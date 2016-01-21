@@ -14,15 +14,18 @@ public class Vision {
 	private double[] defaultVal = new double[0];
 	
 	private int max;
+	private int maxKey = 0;
 	
 	private double[] areas;
 	private double[] widths;
 	private double[] heights;
+	private double[] centerxs;
+	private double[] centerys;
 	
-	private double largestWidth;
-	private double largestHeight;
-	private double largestArea;
-	
+	private double conversionFactor;
+	private double frameHeight = 240;
+	private double frameWidth = 320;
+	private double cameraAngle = 21.2505055;
 	/**
 	 * Constructs a network table given a key. (For instance 'GRIP/myContourReport')
 	 * @param key
@@ -35,40 +38,67 @@ public class Vision {
 	 * Returns max value in a given array.
 	 * @param array
 	 */
-	private double getMax(double[] array) {
+	private int getMax(double[] array) {
 		if (array != null && array != defaultVal) {
 			max = 0;
 			for (int i = 0; i < array.length; i++) {
 				max = array[i] > max ? i : max;
 			}
-			return array[max];
+			return max;
 		} else {
 			return 0;
 		}
 	}
 	
 	/**
-	 * Returns largest measured width.
+	 * Returns width of largest contour.
 	 */
 	public double getWidth() {
+		areas = table.getNumberArray("area", defaultVal);
 		widths = table.getNumberArray("width", defaultVal);
-		largestWidth = getMax(widths);
-		return largestWidth;
+		maxKey = getMax(areas);
+		return widths[maxKey];
 	}
 	/**
-	 * Returns largest measured height.
+	 * Returns height of largest contour.
 	 */
 	public double getHeight() {
+		areas = table.getNumberArray("area", defaultVal);
 		heights = table.getNumberArray("height", defaultVal);
-		largestHeight = getMax(heights);
-		return largestHeight;
+		maxKey = getMax(areas);
+		return heights[maxKey];
 	}
 	/**
 	 * Returns largest measured area.
 	 */
 	public double getArea() {
 		areas = table.getNumberArray("area", defaultVal);
-		largestArea = getMax(areas);
-		return largestArea;
+		maxKey = getMax(areas);
+		return areas[maxKey];
+	}
+	/**
+	 * Returns centerX of the largest contour.
+	 */
+	public double getCenterX() {
+		areas = table.getNumberArray("area", defaultVal);
+		centerxs = table.getNumberArray("centerx", defaultVal);
+		maxKey = getMax(areas);
+		return centerxs[maxKey];
+	}
+	/**
+	 * Returns centerY of the largest contour. 
+	 */
+	public double getCenterY() {
+		areas = table.getNumberArray("area", defaultVal);
+		centerys = table.getNumberArray("centery", defaultVal);
+		maxKey = getMax(areas);
+		return centerys[maxKey];
+	}
+	/**
+	 * Distance calculated using the height of the contour.  
+	 */
+	public double getDistance(double pxHeight) {
+		conversionFactor = 14/pxHeight;
+		return (((frameHeight/2)*(conversionFactor))/Math.tan(cameraAngle*(Math.PI)/180));
 	}
 }

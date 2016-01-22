@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Wesley
  *
  */
-public class MultiLooper extends Loopable {
+public class MultiLooper implements Loopable {
 	private Looper m_looper;
 	private ArrayList<Loopable> m_loopables;
 	

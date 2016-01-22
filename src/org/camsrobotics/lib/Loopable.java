@@ -6,6 +6,6 @@ package org.camsrobotics.lib;
  * @author Wesley
  *
  */
-public abstract class Loopable {
-	public abstract void update();
+public interface Loopable {
+	public void update();
 }

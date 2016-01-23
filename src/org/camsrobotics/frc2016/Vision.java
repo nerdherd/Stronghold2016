@@ -1,5 +1,7 @@
 package org.camsrobotics.frc2016;
 
+import org.camsrobotics.lib.Loopable;
+
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
@@ -8,7 +10,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  * @author Michael
  *
  */
-public class Vision {
+public class Vision implements Loopable {
 	private NetworkTable table;
 	
 	private double[] defaultVal = new double[0];
@@ -100,5 +102,12 @@ public class Vision {
 	public double getDistance(double pxHeight) {
 		conversionFactor = 14/pxHeight;
 		return (((frameHeight/2)*(conversionFactor))/Math.tan(cameraAngle*(Math.PI)/180));
+	}
+	
+	public void snapToTarget() {
+		//Wait until drive class is done to do this?
+	}
+	public void update() {
+		
 	}
 }

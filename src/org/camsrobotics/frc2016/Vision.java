@@ -1,6 +1,6 @@
 package org.camsrobotics.frc2016;
 
-import org.camsrobotics.lib.Loopable;
+import org.camsrobotics.frc2016.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  * @author Michael
  *
  */
-public class Vision implements Loopable {
+public class Vision {
 	private NetworkTable table;
 	
 	private double[] defaultVal = new double[0];
@@ -28,6 +28,10 @@ public class Vision implements Loopable {
 	private double frameHeight = 240;
 	private double frameWidth = 320;
 	private double cameraAngle = 21.2505055;
+	
+	private double centerX;
+	private double desired;
+	private double error;
 	/**
 	 * Constructs a network table given a key. (For instance 'GRIP/myContourReport')
 	 * @param key
@@ -105,9 +109,11 @@ public class Vision implements Loopable {
 	}
 	
 	public void snapToTarget() {
-		//Wait until drive class is done to do this?
-	}
-	public void update() {
+		centerX = getCenterX();
+		desired = frameWidth/2;
 		
+		error = desired - centerX;
+		//power = Math.abs(error) > 5 ? kP * error : 0;
+		//TODO wait for drive controller
 	}
 }

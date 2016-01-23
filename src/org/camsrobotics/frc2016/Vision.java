@@ -1,7 +1,6 @@
 package org.camsrobotics.frc2016;
 
-import org.camsrobotics.frc2016.subsystems.Drive;
-
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
@@ -29,9 +28,8 @@ public class Vision {
 	private double frameWidth = 320;
 	private double cameraAngle = 21.2505055;
 	
-	private double centerX;
-	private double desired;
-	private double error;
+	Ultrasonic ultra;
+	
 	/**
 	 * Constructs a network table given a key. (For instance 'GRIP/myContourReport')
 	 * @param key
@@ -99,12 +97,5 @@ public class Vision {
 		centerys = table.getNumberArray("centery", defaultVal);
 		maxKey = getMax(areas);
 		return centerys[maxKey];
-	}
-	/**
-	 * Distance calculated using the height of the contour.  
-	 */
-	public double getDistance(double pxHeight) {
-		conversionFactor = 14/pxHeight; //14" target
-		return (((frameHeight/2)*(conversionFactor))/Math.tan(cameraAngle*(Math.PI)/180));
 	}
 }

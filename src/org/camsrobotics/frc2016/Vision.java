@@ -107,13 +107,4 @@ public class Vision {
 		conversionFactor = 14/pxHeight; //14" target
 		return (((frameHeight/2)*(conversionFactor))/Math.tan(cameraAngle*(Math.PI)/180));
 	}
-	
-	public void snapToTarget() {
-		centerX = getCenterX();
-		desired = frameWidth/2;
-		
-		error = desired - centerX;
-		//power = Math.abs(error) > 5 ? kP * error : 0;
-		//TODO wait for drive controller
-	}
 }

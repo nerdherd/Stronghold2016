@@ -1,5 +1,7 @@
 package org.camsrobotics.frc2016;
 
+import org.camsrobotics.frc2016.subsystems.Drive;
+
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
@@ -26,6 +28,10 @@ public class Vision {
 	private double frameHeight = 240;
 	private double frameWidth = 320;
 	private double cameraAngle = 21.2505055;
+	
+	private double centerX;
+	private double desired;
+	private double error;
 	/**
 	 * Constructs a network table given a key. (For instance 'GRIP/myContourReport')
 	 * @param key
@@ -100,5 +106,14 @@ public class Vision {
 	public double getDistance(double pxHeight) {
 		conversionFactor = 14/pxHeight; //14" target
 		return (((frameHeight/2)*(conversionFactor))/Math.tan(cameraAngle*(Math.PI)/180));
+	}
+	
+	public void snapToTarget() {
+		centerX = getCenterX();
+		desired = frameWidth/2;
+		
+		error = desired - centerX;
+		//power = Math.abs(error) > 5 ? kP * error : 0;
+		//TODO wait for drive controller
 	}
 }

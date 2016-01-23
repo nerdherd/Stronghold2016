@@ -1,6 +1,5 @@
 package org.camsrobotics.frc2016;
 
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
@@ -12,23 +11,21 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 public class Vision {
 	private NetworkTable table;
 	
-	private double[] defaultVal = new double[0];
+	private double[] m_defaultVal = new double[0];
 	
-	private int max;
-	private int maxKey = 0;
+	private int m_max;
+	private int m_maxKey = 0;
 	
-	private double[] areas;
-	private double[] widths;
-	private double[] heights;
-	private double[] centerxs;
-	private double[] centerys;
+	private double[] m_areas;
+	private double[] m_widths;
+	private double[] m_heights;
+	private double[] m_centerxs;
+	private double[] m_centerys;
 	
-	private double conversionFactor;
-	private double frameHeight = 240;
-	private double frameWidth = 320;
-	private double cameraAngle = 21.2505055;
-	
-	Ultrasonic ultra;
+	private double m_conversionFactor;
+	private double m_frameHeight = 240;
+	private double m_frameWidth = 320;
+	private double m_cameraAngle = 21.2505055;
 	
 	/**
 	 * Constructs a network table given a key. (For instance 'GRIP/myContourReport')
@@ -43,12 +40,12 @@ public class Vision {
 	 * @param array
 	 */
 	private int getMax(double[] array) {
-		if (array != null && array != defaultVal) {
-			max = 0;
+		if (array != null && array != m_defaultVal) {
+			m_max = 0;
 			for (int i = 0; i < array.length; i++) {
-				max = array[i] > max ? i : max;
+				m_max = array[i] > m_max ? i : m_max;
 			}
-			return max;
+			return m_max;
 		} else {
 			return 0;
 		}
@@ -58,44 +55,44 @@ public class Vision {
 	 * Returns width of largest contour.
 	 */
 	public double getWidth() {
-		areas = table.getNumberArray("area", defaultVal);
-		widths = table.getNumberArray("width", defaultVal);
-		maxKey = getMax(areas);
-		return widths[maxKey];
+		m_areas = table.getNumberArray("area", m_defaultVal);
+		m_widths = table.getNumberArray("width", m_defaultVal);
+		m_maxKey = getMax(m_areas);
+		return m_widths[m_maxKey];
 	}
 	/**
 	 * Returns height of largest contour.
 	 */
 	public double getHeight() {
-		areas = table.getNumberArray("area", defaultVal);
-		heights = table.getNumberArray("height", defaultVal);
-		maxKey = getMax(areas);
-		return heights[maxKey];
+		m_areas = table.getNumberArray("area", m_defaultVal);
+		m_heights = table.getNumberArray("height", m_defaultVal);
+		m_maxKey = getMax(m_areas);
+		return m_heights[m_maxKey];
 	}
 	/**
 	 * Returns largest measured area.
 	 */
 	public double getArea() {
-		areas = table.getNumberArray("area", defaultVal);
-		maxKey = getMax(areas);
-		return areas[maxKey];
+		m_areas = table.getNumberArray("area", m_defaultVal);
+		m_maxKey = getMax(m_areas);
+		return m_areas[m_maxKey];
 	}
 	/**
 	 * Returns centerX of the largest contour.
 	 */
 	public double getCenterX() {
-		areas = table.getNumberArray("area", defaultVal);
-		centerxs = table.getNumberArray("centerx", defaultVal);
-		maxKey = getMax(areas);
-		return centerxs[maxKey];
+		m_areas = table.getNumberArray("area", m_defaultVal);
+		m_centerxs = table.getNumberArray("centerx", m_defaultVal);
+		m_maxKey = getMax(m_areas);
+		return m_centerxs[m_maxKey];
 	}
 	/**
 	 * Returns centerY of the largest contour. 
 	 */
 	public double getCenterY() {
-		areas = table.getNumberArray("area", defaultVal);
-		centerys = table.getNumberArray("centery", defaultVal);
-		maxKey = getMax(areas);
-		return centerys[maxKey];
+		m_areas = table.getNumberArray("area", m_defaultVal);
+		m_centerys = table.getNumberArray("centery", m_defaultVal);
+		m_maxKey = getMax(m_areas);
+		return m_centerys[m_maxKey];
 	}
 }

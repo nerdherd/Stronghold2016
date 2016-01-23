@@ -98,7 +98,7 @@ public class Vision {
 	 * Distance calculated using the height of the contour.  
 	 */
 	public double getDistance(double pxHeight) {
-		conversionFactor = 14/pxHeight;
+		conversionFactor = 14/pxHeight; //14" target
 		return (((frameHeight/2)*(conversionFactor))/Math.tan(cameraAngle*(Math.PI)/180));
 	}
 }

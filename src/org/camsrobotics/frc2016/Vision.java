@@ -22,12 +22,21 @@ public class Vision {
 	private double[] m_centerxs;
 	private double[] m_centerys;
 	
+	private String m_type;
+	
 	/**
 	 * Constructs a network table given a key. (For instance 'GRIP/myContourReport')
 	 * @param key
 	 */
 	public Vision(String key) {
 		table = NetworkTable.getTable(key);
+		if (key == "GRIP/myContourReport") {
+			m_type = "contour";
+		} else if (key == "GRIP/myLinesReport") {
+			m_type = "line";
+		} else {
+			m_type = " ";
+		}
 	}
 	
 	/**
@@ -47,47 +56,82 @@ public class Vision {
 	}
 	
 	/**
-	 * Returns width of largest contour.
+	 * Returns width of largest contour. Only works with contour reports.
 	 */
 	public double getWidth() {
-		m_areas = table.getNumberArray("area", m_defaultVal);
-		m_widths = table.getNumberArray("width", m_defaultVal);
-		m_maxKey = getMax(m_areas);
-		return m_widths[m_maxKey];
+		if (m_type == "contour") {
+			m_areas = table.getNumberArray("area", m_defaultVal);
+			m_widths = table.getNumberArray("width", m_defaultVal);
+			m_maxKey = getMax(m_areas);
+			return m_widths[m_maxKey];
+		} else {
+			return 0;
+		}
 	}
 	/**
-	 * Returns height of largest contour.
+	 * Returns height of largest contour, or the length of the longest line.
 	 */
 	public double getHeight() {
-		m_areas = table.getNumberArray("area", m_defaultVal);
-		m_heights = table.getNumberArray("height", m_defaultVal);
-		m_maxKey = getMax(m_areas);
-		return m_heights[m_maxKey];
+		if (m_type == "contour") {
+			m_areas = table.getNumberArray("area", m_defaultVal);
+			m_heights = table.getNumberArray("height", m_defaultVal);
+			m_maxKey = getMax(m_areas);
+			return m_heights[m_maxKey];
+		} else if (m_type == "line") {
+			m_heights = table.getNumberArray("length", m_defaultVal);
+			m_maxKey = getMax(m_heights);
+			return m_heights[m_maxKey];
+		} else {
+			return 0;
+		}
 	}
 	/**
-	 * Returns largest measured area.
+	 * Returns largest measured area. Only works for contour reports.
 	 */
 	public double getArea() {
-		m_areas = table.getNumberArray("area", m_defaultVal);
-		m_maxKey = getMax(m_areas);
-		return m_areas[m_maxKey];
+		if (m_type == "contour") {
+			m_areas = table.getNumberArray("area", m_defaultVal);
+			m_maxKey = getMax(m_areas);
+			return m_areas[m_maxKey];
+		} else {
+			return 0;
+		}		
 	}
 	/**
-	 * Returns centerX of the largest contour.
+	 * Returns centerX of the largest contour or longest line.
 	 */
 	public double getCenterX() {
-		m_areas = table.getNumberArray("area", m_defaultVal);
-		m_centerxs = table.getNumberArray("centerX", m_defaultVal);
-		m_maxKey = getMax(m_areas);
-		return m_centerxs[m_maxKey];
+		if (m_type == "contour") {
+			m_areas = table.getNumberArray("area", m_defaultVal);
+			m_centerxs = table.getNumberArray("centerX", m_defaultVal);
+			m_maxKey = getMax(m_areas);
+			return m_centerxs[m_maxKey];
+		} else if (m_type == "line") {
+			m_heights = table.getNumberArray("length", m_defaultVal);
+			m_centerxs = table.getNumberArray("centerX", m_defaultVal);
+			m_maxKey = getMax(m_heights);
+			return m_centerxs[m_maxKey];
+		} else {
+			return 0;
+		}
 	}
 	/**
 	 * Returns centerY of the largest contour. 
 	 */
 	public double getCenterY() {
-		m_areas = table.getNumberArray("area", m_defaultVal);
-		m_centerys = table.getNumberArray("centerX", m_defaultVal);
-		m_maxKey = getMax(m_areas);
-		return m_centerys[m_maxKey];
+		if (m_type == "contour") {
+			m_areas = table.getNumberArray("area", m_defaultVal);
+			m_centerys = table.getNumberArray("centerY", m_defaultVal);
+			m_maxKey = getMax(m_areas);
+			return m_centerys[m_maxKey];
+		} else if (m_type == "line") {
+			m_heights = table.getNumberArray("length", m_defaultVal);
+			m_centerys = table.getNumberArray("centerY", m_defaultVal);
+			m_maxKey = getMax(m_heights);
+			return m_centerys[m_maxKey];
+		} else {
+			return 0;
+		}
 	}
+	//TODO Distance method, clean this code up
 }

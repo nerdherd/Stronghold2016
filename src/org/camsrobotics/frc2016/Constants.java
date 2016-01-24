@@ -12,20 +12,20 @@ public class Constants {
 	/*
 	 * Drive Constants
 	 */
-	public final static double driveRotationP		= 0;
-	public final static double driveRotationI		= 0;
-	public final static double driveRotationD		= 0;
-	public final static double driveTranslationP	= 0;
-	public final static double driveTranslationI	= 0;
-	public final static double driveTranslationD	= 0;
+	public final static double kDriveRotationP		= 0;
+	public final static double kDriveRotationI		= 0;
+	public final static double kDriveRotationD		= 0;
+	public final static double kDriveTranslationP	= 0;
+	public final static double kDriveTranslationI	= 0;
+	public final static double kDriveTranslationD	= 0;
 	
 	/*
 	 * Shooter Constants
 	 */
-	public final static double flywheelP	= 0;
-	public final static double flywheelI	= 0;
-	public final static double flywheelD	= 0;
-	public final static double liftP		= 0;
-	public final static double liftI		= 0;
-	public final static double liftD		= 0;
+	public final static double kFlywheelP	= 0;
+	public final static double kFlywheelI	= 0;
+	public final static double kFlywheelD	= 0;
+	public final static double kLiftP		= 0;
+	public final static double kLiftI		= 0;
+	public final static double kLiftD		= 0;
 }

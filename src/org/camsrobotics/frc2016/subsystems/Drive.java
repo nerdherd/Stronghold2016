@@ -53,6 +53,32 @@ public class Drive implements Loopable {
 		m_controller = controller;
 	}
 	
+	public void setEncoderDistancePerPulse(double distancePerPulse)	{
+		m_leftGearbox.setEncoderDistancePerPulse(distancePerPulse);
+		m_rightGearbox.setEncoderDistancePerPulse(distancePerPulse);
+	}
+	
+	public int getLeftEncoderRaw()	{
+		return m_leftGearbox.getEncoderRaw();
+	}
+	
+	public int getRightEncoderRaw()	{
+		return m_rightGearbox.getEncoderRaw();
+	}
+	
+	public double getLeftEncoderDistance()	{
+		return m_leftGearbox.getEncoderDistance();
+	}
+	
+	public double getRightEncoderDistance()	{
+		return m_rightGearbox.getEncoderDistance();
+	}
+	
+	public void shiftUp()	{
+		m_leftGearbox.shiftUp();
+		m_rightGearbox.shiftDown();
+	}
+	
 	/**
 	 * Let's drive the bot!
 	 */

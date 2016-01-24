@@ -77,7 +77,9 @@ public class Gearbox {
 	 * @param distancePerPulse
 	 */
 	public void setEncoderDistancePerPulse(double distancePerPulse)	{
-		m_encoder.setDistancePerPulse(distancePerPulse);
+		if(m_encoder != null)	{
+			m_encoder.setDistancePerPulse(distancePerPulse);
+		}
 	}
 	
 	/**
@@ -86,7 +88,11 @@ public class Gearbox {
 	 * @return
 	 */
 	public double getEncoderDistance()	{
-		return m_encoder.getDistance();
+		if(m_encoder != null)	{
+			return m_encoder.getDistance();
+		}	else	{
+			return 0;
+		}
 	}
 	
 	/**
@@ -95,7 +101,11 @@ public class Gearbox {
 	 * @return
 	 */
 	public int getEncoderRaw()	{
-		return m_encoder.getRaw();
+		if(m_encoder != null)	{
+			return m_encoder.getRaw();
+		}	else	{
+			return 0;
+		}
 	}
 	
 	/**

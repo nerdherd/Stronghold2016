@@ -77,7 +77,7 @@ public class Vision {
 	 */
 	public double getCenterX() {
 		m_areas = table.getNumberArray("area", m_defaultVal);
-		m_centerxs = table.getNumberArray("centerx", m_defaultVal);
+		m_centerxs = table.getNumberArray("centerX", m_defaultVal);
 		m_maxKey = getMax(m_areas);
 		return m_centerxs[m_maxKey];
 	}
@@ -86,7 +86,7 @@ public class Vision {
 	 */
 	public double getCenterY() {
 		m_areas = table.getNumberArray("area", m_defaultVal);
-		m_centerys = table.getNumberArray("centery", m_defaultVal);
+		m_centerys = table.getNumberArray("centerX", m_defaultVal);
 		m_maxKey = getMax(m_areas);
 		return m_centerys[m_maxKey];
 	}

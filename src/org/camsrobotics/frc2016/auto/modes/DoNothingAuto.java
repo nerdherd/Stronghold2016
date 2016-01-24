@@ -1,16 +1,13 @@
 package org.camsrobotics.frc2016.auto.modes;
 
-import org.camsrobotics.frc2016.auto.AutoMode;
-
 /**
  * Does nothing
  * 
  * @author Wesley
  *
  */
-public class DoNothingAuto extends AutoMode {
+public class DoNothingAuto implements Runnable {
 
-	@Override
 	public void run() {
 		
 	}

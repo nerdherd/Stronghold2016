@@ -79,6 +79,11 @@ public class Drive implements Loopable {
 		m_rightGearbox.shiftDown();
 	}
 	
+	public void driveOpenLoop(DriveSignal signal)	{
+		m_controller = null;
+		m_signal = signal;
+	}
+	
 	/**
 	 * Let's drive the bot!
 	 */

@@ -2,6 +2,7 @@ package org.camsrobotics.frc2016;
 
 import org.camsrobotics.frc2016.subsystems.Drive;
 import org.camsrobotics.frc2016.subsystems.Intake;
+import org.camsrobotics.frc2016.subsystems.Lifter;
 import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.lib.Gearbox;
 
@@ -27,4 +28,5 @@ public class HardwareAdapter {
 	public static final Drive kDrive = new Drive(kDriveLeftGearbox, kDriveRightGearbox);
 	public static final Shooter kShooter = new Shooter();
 	public static final Intake kIntake = new Intake();
+	public static final Lifter kLifter = new Lifter();
 }

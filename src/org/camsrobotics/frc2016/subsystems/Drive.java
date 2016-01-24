@@ -1,5 +1,6 @@
 package org.camsrobotics.frc2016.subsystems;
 
+import org.camsrobotics.lib.Gearbox;
 import org.camsrobotics.lib.Loopable;
 
 /**
@@ -10,14 +11,13 @@ import org.camsrobotics.lib.Loopable;
  */
 public class Drive implements Loopable {
 	
-	
 	/**
 	 * Send a DriveSignal to the drivebase to control it
 	 * 
 	 * @author Wesley
 	 *
 	 */
-	public class DriveSignal	{
+	public static class DriveSignal	{
 		public double leftSpeed;
 		public double rightSpeed;
 		
@@ -37,8 +37,37 @@ public class Drive implements Loopable {
 		public DriveSignal get();
 	}
 
+	private Gearbox m_leftGearbox;
+	private Gearbox m_rightGearbox;
+	
+	private DriveController m_controller = null;
+	private DriveSignal m_signal = null;
+	
+	public Drive(Gearbox leftGearbox, Gearbox rightGearbox)	{
+		m_leftGearbox = leftGearbox;
+		m_rightGearbox = rightGearbox;
+		m_rightGearbox.setReversed();
+	}
+	
+	public void setController(DriveController controller)	{
+		m_controller = controller;
+	}
+	
+	/**
+	 * Let's drive the bot!
+	 */
 	@Override
 	public void update() {
-		//TODO Add the motor controllers...wait for the gearbox class
+		if(m_controller != null)	{
+			m_signal = m_controller.get();
+		}
+		
+		if(m_signal != null)	{
+			m_leftGearbox.setSpeed(m_signal.leftSpeed);
+			m_rightGearbox.setSpeed(m_signal.rightSpeed);
+		}	else	{
+			m_leftGearbox.setSpeed(0);
+			m_rightGearbox.setSpeed(0);
+		}
 	}
 }

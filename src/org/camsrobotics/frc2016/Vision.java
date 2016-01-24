@@ -22,11 +22,6 @@ public class Vision {
 	private double[] m_centerxs;
 	private double[] m_centerys;
 	
-	private double m_conversionFactor;
-	private double m_frameHeight = 240;
-	private double m_frameWidth = 320;
-	private double m_cameraAngle = 21.2505055;
-	
 	/**
 	 * Constructs a network table given a key. (For instance 'GRIP/myContourReport')
 	 * @param key

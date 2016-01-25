@@ -8,6 +8,12 @@ import org.camsrobotics.lib.NerdyPID;
 
 import com.kauailabs.navx_mxp.AHRS;
 
+/**
+ * PID Drive Rotation Controller
+ * 
+ * @author Wesley
+ *
+ */
 public class DriveRotationController implements DriveController {
 	private final double m_kP = Constants.kDriveRotationP;
 	private final double m_kI = Constants.kDriveRotationI;

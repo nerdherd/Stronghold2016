@@ -1,5 +1,11 @@
 package org.camsrobotics.frc2016;
 
+/**
+ * Assorted Constants
+ * 
+ * @author Wesley
+ *
+ */
 public class Constants {
 	
 	/*

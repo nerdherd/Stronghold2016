@@ -3,7 +3,7 @@ package org.camsrobotics.frc2016;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
- * Vision Class
+ * NetworkTables Vision Adapter
  * 
  * @author Michael
  *

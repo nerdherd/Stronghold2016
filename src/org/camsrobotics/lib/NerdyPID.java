@@ -3,7 +3,7 @@ package org.camsrobotics.lib;
 import edu.wpi.first.wpilibj.util.BoundaryException;
 
 /**
- * PID Looper
+ * PID Controller
  * 
  * @author Wesley
  *

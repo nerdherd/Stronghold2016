@@ -13,6 +13,12 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.VictorSP;
 
+/**
+ * 
+ * 
+ * @author Wesley
+ *
+ */
 public class HardwareAdapter {
 	// Motors
 	public static final VictorSP kDriveFrontLeft	= new VictorSP(2);

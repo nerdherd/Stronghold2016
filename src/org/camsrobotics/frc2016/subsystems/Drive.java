@@ -3,6 +3,8 @@ package org.camsrobotics.frc2016.subsystems;
 import org.camsrobotics.lib.Gearbox;
 import org.camsrobotics.lib.Loopable;
 
+import com.kauailabs.navx_mxp.AHRS;
+
 /**
  * Drivebase Interface
  * 
@@ -27,14 +29,26 @@ public class Drive implements Loopable {
 		}
 	}
 	
+	public static class DriveSensorSignal	{
+		public double yaw;
+		public double leftEncoderDistance;
+		public double rightEncoderDistance;
+		
+		public DriveSensorSignal(double yaw, double leftEncoderDistance, double rightEncoderDistance)	{
+			this.yaw = yaw;
+			this.leftEncoderDistance = leftEncoderDistance;
+			this.rightEncoderDistance = rightEncoderDistance;
+		}
+	}
+	
 	/**
-	 * Abstract controller
+	 * Controller Interface
 	 * 
 	 * @author Wesley
 	 *
 	 */
 	public interface DriveController	{
-		public DriveSignal get();
+		public DriveSignal get(DriveSensorSignal sig);
 		
 		public boolean isOnTarget();
 	}
@@ -42,13 +56,16 @@ public class Drive implements Loopable {
 	private Gearbox m_leftGearbox;
 	private Gearbox m_rightGearbox;
 	
+	private AHRS m_nav;
+	
 	private DriveController m_controller = null;
 	private DriveSignal m_signal = null;
 	
-	public Drive(Gearbox leftGearbox, Gearbox rightGearbox)	{
+	public Drive(Gearbox leftGearbox, Gearbox rightGearbox, AHRS nav)	{
 		m_leftGearbox = leftGearbox;
 		m_rightGearbox = rightGearbox;
 		m_rightGearbox.setReversed();
+		m_nav = nav;
 	}
 	
 	public void setController(DriveController controller)	{
@@ -90,13 +107,17 @@ public class Drive implements Loopable {
 		return m_controller != null && m_controller.isOnTarget();
 	}
 	
+	public double getYaw()	{
+		return m_nav.getYaw();
+	}
+	
 	/**
 	 * Let's drive the bot!
 	 */
 	@Override
 	public void update() {
 		if(m_controller != null)	{
-			m_signal = m_controller.get();
+			m_signal = m_controller.get(new DriveSensorSignal(getYaw(), getLeftEncoderDistance(), getRightEncoderDistance()));
 		}
 		
 		if(m_signal != null)	{

@@ -1,12 +1,10 @@
 package org.camsrobotics.frc2016.subsystems.controllers;
 
 import org.camsrobotics.frc2016.Constants;
-import org.camsrobotics.frc2016.HardwareAdapter;
 import org.camsrobotics.frc2016.subsystems.Drive.DriveController;
+import org.camsrobotics.frc2016.subsystems.Drive.DriveSensorSignal;
 import org.camsrobotics.frc2016.subsystems.Drive.DriveSignal;
 import org.camsrobotics.lib.NerdyPID;
-
-import com.kauailabs.navx_mxp.AHRS;
 
 /**
  * PID Drive Rotation Controller
@@ -19,8 +17,6 @@ public class DriveRotationController implements DriveController {
 	private final double m_kI = Constants.kDriveRotationI;
 	private final double m_kD = Constants.kDriveRotationD;
 	
-	private AHRS m_nav = HardwareAdapter.kNavX;
-	
 	private double m_tolerance;
 	private double m_power = 0;
 	
@@ -30,12 +26,12 @@ public class DriveRotationController implements DriveController {
 		m_tolerance = tolerance;
 		
 		m_pidController = new NerdyPID(m_kP, m_kI, m_kD);
-		m_pidController.setDesired(desired);
+		m_pidController.setDesired((desired + 360) %360);
 	}
 	
 	@Override
-	public DriveSignal get() {
-		m_power = m_pidController.calculate((m_nav.getYaw() + 360) % 360);
+	public DriveSignal get(DriveSensorSignal sig) {
+		m_power = m_pidController.calculate((sig.yaw + 360) % 360);
 		return new DriveSignal(m_power, -m_power);
 	}
 

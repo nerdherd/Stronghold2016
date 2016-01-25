@@ -1,6 +1,7 @@
 package org.camsrobotics.frc2016.subsystems.controllers;
 
 import org.camsrobotics.frc2016.Constants;
+import org.camsrobotics.frc2016.HardwareAdapter;
 import org.camsrobotics.frc2016.subsystems.Drive.DriveController;
 import org.camsrobotics.frc2016.subsystems.Drive.DriveSignal;
 import org.camsrobotics.lib.NerdyPID;
@@ -12,7 +13,7 @@ public class DriveRotationController implements DriveController {
 	private final double m_kI = Constants.kDriveRotationI;
 	private final double m_kD = Constants.kDriveRotationD;
 	
-	private AHRS m_nav;
+	private AHRS m_nav = HardwareAdapter.kNavX;
 	
 	private double m_tolerance;
 	private double m_power = 0;

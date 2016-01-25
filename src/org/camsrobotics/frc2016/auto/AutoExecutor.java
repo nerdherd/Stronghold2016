@@ -9,7 +9,7 @@ import org.camsrobotics.frc2016.auto.modes.*;
  *
  */
 public class AutoExecutor {
-	private Runnable m_auto;
+	private AutoMode m_auto;
 	private Thread m_thread = null;
 	
 	/**
@@ -43,7 +43,12 @@ public class AutoExecutor {
 	 */
 	public void start()	{
 		if(m_thread == null)	{
-			m_thread = new Thread(m_auto);
+			m_thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					m_auto.run();
+				}
+			});
 			
 			m_thread.start();
 		}

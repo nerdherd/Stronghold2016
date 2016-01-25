@@ -33,14 +33,12 @@ public abstract class AutoMode {
 	}
 	
 	public void runAction(Action a) throws Exception	{
-		if(!m_enabled)	{
-			throw new Exception("The Auto Mode has ended!");
-		}
-		
-		a.start();
-		while(isEnabled() && !a.isFinished())	{
-			a.update();
-			Thread.sleep((long) m_rate * 1000);
+		if(m_enabled)	{	
+			a.start();
+			while(isEnabled() && !a.isFinished())	{
+				a.update();
+				Thread.sleep((long) m_rate * 1000);
+			}
 		}
 	}
 }

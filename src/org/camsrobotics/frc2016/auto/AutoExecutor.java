@@ -57,10 +57,10 @@ public class AutoExecutor {
 	/**
 	 * Stops the Autonomous mode
 	 */
-	@SuppressWarnings("deprecation")
 	public void stop()	{
-		if(m_thread != null)	{
-			m_thread.stop();
+		if(m_auto != null)	{
+			m_auto.stop();
 		}
+		m_thread = null;
 	}
 }

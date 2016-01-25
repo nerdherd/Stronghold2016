@@ -35,6 +35,8 @@ public class Drive implements Loopable {
 	 */
 	public interface DriveController	{
 		public DriveSignal get();
+		
+		public boolean isOnTarget();
 	}
 
 	private Gearbox m_leftGearbox;
@@ -82,6 +84,10 @@ public class Drive implements Loopable {
 	public void driveOpenLoop(DriveSignal signal)	{
 		m_controller = null;
 		m_signal = signal;
+	}
+	
+	public boolean isOnTarget()	{
+		return m_controller != null && m_controller.isOnTarget();
 	}
 	
 	/**

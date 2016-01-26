@@ -8,6 +8,7 @@ import org.camsrobotics.lib.Gearbox;
 
 import com.kauailabs.navx_mxp.AHRS;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -21,27 +22,32 @@ import edu.wpi.first.wpilibj.VictorSP;
  */
 public class HardwareAdapter {
 	// Motors
-	public static final VictorSP kDriveFrontLeft	= new VictorSP(2);
-	public static final VictorSP kDriveFrontRight	= new VictorSP(2);
-	public static final VictorSP kDriveBackLeft		= new VictorSP(2);
-	public static final VictorSP kDriveBackRight	= new VictorSP(2);
+	public static final VictorSP kDriveFrontLeft		= new VictorSP(2);
+	public static final VictorSP kDriveFrontRight		= new VictorSP(3);
+	public static final VictorSP kDriveBackLeft			= new VictorSP(4);
+	public static final VictorSP kDriveBackRight		= new VictorSP(5);
+	
+	public static final CANTalon kShooterLeft			= new CANTalon(1);
+	public static final CANTalon kShooterRight			= new CANTalon(2);
+	public static final CANTalon kShooterLift			= new CANTalon(3);
 	
 	// Solenoids
-	public static final DoubleSolenoid kLeftShifter	= new DoubleSolenoid(1,2);
-	public static final DoubleSolenoid kRightShifter= new DoubleSolenoid(3,4);
+	public static final DoubleSolenoid kLeftShifter		= new DoubleSolenoid(1,2);
+	public static final DoubleSolenoid kRightShifter	= new DoubleSolenoid(3,4);
+	public static final DoubleSolenoid kShooterPunch	= new DoubleSolenoid(5,6);
 	
 	// Sensors
-	public static final AHRS kNavX					= new AHRS(new SerialPort(57600, SerialPort.Port.kMXP));
-	public static final Encoder kDriveLeftEncoder	= new Encoder(0,1);
-	public static final Encoder kDriveRightEncoder	= new Encoder(2,3);
+	public static final AHRS kNavX						= new AHRS(new SerialPort(57600, SerialPort.Port.kMXP));
+	public static final Encoder kDriveLeftEncoder		= new Encoder(0,1);
+	public static final Encoder kDriveRightEncoder		= new Encoder(2,3);
 	
 	// Gearboxes
-	public static final Gearbox kDriveLeftGearbox	= new Gearbox(kDriveFrontLeft, kDriveBackLeft, kDriveLeftEncoder, kLeftShifter);
-	public static final Gearbox kDriveRightGearbox	= new Gearbox(kDriveFrontRight, kDriveBackRight, kDriveRightEncoder, kRightShifter);
+	public static final Gearbox kDriveLeftGearbox		= new Gearbox(kDriveFrontLeft, kDriveBackLeft, kDriveLeftEncoder, kLeftShifter);
+	public static final Gearbox kDriveRightGearbox		= new Gearbox(kDriveFrontRight, kDriveBackRight, kDriveRightEncoder, kRightShifter);
 	
 	// Subsystems
 	public static final Drive kDrive = new Drive(kDriveLeftGearbox, kDriveRightGearbox, kNavX);
-	public static final Shooter kShooter = new Shooter();
+	public static final Shooter kShooter = new Shooter(kShooterLeft, kShooterRight, kShooterPunch, kShooterLift);
 	public static final Intake kIntake = new Intake();
 	public static final Lifter kLifter = new Lifter();
 }

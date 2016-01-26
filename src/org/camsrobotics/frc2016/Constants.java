@@ -36,4 +36,5 @@ public class Constants {
 	public final static double kLiftP		= 0;
 	public final static double kLiftI		= 0;
 	public final static double kLiftD		= 0;
+	public final static double kShootTime	= 0;
 }

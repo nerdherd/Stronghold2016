@@ -1,20 +1,29 @@
 package org.camsrobotics.frc2016;
 
+import org.camsrobotics.lib.NerdyButton;
 import org.camsrobotics.lib.NerdyJoystick;
 
 /**
- * Driver Station Interface
+ * Driver Interface
  * 
  * @author Wesley
  *
  */
 public class DriverInput {
 	
-	public static NerdyJoystick m_driveLeftJoy = new NerdyJoystick(0);
-	public static NerdyJoystick m_driveRightJoy = new NerdyJoystick(1);
-	public static NerdyJoystick m_buttonBox = new NerdyJoystick(2);
+	// Driver Functions
+	public static final NerdyJoystick kDriverLeftStick	= new NerdyJoystick(0);
+	public static final NerdyJoystick kDriverRightStick	= new NerdyJoystick(1);
 	
-	// Prevents initialization
-	private DriverInput()	{}
+	public static final NerdyButton kSnapToVisionTarget	= kDriverRightStick.getButton(99);
+	
+	// Operator Functions
+	public static final NerdyJoystick kButtonBox		= new NerdyJoystick(2);
+	
+	public static final NerdyButton kShooterShortRange	= kButtonBox.getButton(99);
+	public static final NerdyButton kShooterMediumRange	= kButtonBox.getButton(99);
+	public static final NerdyButton kShooterLongRange	= kButtonBox.getButton(99);
+	public static final NerdyButton kShooterVision		= kButtonBox.getButton(99);
+	public static final NerdyButton kShoot				= kButtonBox.getButton(99);
 	
 }

@@ -37,4 +37,12 @@ public class Constants {
 	public final static double kLiftI		= 0;
 	public final static double kLiftD		= 0;
 	public final static double kShootTime	= 0;
+	
+	/*
+	 * Intake Constants
+	 */
+	public final static double kIntakeSpeed	= 0.75;
+	public final static double kIntakeP		= 0;
+	public final static double kIntakeI		= 0;
+	public final static double kIntakeD		= 0;
 }

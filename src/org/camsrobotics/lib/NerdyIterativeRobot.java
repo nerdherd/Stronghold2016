@@ -189,7 +189,7 @@ public class NerdyIterativeRobot extends IterativeRobot {
 		 */
 		public void disabledPeriodic() {
 			if (dpFirstRun) {
-				SmartDashboard.putString("NerdyIterativeRobotLog", "NerdyIterativeRobot IterativeRobot.disabledPeriodic() method... Overload me!");
+				System.out.println("NerdyIterativeRobot IterativeRobot.disabledPeriodic() method... Overload me!");
 				dpFirstRun = false;
 			}
 			Timer.delay(0.001);
@@ -205,7 +205,7 @@ public class NerdyIterativeRobot extends IterativeRobot {
 		 */
 		public void autonomousPeriodic() {
 			if (apFirstRun) {
-				SmartDashboard.putString("NerdyIterativeRobotLog", "NerdyIterativeRobot IterativeRobot.autonomousPeriodic() method... Overload me!");
+				System.out.println("NerdyIterativeRobot IterativeRobot.autonomousPeriodic() method... Overload me!");
 				apFirstRun = false;
 			}
 			Timer.delay(0.001);
@@ -221,7 +221,7 @@ public class NerdyIterativeRobot extends IterativeRobot {
 		 */
 		public void teleopPeriodic() {
 			if (tpFirstRun) {
-				SmartDashboard.putString("NerdyIterativeRobotLog", "NerdyIterativeRobot IterativeRobot.teleopPeriodic() method... Overload me!");
+				System.out.println("NerdyIterativeRobot IterativeRobot.teleopPeriodic() method... Overload me!");
 				tpFirstRun = false;
 			}
 			Timer.delay(0.001);
@@ -237,7 +237,7 @@ public class NerdyIterativeRobot extends IterativeRobot {
 		 */
 		public void testPeriodic() {
 			if (tmpFirstRun) {
-				SmartDashboard.putString("NerdyIterativeRobotLog", "NerdyIterativeRobot IterativeRobot.testPeriodic() method... Overload me!");
+				System.out.println("NerdyIterativeRobot IterativeRobot.testPeriodic() method... Overload me!");
 				tmpFirstRun = false;
 			}
 		}
@@ -252,7 +252,7 @@ public class NerdyIterativeRobot extends IterativeRobot {
 		 */
 		public void allPeriodic()	{
 			if (allFirstRun) {
-				SmartDashboard.putString("NerdyIterativeRobotLog", "NerdyIterativeRobot IterativeRobot.allPeriodic() method... Overload me!");
+				System.out.println("NerdyIterativeRobot IterativeRobot.allPeriodic() method... Overload me!");
 			}
 		}
 }

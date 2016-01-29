@@ -11,19 +11,32 @@ import org.camsrobotics.lib.NerdyJoystick;
  */
 public class DriverInput {
 	
-	// Driver Functions
-	public static final NerdyJoystick kDriverLeftStick	= new NerdyJoystick(0);
-	public static final NerdyJoystick kDriverRightStick	= new NerdyJoystick(1);
+	private NerdyJoystick m_driverLeftStick;
+	private NerdyJoystick m_driverRightStick;
+	private NerdyJoystick m_buttonBox;
 	
-	public static final NerdyButton kSnapToVisionTarget	= kDriverRightStick.getButton(99);
+	private NerdyButton m_snapToVisionTarget;
 	
-	// Operator Functions
-	public static final NerdyJoystick kButtonBox		= new NerdyJoystick(2);
+	private NerdyButton m_shooterShortRange;
+	private NerdyButton m_shooterMediumRange;
+	private NerdyButton m_shooterLongRange;
+	private NerdyButton m_shooterVision;
+	private NerdyButton m_shoot;
 	
-	public static final NerdyButton kShooterShortRange	= kButtonBox.getButton(99);
-	public static final NerdyButton kShooterMediumRange	= kButtonBox.getButton(99);
-	public static final NerdyButton kShooterLongRange	= kButtonBox.getButton(99);
-	public static final NerdyButton kShooterVision		= kButtonBox.getButton(99);
-	public static final NerdyButton kShoot				= kButtonBox.getButton(99);
+	public DriverInput(NerdyJoystick leftStick, NerdyJoystick rightStick, NerdyJoystick buttonBox)	{
+		m_driverLeftStick = leftStick;
+		m_driverRightStick = rightStick;
+		m_buttonBox = buttonBox;
+		
+		m_snapToVisionTarget	= m_driverLeftStick.getButton(99);
+		m_shooterShortRange		= m_buttonBox.getButton(99);
+		m_shooterMediumRange	= m_buttonBox.getButton(99);
+		m_shooterLongRange		= m_buttonBox.getButton(99);
+		m_shooterVision			= m_buttonBox.getButton(99);
+		m_shoot					= m_buttonBox.getButton(99);
+	}
 	
+	public void update()	{
+		// Add commands here
+	}
 }

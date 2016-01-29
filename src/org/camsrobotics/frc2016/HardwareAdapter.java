@@ -5,6 +5,7 @@ import org.camsrobotics.frc2016.subsystems.Intake;
 import org.camsrobotics.frc2016.subsystems.Lifter;
 import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.lib.Gearbox;
+import org.camsrobotics.lib.NerdyJoystick;
 
 import com.kauailabs.navx_mxp.AHRS;
 
@@ -21,6 +22,12 @@ import edu.wpi.first.wpilibj.VictorSP;
  *
  */
 public class HardwareAdapter {
+	// Driver Input
+	public static final NerdyJoystick kDriveLeftStick	= new NerdyJoystick(0);
+	public static final NerdyJoystick kDriveRightStick	= new NerdyJoystick(1);
+	public static final NerdyJoystick kButtonBox		= new NerdyJoystick(2);
+	public static final DriverInput kDriverInput		= new DriverInput(kDriveLeftStick, kDriveRightStick, kButtonBox);
+	
 	// Motors
 	public static final VictorSP kDriveFrontLeft		= new VictorSP(2);
 	public static final VictorSP kDriveFrontRight		= new VictorSP(3);

@@ -6,6 +6,7 @@ import org.camsrobotics.frc2016.subsystems.Drive;
 import org.camsrobotics.frc2016.subsystems.Intake;
 import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.frc2016.subsystems.Drive.DriveSignal;
+import org.camsrobotics.frc2016.teleop.TeleopManager;
 import org.camsrobotics.lib.MultiLooper;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -28,6 +29,7 @@ public class Robot extends IterativeRobot {
 	Intake intake = HardwareAdapter.kIntake;
 	
 	DriverInput driverInput = HardwareAdapter.kDriverInput;
+	TeleopManager teleop = new TeleopManager();
 	
     public void robotInit() {
     	System.out.println("NerdyBot Apotheosis Initialization");
@@ -63,7 +65,7 @@ public class Robot extends IterativeRobot {
     }
     
     public void teleopPeriodic() {
-        
+        teleop.update(driverInput.update());
     }
     
     public void disabledInit()	{

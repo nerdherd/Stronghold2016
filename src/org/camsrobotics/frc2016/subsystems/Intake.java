@@ -2,9 +2,6 @@ package org.camsrobotics.frc2016.subsystems;
 
 import org.camsrobotics.frc2016.Constants;
 import org.camsrobotics.lib.Loopable;
-
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;

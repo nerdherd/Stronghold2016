@@ -48,8 +48,9 @@ public class Constants {
 	/*
 	 * Intake Constants
 	 */
-	public final static double kIntakeSpeed	= 0.75;
-	public final static double kIntakeP		= 0;
-	public final static double kIntakeI		= 0;
-	public final static double kIntakeD		= 0;
+	public final static double kIntakeSpeed		= 0.75;
+	public final static double kIntakeP			= 0;
+	public final static double kIntakeI			= 0;
+	public final static double kIntakeD			= 0;
+	public final static int kIntakeTicksPerRev	= 0;
 }

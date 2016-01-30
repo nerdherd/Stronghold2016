@@ -119,7 +119,11 @@ public class Drive implements Loopable {
 	}
 	
 	public double getVision() {
-		return m_table.getCenterX();
+		try {
+			return m_table.getCenterX();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

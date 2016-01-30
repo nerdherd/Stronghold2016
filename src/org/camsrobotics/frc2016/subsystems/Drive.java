@@ -1,5 +1,6 @@
 package org.camsrobotics.frc2016.subsystems;
 
+import org.camsrobotics.frc2016.Vision;
 import org.camsrobotics.lib.Gearbox;
 import org.camsrobotics.lib.Loopable;
 
@@ -33,11 +34,13 @@ public class Drive implements Loopable {
 		public double yaw;
 		public double leftEncoderDistance;
 		public double rightEncoderDistance;
+		public double vision;
 		
-		public DriveSensorSignal(double yaw, double leftEncoderDistance, double rightEncoderDistance)	{
+		public DriveSensorSignal(double yaw, double leftEncoderDistance, double rightEncoderDistance, double vision)	{
 			this.yaw = yaw;
 			this.leftEncoderDistance = leftEncoderDistance;
 			this.rightEncoderDistance = rightEncoderDistance;
+			this.vision = vision;
 		}
 	}
 	
@@ -60,6 +63,8 @@ public class Drive implements Loopable {
 	
 	private DriveController m_controller = null;
 	private DriveSignal m_signal = null;
+	
+	private Vision m_table = new Vision("line");
 	
 	public Drive(Gearbox leftGearbox, Gearbox rightGearbox, AHRS nav)	{
 		m_leftGearbox = leftGearbox;
@@ -111,13 +116,17 @@ public class Drive implements Loopable {
 		return m_nav.getYaw();
 	}
 	
+	public double getVision() {
+		return m_table.getCenterX();
+	}
+	
 	/**
 	 * Let's drive the bot!
 	 */
 	@Override
 	public void update() {
 		if(m_controller != null)	{
-			m_signal = m_controller.get(new DriveSensorSignal(getYaw(), getLeftEncoderDistance(), getRightEncoderDistance()));
+			m_signal = m_controller.get(new DriveSensorSignal(getYaw(), getLeftEncoderDistance(), getRightEncoderDistance(), getVision()));
 		}
 		
 		if(m_signal != null)	{

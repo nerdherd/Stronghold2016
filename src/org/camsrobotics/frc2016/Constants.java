@@ -14,6 +14,9 @@ public class Constants {
 	public final static int cameraFrameHeight	= 240;
 	public final static int cameraFrameWidth	= 320;
 	public final static double cameraFOVAngle	= 21.2505055;
+	public final static double kVisionSnapP		= 0.00245;
+	public final static double kVisionSnapI		= 0;
+	public final static double kVisionSnapD		= 0;
 	
 	/*
 	 * Drive Constants

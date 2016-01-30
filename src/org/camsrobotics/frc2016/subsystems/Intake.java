@@ -75,10 +75,10 @@ public class Intake implements Loopable {
 		double intakePow;
 		switch(m_rollerState)	{
 		case INTAKE:
-			intakePow = 1.0;
+			intakePow = Constants.kIntakeSpeed;
 			break;
 		case OUTTAKE:
-			intakePow = -1.0;
+			intakePow = -Constants.kIntakeSpeed;
 			break;
 		case IDLE:
 			intakePow = 0;

@@ -31,19 +31,23 @@ public class Constants {
 	/*
 	 * Shooter Constants
 	 */
-	public final static double kFlywheelF	= 0;
-	public final static double kFlywheelP	= 0;
-	public final static double kFlywheelI	= 0;
-	public final static double kFlywheelD	= 0;
-	public final static double kLiftF		= 0;
-	public final static double kLiftP		= 0;
-	public final static double kLiftI		= 0;
-	public final static double kLiftD		= 0;
-	public final static double kShootTime	= 0.5;
+	public final static double kFlywheelF		= 0;
+	public final static double kFlywheelP		= 0;
+	public final static double kFlywheelI		= 0;
+	public final static double kFlywheelD		= 0;
+	public final static double kLiftF			= 0;
+	public final static double kLiftP			= 0;
+	public final static double kLiftI			= 0;
+	public final static double kLiftD			= 0;
+	public final static double kShootTime		= 0.5;
 	
-	public final static int kLongRangeRPM	= 3600;
-	public final static int kMediumRangeRPM	= 0;
-	public final static int kShortRangeRPM	= 3600;
+	public final static int kLongRangeRPM		= 3600;
+	public final static int kMediumRangeRPM		= 0;
+	public final static int kShortRangeRPM		= 3600;
+	
+	public final static int kLongRangeAngle		= 0;
+	public final static int kMediumRangeAngle	= 0;
+	public final static int kShortRangeAngle	= 0;
 	
 	/*
 	 * Intake Constants
@@ -53,4 +57,8 @@ public class Constants {
 	public final static double kIntakeI			= 0;
 	public final static double kIntakeD			= 0;
 	public final static int kIntakeTicksPerRev	= 0;
+	
+	public final static int kIntakeFloorLevel	= 0;
+	public final static int kIntakeBallPickup	= 0;
+	public final static int kIntakeTuckedIn		= 0;
 }

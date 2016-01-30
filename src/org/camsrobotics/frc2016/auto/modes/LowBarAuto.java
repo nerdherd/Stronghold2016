@@ -21,7 +21,7 @@ public class LowBarAuto extends AutoMode {
 	public void run() {
 		// Pass the Low Bar
 		drive.setController(new DriveStraightController(3, .5));
-		runAction(new WaitForUltrasonicAction(5, 15));
+		runAction(new WaitForUltrasonicAction(60, 15));
 		
 		// Turn until vision sees
 		drive.setController(new DriveRotationController(45, 0)); // Tolerance really does not matter

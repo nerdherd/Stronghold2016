@@ -39,7 +39,11 @@ public class Constants {
 	public final static double kLiftP		= 0;
 	public final static double kLiftI		= 0;
 	public final static double kLiftD		= 0;
-	public final static double kShootTime	= 0;
+	public final static double kShootTime	= 0.5;
+	
+	public final static int kLongRangeRPM	= 3600;
+	public final static int kMediumRangeRPM	= 0;
+	public final static int kShortRangeRPM	= 3600;
 	
 	/*
 	 * Intake Constants

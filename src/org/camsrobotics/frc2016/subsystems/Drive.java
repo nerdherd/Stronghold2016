@@ -28,6 +28,8 @@ public class Drive implements Loopable {
 			this.leftSpeed = leftSpeed;
 			this.rightSpeed = rightSpeed;
 		}
+		
+		public static DriveSignal kStop = new DriveSignal(0, 0);
 	}
 	
 	public static class DriveSensorSignal	{

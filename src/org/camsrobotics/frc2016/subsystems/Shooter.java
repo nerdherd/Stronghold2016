@@ -117,6 +117,12 @@ public class Shooter implements Loopable {
 		}
 	}
 	
+	public void stop()	{
+		m_shooting = false;
+		m_shooterLeft.set(0);
+		m_shooterRight.set(0);
+	}
+	
 	@Override
 	public void update() {
 		m_shooterLeft.set(m_desiredRPM);

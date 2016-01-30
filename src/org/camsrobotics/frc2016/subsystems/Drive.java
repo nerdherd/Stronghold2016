@@ -128,6 +128,16 @@ public class Drive implements Loopable {
 		}
 	}
 	
+	public void resetEncoders()	{
+		m_leftGearbox.resetEncoder();
+		m_rightGearbox.resetEncoder();
+	}
+	
+	public void stop()	{
+		m_leftGearbox.setSpeed(0);
+		m_rightGearbox.setSpeed(0);
+	}
+	
 	/**
 	 * Let's drive the bot!
 	 */

@@ -109,6 +109,15 @@ public class Gearbox {
 	}
 	
 	/**
+	 * Rezeros the encoder reading
+	 */
+	public void resetEncoder()	{
+		if(m_encoder != null)	{
+			m_encoder.reset();
+		}
+	}
+	
+	/**
 	 * Sets the motor speed
 	 * 
 	 * @param speed

@@ -19,7 +19,7 @@ public class AutoExecutor {
 	 *
 	 */
 	public enum Mode	{
-		DO_NOTHING
+		DO_NOTHING, LOW_BAR
 	}
 	
 	/**
@@ -32,6 +32,8 @@ public class AutoExecutor {
 		case DO_NOTHING:
 			m_auto = new DoNothingAuto();
 			break;
+		case LOW_BAR:
+			m_auto = new LowBarAuto();
 		default:
 			m_auto = new DoNothingAuto();
 			break;

@@ -19,7 +19,7 @@ public abstract class AutoMode {
 	protected Intake intake = HardwareAdapter.kIntake;
 	protected Lifter lifter = HardwareAdapter.kLifter;
 	
-	private double m_rate = 1d/50d;
+	private double m_period = 1/50.0;
 	private boolean m_enabled = false;
 
 	public abstract void run();
@@ -38,7 +38,7 @@ public abstract class AutoMode {
 			while(isEnabled() && !a.isFinished())	{
 				a.update();
 				try {
-					Thread.sleep((long) m_rate * 1000);
+					Thread.sleep((long) m_period * 1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

@@ -1,5 +1,6 @@
 package org.camsrobotics.frc2016.subsystems;
 
+import org.camsrobotics.frc2016.Constants;
 import org.camsrobotics.frc2016.Vision;
 import org.camsrobotics.lib.Gearbox;
 import org.camsrobotics.lib.Loopable;
@@ -123,7 +124,7 @@ public class Drive implements Loopable {
 			return m_table.getCenterX();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 0;
+			return Constants.kCameraFrameWidth/2;
 		}
 	}
 	

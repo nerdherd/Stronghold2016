@@ -1,5 +1,6 @@
 package org.camsrobotics.frc2016;
 
+import org.camsrobotics.frc2016.teleop.Commands;
 import org.camsrobotics.lib.NerdyButton;
 import org.camsrobotics.lib.NerdyJoystick;
 
@@ -10,6 +11,8 @@ import org.camsrobotics.lib.NerdyJoystick;
  *
  */
 public class DriverInput {
+	
+	private Commands m_commands;
 	
 	private NerdyJoystick m_driverLeftStick;
 	private NerdyJoystick m_driverRightStick;
@@ -24,6 +27,8 @@ public class DriverInput {
 	private NerdyButton m_shoot;
 	
 	public DriverInput(NerdyJoystick leftStick, NerdyJoystick rightStick, NerdyJoystick buttonBox)	{
+		m_commands = new Commands();
+		
 		m_driverLeftStick = leftStick;
 		m_driverRightStick = rightStick;
 		m_buttonBox = buttonBox;
@@ -36,7 +41,18 @@ public class DriverInput {
 		m_shoot					= m_buttonBox.getButton(99);
 	}
 	
-	public void update()	{
-		// Add commands here
+	public Commands update()	{
+		
+		if(m_snapToVisionTarget.get())	{
+			m_commands.driveCommand = Commands.DriveCommands.VISION;
+		}	else	{
+			m_commands.driveCommand = Commands.DriveCommands.TANK_DRIVE;
+		}
+		
+		if(m_shooterShortRange.get())	{
+			
+		}
+		
+		return m_commands;
 	}
 }

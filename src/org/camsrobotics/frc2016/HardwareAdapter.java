@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.VictorSP;
 
 /**
- * 
+ * Hardware Components
  * 
  * @author Wesley
  *
@@ -55,6 +55,6 @@ public class HardwareAdapter {
 	// Subsystems
 	public static final Drive kDrive = new Drive(kDriveLeftGearbox, kDriveRightGearbox, kNavX);
 	public static final Shooter kShooter = new Shooter(kShooterLeft, kShooterRight, kShooterPunch, kShooterLift);
-	public static final Intake kIntake = new Intake();
+	public static final Intake kIntake = new Intake(null, null, null);
 	public static final Lifter kLifter = new Lifter();
 }

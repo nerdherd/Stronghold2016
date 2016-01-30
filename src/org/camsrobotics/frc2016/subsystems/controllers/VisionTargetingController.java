@@ -20,13 +20,11 @@ public class VisionTargetingController implements DriveController {
 	private NerdyPID m_pid;
 	
 	
-	private double kP = Constants.kDriveRotationP;
-	private double kI = Constants.kDriveRotationI;
-	private double kD = Constants.kDriveRotationD;
+	private double kP = Constants.kDriveVisionP;
+	private double kI = Constants.kDriveVisionI;
+	private double kD = Constants.kDriveVisionD;
 	
 	public VisionTargetingController(double desired, double tolerance) {
-		m_tolerance = tolerance;
-		
 		m_pid = new NerdyPID(kP,kI,kD);
 		m_pid.setDesired(desired);
 	}

@@ -32,12 +32,16 @@ public abstract class AutoMode {
 		return m_enabled;
 	}
 	
-	public void runAction(Action a) throws Exception	{
+	public void runAction(Action a)	{
 		if(m_enabled)	{	
 			a.start();
 			while(isEnabled() && !a.isFinished())	{
 				a.update();
-				Thread.sleep((long) m_rate * 1000);
+				try {
+					Thread.sleep((long) m_rate * 1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

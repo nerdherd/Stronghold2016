@@ -33,8 +33,8 @@ public class Intake implements Loopable {
 		
 		m_angleAdjust.enableBrakeMode(true);
 		
-		m_angleAdjust.setF(Constants.kIntakeP);
-		m_angleAdjust.setP(Constants.kIntakeI);
+		m_angleAdjust.setF(Constants.kIntakeF);
+		m_angleAdjust.setP(Constants.kIntakeP);
 		m_angleAdjust.setI(Constants.kIntakeI);
 		m_angleAdjust.setD(Constants.kIntakeD);
     }

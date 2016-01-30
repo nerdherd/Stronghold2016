@@ -16,12 +16,6 @@ public class Vision {
 	private int m_max;
 	private int m_maxKey = 0;
 	
-	private double[] m_areas;
-	private double[] m_widths;
-	private double[] m_heights;
-	private double[] m_centerxs;
-	private double[] m_centerys;
-	
 	private static Vision m_instance = null;
 	
 	/**
@@ -63,8 +57,8 @@ public class Vision {
 	 * @throws Exception 
 	 */
 	public double getWidth() throws Exception {
-		m_areas = table.getNumberArray("area", m_defaultVal);
-		m_widths = table.getNumberArray("width", m_defaultVal);
+		double[] m_areas = table.getNumberArray("area", m_defaultVal);
+		double[] m_widths = table.getNumberArray("width", m_defaultVal);
 		m_maxKey = getMax(m_areas);
 		return m_widths[m_maxKey];
 	}
@@ -73,8 +67,8 @@ public class Vision {
 	 * @throws Exception 
 	 */
 	public double getHeight() throws Exception {
-		m_areas = table.getNumberArray("area", m_defaultVal);
-		m_heights = table.getNumberArray("height", m_defaultVal);
+		double[] m_areas = table.getNumberArray("area", m_defaultVal);
+		double[] m_heights = table.getNumberArray("height", m_defaultVal);
 		m_maxKey = getMax(m_areas);
 		return m_heights[m_maxKey];
 	}
@@ -83,7 +77,7 @@ public class Vision {
 	 * @throws Exception 
 	 */
 	public double getArea() throws Exception {
-		m_areas = table.getNumberArray("area", m_defaultVal);
+		double[] m_areas = table.getNumberArray("area", m_defaultVal);
 		m_maxKey = getMax(m_areas);
 		return m_areas[m_maxKey];	
 	}
@@ -92,8 +86,8 @@ public class Vision {
 	 * @throws Exception 
 	 */
 	public double getCenterX() throws Exception {
-		m_areas = table.getNumberArray("area", m_defaultVal);
-		m_centerxs = table.getNumberArray("centerX", m_defaultVal);
+		double[] m_areas = table.getNumberArray("area", m_defaultVal);
+		double[] m_centerxs = table.getNumberArray("centerX", m_defaultVal);
 		m_maxKey = getMax(m_areas);
 		return m_centerxs[m_maxKey];
 	}
@@ -102,8 +96,8 @@ public class Vision {
 	 * @throws Exception 
 	 */
 	public double getCenterY() throws Exception {
-		m_areas = table.getNumberArray("area", m_defaultVal);
-		m_centerys = table.getNumberArray("centerY", m_defaultVal);
+		double[] m_areas = table.getNumberArray("area", m_defaultVal);
+		double[] m_centerys = table.getNumberArray("centerY", m_defaultVal);
 		m_maxKey = getMax(m_areas);
 		return m_centerys[m_maxKey];
 	}

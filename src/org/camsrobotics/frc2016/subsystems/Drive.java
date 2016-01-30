@@ -123,6 +123,7 @@ public class Drive implements Loopable {
 			return m_table.getCenterX();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return 0;
 		}
 	}
 	

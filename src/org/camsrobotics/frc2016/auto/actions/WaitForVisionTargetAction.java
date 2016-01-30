@@ -9,7 +9,7 @@ import org.camsrobotics.frc2016.Vision;
  *
  */
 public class WaitForVisionTargetAction extends TimeoutAction {
-	private Vision m_table = new Vision();
+	private Vision m_table = Vision.getInstance();
 	
 	public WaitForVisionTargetAction(double timeout) {
 		super(timeout);

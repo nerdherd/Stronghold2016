@@ -22,14 +22,25 @@ public class Vision {
 	private double[] m_centerxs;
 	private double[] m_centerys;
 	
+	private static Vision m_instance = null;
+	
 	/**
 	 * Constructs a network table given a key. (For instance 'GRIP/myContourReport')
 	 * @param key
 	 */
-	public Vision() {
+	private Vision() {
 		table = NetworkTable.getTable("GRIP/myContourReport");
 	}
-	
+	 /**
+	  * Get one instance of vision object. (Since we will never need more than one.)
+	  * @Vision Instance
+	  */
+	public static Vision getInstance() {
+		if (m_instance == null) {
+			m_instance = new Vision();
+		}
+		return m_instance;
+	}
 	/**
 	 * Returns max value in a given array.
 	 * @param array

@@ -67,7 +67,7 @@ public class Drive implements Loopable {
 	private DriveController m_controller = null;
 	private DriveSignal m_signal = null;
 	
-	private Vision m_table = new Vision();
+	private Vision m_table = Vision.getInstance();
 	
 	public Drive(Gearbox leftGearbox, Gearbox rightGearbox, AHRS nav)	{
 		m_leftGearbox = leftGearbox;

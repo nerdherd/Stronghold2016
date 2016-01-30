@@ -9,6 +9,12 @@ import org.camsrobotics.frc2016.subsystems.Drive.DriveSignal;
 import org.camsrobotics.frc2016.subsystems.controllers.DriveRotationController;
 import org.camsrobotics.frc2016.subsystems.controllers.DriveStraightController;
 
+/**
+ * Lowbar and shoot
+ * 
+ * @author Wesley
+ *
+ */
 public class LowBarAuto extends AutoMode {
 
 	@Override

@@ -22,8 +22,6 @@ public class Vision {
 	private double[] m_centerxs;
 	private double[] m_centerys;
 	
-	private String m_type;
-	
 	/**
 	 * Constructs a network table given a key. (For instance 'GRIP/myContourReport')
 	 * @param key
@@ -35,8 +33,9 @@ public class Vision {
 	/**
 	 * Returns max value in a given array.
 	 * @param array
+	 * @throws Exception 
 	 */
-	private int getMax(double[] array) {
+	private int getMax(double[] array) throws Exception {
 		if (array != null && array != m_defaultVal) {
 			m_max = 0;
 			for (int i = 0; i < array.length; i++) {
@@ -44,14 +43,15 @@ public class Vision {
 			}
 			return m_max;
 		} else {
-			return 0;
+			throw new Exception("There is nothing in the array.");
 		}
 	}
 	
 	/**
 	 * Returns width of largest contour. Only works with contour reports.
+	 * @throws Exception 
 	 */
-	public double getWidth() {
+	public double getWidth() throws Exception {
 		m_areas = table.getNumberArray("area", m_defaultVal);
 		m_widths = table.getNumberArray("width", m_defaultVal);
 		m_maxKey = getMax(m_areas);
@@ -59,8 +59,9 @@ public class Vision {
 	}
 	/**
 	 * Returns height of largest contour, or the length of the longest line.
+	 * @throws Exception 
 	 */
-	public double getHeight() {
+	public double getHeight() throws Exception {
 		m_areas = table.getNumberArray("area", m_defaultVal);
 		m_heights = table.getNumberArray("height", m_defaultVal);
 		m_maxKey = getMax(m_areas);
@@ -68,16 +69,18 @@ public class Vision {
 	}
 	/**
 	 * Returns largest measured area. Only works for contour reports.
+	 * @throws Exception 
 	 */
-	public double getArea() {
+	public double getArea() throws Exception {
 		m_areas = table.getNumberArray("area", m_defaultVal);
 		m_maxKey = getMax(m_areas);
 		return m_areas[m_maxKey];	
 	}
 	/**
 	 * Returns centerX of the largest contour or longest line.
+	 * @throws Exception 
 	 */
-	public double getCenterX() {
+	public double getCenterX() throws Exception {
 		m_areas = table.getNumberArray("area", m_defaultVal);
 		m_centerxs = table.getNumberArray("centerX", m_defaultVal);
 		m_maxKey = getMax(m_areas);
@@ -85,8 +88,9 @@ public class Vision {
 	}
 	/**
 	 * Returns centerY of the largest contour. 
+	 * @throws Exception 
 	 */
-	public double getCenterY() {
+	public double getCenterY() throws Exception {
 		m_areas = table.getNumberArray("area", m_defaultVal);
 		m_centerys = table.getNumberArray("centerY", m_defaultVal);
 		m_maxKey = getMax(m_areas);

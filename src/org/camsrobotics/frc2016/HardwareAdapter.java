@@ -48,6 +48,7 @@ public class HardwareAdapter {
 	public static final AHRS kNavX						= new AHRS(new SerialPort(57600, SerialPort.Port.kMXP));
 	public static final Encoder kDriveLeftEncoder		= new Encoder(0,1);
 	public static final Encoder kDriveRightEncoder		= new Encoder(2,3);
+	public static final Ultrasonic kUltrasonic			= new Ultrasonic(4,5);
 	
 	// Gearboxes
 	public static final Gearbox kDriveLeftGearbox		= new Gearbox(kDriveFrontLeft, kDriveBackLeft, kDriveLeftEncoder, kLeftShifter);

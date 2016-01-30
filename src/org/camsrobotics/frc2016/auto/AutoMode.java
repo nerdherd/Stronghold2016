@@ -19,7 +19,7 @@ public abstract class AutoMode {
 	protected Intake intake = HardwareAdapter.kIntake;
 	protected Lifter lifter = HardwareAdapter.kLifter;
 	
-	private double m_rate = 1/50;
+	private double m_rate = 1d/50d;
 	private boolean m_enabled = false;
 
 	public abstract void run();

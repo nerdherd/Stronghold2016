@@ -27,6 +27,9 @@ public class Constants {
 	public final static double kDriveTranslationP	= 0;
 	public final static double kDriveTranslationI	= 0;
 	public final static double kDriveTranslationD	= 0;
+	public final static double kDriveStraightP		= 0;
+	public final static double kDriveStraightI		= 0;
+	public final static double kDriveStraightD		= 0;
 	
 	/*
 	 * Shooter Constants

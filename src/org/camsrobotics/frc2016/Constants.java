@@ -11,9 +11,9 @@ public class Constants {
 	/*
 	 * Camera Constants
 	 */
-	public final static int cameraFrameHeight	= 240;
-	public final static int cameraFrameWidth	= 320;
-	public final static double cameraFOVAngle	= 21.2505055;
+	public final static int kCameraFrameHeight	= 240;
+	public final static int kCameraFrameWidth	= 320;
+	public final static double kCameraFOVAngle	= 21.2505055;
 	
 	/*
 	 * Drive Constants

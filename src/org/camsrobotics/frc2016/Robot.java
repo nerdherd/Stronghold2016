@@ -33,7 +33,7 @@ public class Robot extends IterativeRobot {
     	System.out.println("NerdyBot Apotheosis Initialization");
     	
     	controllers.addLoopable(shooter);
-    	// controllers.addLoopable(intake); // need to wait for jamari to fix
+    	controllers.addLoopable(intake);
     	
     	slowControllers.addLoopable(drive);
     }

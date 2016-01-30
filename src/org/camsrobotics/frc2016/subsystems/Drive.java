@@ -103,6 +103,11 @@ public class Drive implements Loopable {
 	
 	public void shiftUp()	{
 		m_leftGearbox.shiftUp();
+		m_rightGearbox.shiftUp();
+	}
+	
+	public void shiftDown()	{
+		m_leftGearbox.shiftDown();
 		m_rightGearbox.shiftDown();
 	}
 	

@@ -39,6 +39,9 @@ public class HardwareAdapter {
 	public static final CANTalon kShooterRight			= new CANTalon(2);
 	public static final CANTalon kShooterLift			= new CANTalon(3);
 	
+	public static final VictorSP kIntakeRollers			= new VictorSP(6);
+	public static final CANTalon kIntakeArtic			= new CANTalon(4);
+	
 	// Solenoids
 	public static final DoubleSolenoid kLeftShifter		= new DoubleSolenoid(1,2);
 	public static final DoubleSolenoid kRightShifter	= new DoubleSolenoid(3,4);
@@ -57,6 +60,6 @@ public class HardwareAdapter {
 	// Subsystems
 	public static final Drive kDrive = new Drive(kDriveLeftGearbox, kDriveRightGearbox, kNavX);
 	public static final Shooter kShooter = new Shooter(kShooterLeft, kShooterRight, kShooterPunch, kShooterLift);
-	public static final Intake kIntake = new Intake(null, null, null);
+	public static final Intake kIntake = new Intake(kIntakeRollers, kIntakeArtic);
 	public static final Lifter kLifter = new Lifter();
 }

@@ -81,8 +81,6 @@ public class Robot extends IterativeRobot {
     	
     	shooter.setDesiredRPM(0);
     	shooter.stop();
-    	
-    	System.gc();
     }
     
     public void disabledPeriodic()	{

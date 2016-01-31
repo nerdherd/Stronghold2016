@@ -67,6 +67,11 @@ public class Intake implements Loopable {
     	return Math.abs(m_desiredAngle - getHeight()) < tolerance;
     }
 
+    public void stop()	{
+    	idle();
+    	setIntakeHeight(getHeight());
+    }
+    
 	@Override
 	public void update() {
 		double intakePow;

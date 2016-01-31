@@ -10,6 +10,7 @@ import org.camsrobotics.frc2016.teleop.Commands;
 import org.camsrobotics.frc2016.teleop.TeleopManager;
 import org.camsrobotics.lib.MultiLooper;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 /**
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	
 	AutoExecutor auto = new AutoExecutor(AutoExecutor.Mode.LOW_BAR);
 	
+	Compressor compressor = HardwareAdapter.kCompressor;
 	Drive drive = HardwareAdapter.kDrive;
 	Shooter shooter = HardwareAdapter.kShooter;
 	Intake intake = HardwareAdapter.kIntake;
@@ -33,6 +35,8 @@ public class Robot extends IterativeRobot {
 	TeleopManager teleop = new TeleopManager();
 	
     public void robotInit() {
+    	compressor.start();
+    	
     	System.out.println("NerdyBot Apotheosis Initialization");
     	
     	controllers.addLoopable(shooter);

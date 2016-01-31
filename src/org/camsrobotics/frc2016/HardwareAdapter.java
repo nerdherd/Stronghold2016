@@ -10,6 +10,7 @@ import org.camsrobotics.lib.NerdyJoystick;
 import com.kauailabs.navx_mxp.AHRS;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -42,7 +43,8 @@ public class HardwareAdapter {
 	public static final VictorSP kIntakeRollers			= new VictorSP(6);
 	public static final CANTalon kIntakeArtic			= new CANTalon(4);
 	
-	// Solenoids
+	// Pneumatics
+	public static final Compressor kCompressor			= new Compressor();
 	public static final DoubleSolenoid kLeftShifter		= new DoubleSolenoid(1,2);
 	public static final DoubleSolenoid kRightShifter	= new DoubleSolenoid(3,4);
 	public static final DoubleSolenoid kShooterPunch	= new DoubleSolenoid(5,6);

@@ -6,6 +6,7 @@ import org.camsrobotics.frc2016.subsystems.Drive;
 import org.camsrobotics.frc2016.subsystems.Intake;
 import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.frc2016.subsystems.Drive.DriveSignal;
+import org.camsrobotics.frc2016.teleop.Commands;
 import org.camsrobotics.frc2016.teleop.TeleopManager;
 import org.camsrobotics.lib.MultiLooper;
 
@@ -65,7 +66,8 @@ public class Robot extends IterativeRobot {
     }
     
     public void teleopPeriodic() {
-        teleop.update(driverInput.update());
+    	Commands c = driverInput.update();
+        teleop.update(c);
     }
     
     public void disabledInit()	{

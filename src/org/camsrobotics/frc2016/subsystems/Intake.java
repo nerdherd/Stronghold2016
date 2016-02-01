@@ -19,6 +19,9 @@ public class Intake implements Loopable {
 	private VictorSP m_intake;
 	private CANTalon m_angleAdjust;
 	
+	private boolean m_manual = false;
+	private double m_manualPow = 0;
+	
 	private double m_desiredAngle = 0;
 	
 	private IntakeStates m_rollerState;
@@ -56,11 +59,23 @@ public class Intake implements Loopable {
     }
     
     public void setIntakeHeight(double angle)	{
+    	m_manual = false;
     	m_desiredAngle = angle;
     }
     
     public int getHeight()	{
     	return m_angleAdjust.getEncPosition();
+    }
+    
+    public void manualDrive(double pow)	{
+    	// deadband pow
+    	if(Math.abs(pow) > 0.05)	{
+    		m_manual = true;
+    		m_manualPow = pow;
+    	}	else	{
+    		m_manual = false;
+    		m_desiredAngle = getHeight();
+    	}
     }
     
     public boolean isOnTarget(double tolerance)	{
@@ -91,7 +106,13 @@ public class Intake implements Loopable {
 		}
 		
 		m_intake.set(intakePow);
-		m_angleAdjust.set(m_desiredAngle);
+		if(m_manual)	{
+			m_angleAdjust.changeControlMode(TalonControlMode.PercentVbus);
+			m_angleAdjust.set(m_manualPow);
+		}	else	{
+			m_angleAdjust.changeControlMode(TalonControlMode.Position);
+			m_angleAdjust.set(m_desiredAngle);
+		}
 	}
     
 }

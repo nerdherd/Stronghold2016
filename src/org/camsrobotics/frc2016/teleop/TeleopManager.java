@@ -22,6 +22,7 @@ public class TeleopManager {
 	
 	private NerdyJoystick m_driverLeftStick = HardwareAdapter.kDriveLeftStick;
 	private NerdyJoystick m_driverRightStick = HardwareAdapter.kDriveRightStick;
+	private NerdyJoystick m_buttonBox = HardwareAdapter.kButtonBox;
 	
 	public void update(Commands c)	{
 		// Drive
@@ -72,7 +73,7 @@ public class TeleopManager {
 		// Intake
 		switch(c.intakeCommand)	{
 		case MANUAL:
-			// insert manual control logic here
+			m_intake.manualDrive(m_buttonBox.getY());
 			break;
 		case FLOOR_LEVEL:
 			m_intake.setIntakeHeight(Constants.kIntakeFloorLevel);

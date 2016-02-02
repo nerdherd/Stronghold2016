@@ -41,6 +41,10 @@ public class AutoExecutor {
 		}
 	}
 	
+	public AutoExecutor(AutoMode mode)	{
+		m_auto = mode;
+	}
+	
 	/**
 	 * Let's go!
 	 */

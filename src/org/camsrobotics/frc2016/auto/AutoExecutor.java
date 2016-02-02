@@ -34,6 +34,7 @@ public class AutoExecutor {
 			break;
 		case LOW_BAR:
 			m_auto = new LowBarAuto();
+			break;
 		default:
 			m_auto = new DoNothingAuto();
 			break;

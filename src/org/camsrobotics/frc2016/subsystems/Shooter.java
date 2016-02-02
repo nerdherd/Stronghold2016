@@ -122,6 +122,7 @@ public class Shooter implements Loopable {
 		m_shooterLeft.set(0);
 		m_shooterRight.set(0);
 		setShooterAngle(getShooterAngle());
+		setDesiredRPM(0);
 	}
 	
 	@Override

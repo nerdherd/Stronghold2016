@@ -141,6 +141,7 @@ public class Drive implements Loopable {
 	public void stop()	{
 		m_leftGearbox.setSpeed(0);
 		m_rightGearbox.setSpeed(0);
+		m_signal = null;
 	}
 	
 	/**

@@ -1,6 +1,6 @@
 package org.camsrobotics.lib;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Loops a bunch of stuff
@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class MultiLooper implements Loopable {
 	private Looper m_looper;
-	private ArrayList<Loopable> m_loopables;
+	private Vector<Loopable> m_loopables = new Vector<Loopable>();
 	
 	public MultiLooper(String name, double period)	{
 		m_looper = new Looper(name, this, period);

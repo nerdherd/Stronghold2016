@@ -5,7 +5,7 @@ import org.camsrobotics.frc2016.Vision;
 import org.camsrobotics.lib.Gearbox;
 import org.camsrobotics.lib.Loopable;
 
-import com.kauailabs.navx_mxp.AHRS;
+import com.kauailabs.navx.frc.AHRS;
 
 /**
  * Drivebase Interface

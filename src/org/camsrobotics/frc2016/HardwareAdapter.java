@@ -7,7 +7,7 @@ import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.lib.Gearbox;
 import org.camsrobotics.lib.NerdyJoystick;
 
-import com.kauailabs.navx_mxp.AHRS;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
@@ -50,7 +50,7 @@ public class HardwareAdapter {
 	public static final DoubleSolenoid kShooterPunch	= new DoubleSolenoid(5,6);
 	
 	// Sensors
-	public static final AHRS kNavX						= new AHRS(new SerialPort(57600, SerialPort.Port.kMXP));
+	public static final AHRS kNavX						= new AHRS(SerialPort.Port.kMXP);
 	public static final Encoder kDriveLeftEncoder		= new Encoder(0,1);
 	public static final Encoder kDriveRightEncoder		= new Encoder(2,3);
 	public static final Ultrasonic kUltrasonic			= new Ultrasonic(4,5);

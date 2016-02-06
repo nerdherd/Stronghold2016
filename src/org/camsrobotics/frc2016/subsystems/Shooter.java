@@ -1,7 +1,8 @@
 package org.camsrobotics.frc2016.subsystems;
 
 import org.camsrobotics.frc2016.Constants;
-import org.camsrobotics.lib.Loopable;
+import org.camsrobotics.lib.StateHolder;
+import org.camsrobotics.lib.Subsystem;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
@@ -15,7 +16,7 @@ import edu.wpi.first.wpilibj.Timer;
  * @author Wesley
  *
  */
-public class Shooter implements Loopable {
+public class Shooter extends Subsystem {
 	
 	private CANTalon m_shooterLeft;
 	private CANTalon m_shooterRight;
@@ -42,7 +43,9 @@ public class Shooter implements Loopable {
 	private boolean m_shooting = false;
 	private Timer m_shootTimer;
 	
-	public Shooter(CANTalon shooterLeft, CANTalon shooterRight, DoubleSolenoid shooterPunch, CANTalon lifter)	{
+	public Shooter(String name, CANTalon shooterLeft, CANTalon shooterRight, DoubleSolenoid shooterPunch, CANTalon lifter)	{
+		super(name);
+		
 		m_shooterLeft = shooterLeft;
 		m_shooterRight = shooterRight;
 		m_shooterPunch = shooterPunch;
@@ -145,5 +148,13 @@ public class Shooter implements Loopable {
 			if(m_shooterPunch.get() != DoubleSolenoid.Value.kReverse)
 				m_shooterPunch.set(DoubleSolenoid.Value.kReverse);
 		}
+	}
+
+	@Override
+	public void getState(StateHolder states) {
+		states.put("Shooting", Boolean.toString(m_shooting));
+		states.put("DesiredRPM", Double.toString(m_desiredRPM));
+		states.put("EncoderPosition", Double.toString(getShooterAngle()));
+		states.put("DesiredPosition", Double.toString(m_desiredAngle));
 	}
 }

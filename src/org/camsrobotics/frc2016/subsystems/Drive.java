@@ -3,7 +3,8 @@ package org.camsrobotics.frc2016.subsystems;
 import org.camsrobotics.frc2016.Constants;
 import org.camsrobotics.frc2016.Vision;
 import org.camsrobotics.lib.Gearbox;
-import org.camsrobotics.lib.Loopable;
+import org.camsrobotics.lib.StateHolder;
+import org.camsrobotics.lib.Subsystem;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -13,7 +14,7 @@ import com.kauailabs.navx.frc.AHRS;
  * @author Wesley
  *
  */
-public class Drive implements Loopable {
+public class Drive extends Subsystem {
 	
 	/**
 	 * Send a DriveSignal to the drivebase to control it
@@ -69,7 +70,8 @@ public class Drive implements Loopable {
 	
 	private Vision m_table = Vision.getInstance();
 	
-	public Drive(Gearbox leftGearbox, Gearbox rightGearbox, AHRS nav)	{
+	public Drive(String name, Gearbox leftGearbox, Gearbox rightGearbox, AHRS nav)	{
+		super(name);
 		m_leftGearbox = leftGearbox;
 		m_rightGearbox = rightGearbox;
 		m_rightGearbox.setReversed();
@@ -160,5 +162,16 @@ public class Drive implements Loopable {
 			m_leftGearbox.setSpeed(0);
 			m_rightGearbox.setSpeed(0);
 		}
+	}
+
+	@Override
+	public void getState(StateHolder states) {
+		states.put("LeftSpeed", Double.toString(m_signal.leftSpeed));
+		states.put("RightSpeed", Double.toString(m_signal.rightSpeed));
+		
+		states.put("Yaw", Double.toString(getYaw()));
+		states.put("LeftEncoder", Double.toString(getLeftEncoderDistance()));
+		states.put("RightEncoder", Double.toString(getRightEncoderDistance()));
+		states.put("VisionCenterX", Double.toString(getVision()));
 	}
 }

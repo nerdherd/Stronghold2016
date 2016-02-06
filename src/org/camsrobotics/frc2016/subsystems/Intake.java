@@ -1,7 +1,9 @@
 package org.camsrobotics.frc2016.subsystems;
 
 import org.camsrobotics.frc2016.Constants;
-import org.camsrobotics.lib.Loopable;
+import org.camsrobotics.lib.StateHolder;
+import org.camsrobotics.lib.Subsystem;
+
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
@@ -15,7 +17,7 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
  * @author Wesley
  *
  */
-public class Intake implements Loopable {
+public class Intake extends Subsystem {
 	private VictorSP m_intake;
 	private CANTalon m_angleAdjust;
 	
@@ -26,7 +28,8 @@ public class Intake implements Loopable {
 	
 	private IntakeStates m_rollerState;
 	
-    public Intake(VictorSP rollers, CANTalon angleAdjust)	{
+    public Intake(String name, VictorSP rollers, CANTalon angleAdjust)	{
+    	super(name);
     	m_intake = rollers;
     	m_angleAdjust = angleAdjust;
     	
@@ -74,6 +77,7 @@ public class Intake implements Loopable {
     		m_manualPow = pow;
     	}	else	{
     		m_manual = false;
+    		m_manualPow = 0;
     		m_desiredAngle = getHeight();
     	}
     }
@@ -113,6 +117,13 @@ public class Intake implements Loopable {
 			m_angleAdjust.changeControlMode(TalonControlMode.Position);
 			m_angleAdjust.set(m_desiredAngle);
 		}
+	}
+
+	@Override
+	public void getState(StateHolder states) {
+		states.put("RollerPower", m_rollerState == IntakeStates.INTAKE ? Double.toString(Constants.kIntakeSpeed) : 
+			m_rollerState == IntakeStates.OUTTAKE ? Double.toString(-Constants.kIntakeSpeed) : "0");
+		states.put("AnglePower", m_manual ? Double.toString(m_manualPow) : Double.toString(m_desiredAngle));
 	}
     
 }

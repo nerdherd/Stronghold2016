@@ -11,5 +11,5 @@ public abstract class Subsystem implements Loopable {
 		return m_name;
 	}
 	
-	public abstract void getState();
+	public abstract void getState(StateHolder states);
 }

@@ -60,8 +60,8 @@ public class HardwareAdapter {
 	public static final Gearbox kDriveRightGearbox		= new Gearbox(kDriveFrontRight, kDriveBackRight, kDriveRightEncoder, kRightShifter);
 	
 	// Subsystems
-	public static final Drive kDrive = new Drive(kDriveLeftGearbox, kDriveRightGearbox, kNavX);
-	public static final Shooter kShooter = new Shooter(kShooterLeft, kShooterRight, kShooterPunch, kShooterLift);
-	public static final Intake kIntake = new Intake(kIntakeRollers, kIntakeArtic);
+	public static final Drive kDrive = new Drive("Drivebase", kDriveLeftGearbox, kDriveRightGearbox, kNavX);
+	public static final Shooter kShooter = new Shooter("Shooter", kShooterLeft, kShooterRight, kShooterPunch, kShooterLift);
+	public static final Intake kIntake = new Intake("Intakes", kIntakeRollers, kIntakeArtic);
 	public static final Lifter kLifter = new Lifter();
 }

@@ -31,10 +31,12 @@ public class HardwareAdapter {
 	public static final DriverInput kDriverInput		= new DriverInput(kDriveLeftStick, kDriveRightStick, kButtonBox);
 	
 	// Motors
-	public static final VictorSP kDriveFrontLeft		= new VictorSP(2);
-	public static final VictorSP kDriveFrontRight		= new VictorSP(3);
-	public static final VictorSP kDriveBackLeft			= new VictorSP(4);
-	public static final VictorSP kDriveBackRight		= new VictorSP(5);
+	public static final VictorSP kDriveLeft1			= new VictorSP(0);
+	public static final VictorSP kDriveLeft2			= new VictorSP(1);
+	public static final VictorSP kDriveLeft3			= new VictorSP(2);
+	public static final VictorSP kDriveRight1			= new VictorSP(3);
+	public static final VictorSP kDriveRight2			= new VictorSP(4);
+	public static final VictorSP kDriveRight3			= new VictorSP(5);
 	
 	public static final CANTalon kShooterLeft			= new CANTalon(1);
 	public static final CANTalon kShooterRight			= new CANTalon(2);
@@ -56,8 +58,8 @@ public class HardwareAdapter {
 	public static final Ultrasonic kUltrasonic			= new Ultrasonic(4,5);
 	
 	// Gearboxes
-	public static final Gearbox kDriveLeftGearbox		= new Gearbox(kDriveFrontLeft, kDriveBackLeft, kDriveLeftEncoder, kLeftShifter);
-	public static final Gearbox kDriveRightGearbox		= new Gearbox(kDriveFrontRight, kDriveBackRight, kDriveRightEncoder, kRightShifter);
+	public static final Gearbox kDriveLeftGearbox		= new Gearbox(kDriveLeft1, kDriveLeft2, kDriveRight3, kDriveLeftEncoder, kLeftShifter);
+	public static final Gearbox kDriveRightGearbox		= new Gearbox(kDriveRight1, kDriveRight2, kDriveRight3, kDriveRightEncoder, kRightShifter);
 	
 	// Subsystems
 	public static final Drive kDrive = new Drive("Drivebase", kDriveLeftGearbox, kDriveRightGearbox, kNavX);

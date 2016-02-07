@@ -13,28 +13,30 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class Gearbox {
 	private SpeedController m_motor1;
 	private SpeedController m_motor2;
+	private SpeedController m_motor3;
 	private Encoder m_encoder;
 	private DoubleSolenoid m_shifter;
 	private boolean m_reversed;
 	
-	public Gearbox(SpeedController motor1, SpeedController motor2, Encoder encoder, DoubleSolenoid shifter)	{
+	public Gearbox(SpeedController motor1, SpeedController motor2, SpeedController motor3, Encoder encoder, DoubleSolenoid shifter)	{
 		m_motor1 = motor1;
 		m_motor2 = motor2;
+		m_motor3 = motor3;
 		
 		m_encoder = encoder;
 		m_shifter = shifter;
 	}
 	
-	public Gearbox(SpeedController motor1, SpeedController motor2, Encoder encoder)	{
-		this(motor1, motor2, encoder, null);
+	public Gearbox(SpeedController motor1, SpeedController motor2, SpeedController motor3, Encoder encoder)	{
+		this(motor1, motor2, motor3, encoder, null);
 	}
 	
-	public Gearbox(SpeedController motor1, SpeedController motor2, DoubleSolenoid shifter)	{
-		this(motor1, motor2, null, shifter);
+	public Gearbox(SpeedController motor1, SpeedController motor2, SpeedController motor3, DoubleSolenoid shifter)	{
+		this(motor1, motor2, motor3, null, shifter);
 	}
 	
-	public Gearbox(SpeedController motor1, SpeedController motor2)	{
-		this(motor1, motor2, null, null);
+	public Gearbox(SpeedController motor1, SpeedController motor2, SpeedController motor3)	{
+		this(motor1, motor2, motor3, null, null);
 	}
 	
 	/**
@@ -125,5 +127,6 @@ public class Gearbox {
 	public void setSpeed(double speed)	{
 		m_motor1.set(speed * (m_reversed ? -1 : 1));
 		m_motor2.set(speed * (m_reversed ? -1 : 1));
+		m_motor3.set(speed * (m_reversed ? -1 : 1));
 	}
 }

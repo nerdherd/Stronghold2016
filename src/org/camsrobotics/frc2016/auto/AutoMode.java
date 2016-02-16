@@ -38,7 +38,7 @@ public abstract class AutoMode {
 			while(isEnabled() && !a.isFinished())	{
 				a.update();
 				try {
-					Thread.sleep((long) m_period * 1000);
+					Thread.sleep((long) (m_period * 1000));
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

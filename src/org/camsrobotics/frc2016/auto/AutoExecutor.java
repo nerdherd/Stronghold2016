@@ -13,34 +13,10 @@ public class AutoExecutor {
 	private Thread m_thread = null;
 	
 	/**
-	 * Autonomous Modes
+	 * Constructs the AutoExecutor with the given mode
 	 * 
-	 * @author Wesley
-	 *
+	 * @param mode The mode to be executed
 	 */
-	public enum Mode	{
-		DO_NOTHING, LOW_BAR
-	}
-	
-	/**
-	 * Default Constructor
-	 * 
-	 * @param mode
-	 */
-	public AutoExecutor(Mode mode)	{
-		switch(mode)	{
-		case DO_NOTHING:
-			m_auto = new DoNothingAuto();
-			break;
-		case LOW_BAR:
-			m_auto = new LowBarAuto();
-			break;
-		default:
-			m_auto = new DoNothingAuto();
-			break;
-		}
-	}
-	
 	public AutoExecutor(AutoMode mode)	{
 		m_auto = mode;
 	}

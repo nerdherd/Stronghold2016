@@ -35,14 +35,14 @@ public class DriverInput {
 		m_driverRightStick = rightStick;
 		m_buttonBox = buttonBox;
 		
-		m_snapToVisionTarget	= m_driverLeftStick.getButton(99);
-		m_shiftUp				= m_driverRightStick.getButton(99);
-		m_shiftDown				= m_driverRightStick.getButton(99);
-		m_shooterShortRange		= m_buttonBox.getButton(99);
-		m_shooterMediumRange	= m_buttonBox.getButton(99);
-		m_shooterLongRange		= m_buttonBox.getButton(99);
-		m_shooterVision			= m_buttonBox.getButton(99);
-		m_shoot					= m_buttonBox.getButton(99);
+		m_snapToVisionTarget	= m_driverLeftStick.getButton(1);
+		m_shiftUp				= m_driverRightStick.getButton(4);
+		m_shiftDown				= m_driverRightStick.getButton(3);
+		m_shooterShortRange		= m_buttonBox.getButton(11);
+		m_shooterMediumRange	= m_buttonBox.getButton(9);
+		m_shooterLongRange		= m_buttonBox.getButton(7);
+		m_shooterVision			= m_buttonBox.getButton(2);
+		m_shoot					= m_buttonBox.getButton(3);
 	}
 	
 	public Commands update()	{

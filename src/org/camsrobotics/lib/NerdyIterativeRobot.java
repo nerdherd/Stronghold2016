@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.communication.UsageReporting;
 import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary.tInstances;
 import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary.tResourceType;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * A slightly modified version of IterativeRobot.
@@ -134,7 +133,7 @@ public class NerdyIterativeRobot extends IterativeRobot {
 		 * ready, causing the robot to be bypassed in a match.
 		 */
 		public void robotInit() {
-			SmartDashboard.putString("NerdyIterativeRobotLog", "NerdyIterativeRobot IterativeRobot.robotInit() method... Overload me!");
+			System.out.println("NerdyIterativeRobot IterativeRobot.robotInit() method... Overload me!");
 		}
 
 		/**
@@ -144,7 +143,7 @@ public class NerdyIterativeRobot extends IterativeRobot {
 		 * called each time the robot enters disabled mode.
 		 */
 		public void disabledInit() {
-			SmartDashboard.putString("NerdyIterativeRobotLog", "NerdyIterativeRobot IterativeRobot.disabledInit() method... Overload me!");
+			System.out.println("NerdyIterativeRobot IterativeRobot.disabledInit() method... Overload me!");
 		}
 
 		/**
@@ -154,7 +153,7 @@ public class NerdyIterativeRobot extends IterativeRobot {
 		 * called each time the robot enters autonomous mode.
 		 */
 		public void autonomousInit() {
-			SmartDashboard.putString("NerdyIterativeRobotLog", "NerdyIterativeRobot IterativeRobot.autonomousInit() method... Overload me!");
+			System.out.println("NerdyIterativeRobot IterativeRobot.autonomousInit() method... Overload me!");
 		}
 
 		/**
@@ -164,7 +163,7 @@ public class NerdyIterativeRobot extends IterativeRobot {
 		 * called each time the robot enters teleop mode.
 		 */
 		public void teleopInit() {
-			SmartDashboard.putString("NerdyIterativeRobotLog", "NerdyIterativeRobot IterativeRobot.teleopInit() method... Overload me!");
+			System.out.println("NerdyIterativeRobot IterativeRobot.teleopInit() method... Overload me!");
 		}
 
 		/**
@@ -174,7 +173,7 @@ public class NerdyIterativeRobot extends IterativeRobot {
 		 * called each time the robot enters test mode.
 		 */
 		public void testInit() {
-			SmartDashboard.putString("NerdyIterativeRobotLog", "NerdyIterativeRobot IterativeRobot.testInit() method... Overload me!");
+			System.out.println("NerdyIterativeRobot IterativeRobot.testInit() method... Overload me!");
 		}
 
 		/* ----------- Overridable periodic code ----------------- */

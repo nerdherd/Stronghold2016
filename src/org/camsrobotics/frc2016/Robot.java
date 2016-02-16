@@ -2,15 +2,16 @@
 package org.camsrobotics.frc2016;
 
 import org.camsrobotics.frc2016.auto.AutoExecutor;
+import org.camsrobotics.frc2016.auto.modes.*;
 import org.camsrobotics.frc2016.subsystems.Drive;
 import org.camsrobotics.frc2016.subsystems.Intake;
 import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.frc2016.teleop.Commands;
 import org.camsrobotics.frc2016.teleop.TeleopManager;
 import org.camsrobotics.lib.MultiLooper;
+import org.camsrobotics.lib.NerdyIterativeRobot;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.IterativeRobot;
 
 /**
  * This is where the magic happens!
@@ -18,12 +19,12 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  * @author Wesley
  * 
  */
-public class Robot extends IterativeRobot {
+public class Robot extends NerdyIterativeRobot {
 	
 	MultiLooper controllers = new MultiLooper("Controllers", 1/200.0);
 	MultiLooper slowControllers = new MultiLooper("SlowControllers", 1/100.0);
 	
-	AutoExecutor auto = new AutoExecutor(AutoExecutor.Mode.LOW_BAR);
+	AutoExecutor auto = new AutoExecutor(new LowBarAuto());
 	
 	Compressor compressor = HardwareAdapter.kCompressor;
 	Drive drive = HardwareAdapter.kDrive;

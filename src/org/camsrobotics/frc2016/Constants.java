@@ -41,13 +41,17 @@ public class Constants {
 	public final static double kLiftD			= 0;
 	public final static double kShootTime		= 0.5;
 	
-	public final static int kLongRangeRPM		= 3600;
-	public final static int kMediumRangeRPM		= 0;
-	public final static int kShortRangeRPM		= 3600;
+	public final static int kShortRangeRPM		= 2000;
+	public final static int kMediumRangeRPM		= 3000;
+	public final static int kLongRangeRPM		= 4000;
+
+	public final static int kShortRangeActivate	= 2800;
+	public final static int kMediumRangeActivate= 4200;
+	public final static int kLongRangeActivate	= 5600;
 	
-	public final static int kLongRangeAngle		= 0;
-	public final static int kMediumRangeAngle	= 0;
 	public final static int kShortRangeAngle	= 0;
+	public final static int kMediumRangeAngle	= 0;
+	public final static int kLongRangeAngle		= 0;
 	
 	/*
 	 * Intake Constants

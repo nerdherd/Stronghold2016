@@ -4,7 +4,6 @@ import org.camsrobotics.frc2016.HardwareAdapter;
 import org.camsrobotics.frc2016.auto.actions.Action;
 import org.camsrobotics.frc2016.subsystems.Drive;
 import org.camsrobotics.frc2016.subsystems.Intake;
-import org.camsrobotics.frc2016.subsystems.Lifter;
 import org.camsrobotics.frc2016.subsystems.Shooter;
 
 /**
@@ -17,7 +16,6 @@ public abstract class AutoMode {
 	protected Drive drive = HardwareAdapter.kDrive;
 	protected Shooter shooter = HardwareAdapter.kShooter;
 	protected Intake intake = HardwareAdapter.kIntake;
-	protected Lifter lifter = HardwareAdapter.kLifter;
 	
 	private double m_period = 1/50.0;
 	private boolean m_enabled = false;

@@ -92,8 +92,8 @@ public class Shooter extends Subsystem {
 	}
 	
 	public boolean flywheelOnTarget(double threshold)	{
-		return threshold > Math.abs(m_shooterLeft.getEncVelocity() - m_desiredRPM) &&
-				threshold > Math.abs(m_shooterRight.getEncVelocity() - m_desiredRPM);
+		return threshold > Math.abs(m_shooterLeft.getSpeed() - m_desiredRPM) &&
+				threshold > Math.abs(m_shooterRight.getSpeed() - m_desiredRPM);
 	}
 	
 	public void setShooterAngle(double angle)	{
@@ -105,11 +105,11 @@ public class Shooter extends Subsystem {
 	}
 	
 	public double getShooterAngle()	{
-		return m_lifter.getEncPosition() - m_offsetAngle;
+		return m_lifter.getPosition() - m_offsetAngle;
 	}
 	
 	public boolean liftOnTarget(double threshold)	{
-		return threshold > Math.abs(m_lifter.getEncPosition() - m_desiredAngle);
+		return threshold > Math.abs(m_lifter.getPosition() - m_desiredAngle);
 	}
 	
 	public void shoot()	{
@@ -130,8 +130,19 @@ public class Shooter extends Subsystem {
 	
 	@Override
 	public void update() {
-		m_shooterLeft.set(m_desiredRPM);
-		m_shooterRight.set(m_desiredRPM);
+		if(m_desiredRPM != 0)	{
+			m_shooterLeft.changeControlMode(TalonControlMode.Speed);
+			m_shooterRight.changeControlMode(TalonControlMode.Speed);
+			
+			m_shooterLeft.set(m_desiredRPM);
+			m_shooterRight.set(m_desiredRPM);	
+		}	else	{
+			m_shooterLeft.changeControlMode(TalonControlMode.PercentVbus);
+			m_shooterRight.changeControlMode(TalonControlMode.PercentVbus);
+			
+			m_shooterLeft.set(m_desiredRPM);
+			m_shooterRight.set(m_desiredRPM);
+		}
 		
 		m_lifter.set(m_desiredAngle);
 		

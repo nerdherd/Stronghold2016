@@ -1,7 +1,5 @@
 package org.camsrobotics.frc2016.auto.actions;
 
-import org.camsrobotics.frc2016.Constants;
-
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
@@ -22,6 +20,6 @@ public class WaitForVisionTargetAction extends TimeoutAction {
 	
 	@Override
 	public boolean isFinished()	{
-		return super.isFinished() || m_contour == Constants.kCameraFrameWidth/2;
+		return super.isFinished() || m_contour != 0;
 	}
 }

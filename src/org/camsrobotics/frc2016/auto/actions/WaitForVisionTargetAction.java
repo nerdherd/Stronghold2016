@@ -1,23 +1,27 @@
 package org.camsrobotics.frc2016.auto.actions;
 
-import org.camsrobotics.frc2016.Vision;
+import org.camsrobotics.frc2016.Constants;
+
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
- * Waits for the vision target to 
+ * Waits for the vision target
  * 
  * @author Michael
  *
  */
 public class WaitForVisionTargetAction extends TimeoutAction {
-	private Vision m_table = Vision.getInstance();
+	private NetworkTable m_table;
+	private double m_contour;
 	
 	public WaitForVisionTargetAction(double timeout) {
 		super(timeout);
-	
+		m_table = NetworkTable.getTable("GRIP/myContourReport");
+		m_contour = m_table.getNumber("centerx",0);
 	}
 	
 	@Override
 	public boolean isFinished()	{
-		return super.isFinished() || m_table != null;
+		return super.isFinished() || m_contour == Constants.kCameraFrameWidth/2;
 	}
 }

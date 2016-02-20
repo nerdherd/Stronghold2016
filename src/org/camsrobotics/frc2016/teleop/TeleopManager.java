@@ -84,9 +84,6 @@ public class TeleopManager {
 		case MANUAL:
 			m_intake.manualDrive(m_buttonBox.getY());
 			break;
-		case FLOOR_LEVEL:
-			m_intake.setIntakeHeight(Constants.kIntakeFloorLevel);
-			break;
 		case BALL_PICKUP:
 			m_intake.setIntakeHeight(Constants.kIntakeBallPickup);
 			break;

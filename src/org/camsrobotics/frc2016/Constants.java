@@ -63,7 +63,6 @@ public class Constants {
 	public final static double kIntakeD			= 16;
 	public final static int kIntakeTicksPerRev	= 0;
 	
-	public final static int kIntakeFloorLevel	= 0;
-	public final static int kIntakeBallPickup	= 0;
-	public final static int kIntakeTuckedIn		= 0;
+	public final static double kIntakeBallPickup	= -0.095;
+	public final static double kIntakeTuckedIn		= -0.3;
 }

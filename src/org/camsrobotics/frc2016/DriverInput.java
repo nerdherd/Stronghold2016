@@ -30,6 +30,8 @@ public class DriverInput {
 
 	private NerdyButton m_intake;
 	private NerdyButton m_outtake;
+	private NerdyButton m_ballPickup;
+	private NerdyButton m_tuckedIn;
 	
 	public DriverInput(NerdyJoystick leftStick, NerdyJoystick rightStick, NerdyJoystick buttonBox)	{
 		m_commands = new Commands();
@@ -49,6 +51,8 @@ public class DriverInput {
 		
 		m_intake				= m_buttonBox.getButton(12);
 		m_outtake				= m_buttonBox.getButton(10);
+		m_ballPickup			= m_buttonBox.getButton(1);
+		m_tuckedIn				= m_buttonBox.getButton(1);
 	}
 	
 	public Commands update()	{
@@ -102,6 +106,14 @@ public class DriverInput {
 			m_commands.rollerCommand = Commands.RollerCommands.OUTTAKE;
 		}	else	{
 			m_commands.rollerCommand = Commands.RollerCommands.IDLE;
+		}
+		
+		if(m_ballPickup.get())	{
+			m_commands.intakeCommand = Commands.IntakeCommands.BALL_PICKUP;
+		}	else if(m_tuckedIn.get())	{
+			m_commands.intakeCommand = Commands.IntakeCommands.TUCKED_IN;
+		}	else	{
+			m_commands.intakeCommand = Commands.IntakeCommands.MANUAL;
 		}
 		
 		return m_commands;

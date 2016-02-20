@@ -56,7 +56,7 @@ public class Constants {
 	/*
 	 * Intake Constants
 	 */
-	public final static double kIntakeSpeed		= 0.75;
+	public final static double kIntakeSpeed		= 1;
 	public final static double kIntakeF			= 0;
 	public final static double kIntakeP			= 0;
 	public final static double kIntakeI			= 0;

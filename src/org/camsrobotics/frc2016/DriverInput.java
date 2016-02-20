@@ -27,6 +27,9 @@ public class DriverInput {
 	private NerdyButton m_shooterLongRange;
 	private NerdyButton m_shooterVision;
 	private NerdyButton m_shoot;
+
+	private NerdyButton m_intake;
+	private NerdyButton m_outtake;
 	
 	public DriverInput(NerdyJoystick leftStick, NerdyJoystick rightStick, NerdyJoystick buttonBox)	{
 		m_commands = new Commands();
@@ -42,7 +45,10 @@ public class DriverInput {
 		m_shooterMediumRange	= m_buttonBox.getButton(9);
 		m_shooterLongRange		= m_buttonBox.getButton(7);
 		m_shooterVision			= m_buttonBox.getButton(2);
-		m_shoot					= m_buttonBox.getButton(3);
+		m_shoot					= m_buttonBox.getButton(1);
+		
+		m_intake				= m_buttonBox.getButton(12);
+		m_outtake				= m_buttonBox.getButton(10);
 	}
 	
 	public Commands update()	{
@@ -55,6 +61,9 @@ public class DriverInput {
 		m_shooterLongRange.update();
 		m_shooterVision.update();
 		m_shoot.update();
+		
+		m_intake.update();
+		m_outtake.update();
 		
 		// Do the magic
 		if(m_snapToVisionTarget.get())	{
@@ -85,6 +94,14 @@ public class DriverInput {
 			m_commands.shooting = true;
 		}	else	{
 			m_commands.shooting = false;
+		}
+		
+		if(m_intake.get())	{
+			m_commands.rollerCommand = Commands.RollerCommands.INTAKE;
+		}	else if(m_outtake.get())	{
+			m_commands.rollerCommand = Commands.RollerCommands.OUTTAKE;
+		}	else	{
+			m_commands.rollerCommand = Commands.RollerCommands.IDLE;
 		}
 		
 		return m_commands;

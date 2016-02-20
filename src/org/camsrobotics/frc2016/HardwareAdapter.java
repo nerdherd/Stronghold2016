@@ -46,9 +46,9 @@ public class HardwareAdapter {
 	
 	// Pneumatics
 	public static final Compressor kCompressor			= new Compressor();
-	public static final DoubleSolenoid kLeftShifter		= new DoubleSolenoid(1,2);
-	public static final DoubleSolenoid kRightShifter	= new DoubleSolenoid(3,4);
-	public static final DoubleSolenoid kShooterPunch	= new DoubleSolenoid(5,6);
+	public static final DoubleSolenoid kLeftShifter		= new DoubleSolenoid(0,1);
+	public static final DoubleSolenoid kRightShifter	= new DoubleSolenoid(2,3);
+	public static final DoubleSolenoid kShooterPunch	= new DoubleSolenoid(4,5);
 	
 	// Sensors
 	public static final AHRS kNavX						= new AHRS(SerialPort.Port.kMXP);

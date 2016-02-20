@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Shooter Interface
@@ -146,6 +147,7 @@ public class Shooter extends Subsystem {
 		
 		m_lifter.set(m_desiredAngle);
 		
+		System.out.println(m_shooting);
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{
 				if(m_shooterPunch.get() != DoubleSolenoid.Value.kForward)

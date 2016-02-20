@@ -109,6 +109,11 @@ public class Shooter extends Subsystem {
 		return m_lifter.getPosition() - m_offsetAngle;
 	}
 	
+	public double getSpeed()	{
+		return (m_shooterLeft.getSpeed() + m_shooterRight.getSpeed()) / 2;
+	}
+	
+	
 	public boolean liftOnTarget(double threshold)	{
 		return threshold > Math.abs(m_lifter.getPosition() - m_desiredAngle);
 	}

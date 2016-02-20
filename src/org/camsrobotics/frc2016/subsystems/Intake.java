@@ -33,10 +33,11 @@ public class Intake extends Subsystem {
     	m_intake = rollers;
     	m_angleAdjust = angleAdjust;
     	
-    	m_angleAdjust.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	m_angleAdjust.configEncoderCodesPerRev(Constants.kIntakeTicksPerRev);
+    	m_angleAdjust.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
+
 		m_angleAdjust.changeControlMode(TalonControlMode.Position);
-		
+
+		m_angleAdjust.reverseSensor(false);
 		m_angleAdjust.enableBrakeMode(true);
 		
 		m_angleAdjust.setF(Constants.kIntakeF);
@@ -49,21 +50,25 @@ public class Intake extends Subsystem {
     	INTAKE, OUTTAKE, IDLE
     }
     
-    public void intake(){ // turn on intake rollers to intake
+    public void intake()	{ // turn on intake rollers to intake
     	m_rollerState = IntakeStates.INTAKE;
     }
     
-    public void outtake(){ // turn on intake rollers to outake
+    public void outtake()	{ // turn on intake rollers to outake
     	m_rollerState = IntakeStates.OUTTAKE;
     }
     
-    public void idle(){ // cease all intake motors
+    public void idle()	{ // cease all intake motors
     	m_rollerState = IntakeStates.IDLE;
     }
     
     public void setIntakeHeight(double angle)	{
     	m_manual = false;
     	m_desiredAngle = angle;
+    }
+    
+    public void zero()	{
+    	m_angleAdjust.setPosition(0);
     }
     
     public int getHeight()	{

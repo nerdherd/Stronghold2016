@@ -41,7 +41,7 @@ public class Vision {
 	 * @throws Exception 
 	 */
 	private int getMax(double[] array) throws Exception {
-		if (array != null && array != m_defaultVal) {
+		if (array != m_defaultVal) {
 			m_max = 0;
 			for (int i = 0; i < array.length; i++) {
 				m_max = array[i] > m_max ? i : m_max;

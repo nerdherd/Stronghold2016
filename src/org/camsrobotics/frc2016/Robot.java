@@ -37,7 +37,7 @@ public class Robot extends NerdyIterativeRobot {
     public void robotInit() {
     	compressor.start();
     	
-    	System.out.println("NerdyBot Apotheosis Initialization");
+    	System.out.println("NerdyBot Mantis Initialization");
     	
     	controllers.addLoopable(shooter);
     	controllers.addLoopable(intake);
@@ -46,7 +46,7 @@ public class Robot extends NerdyIterativeRobot {
     }
     
     public void autonomousInit() {
-    	System.out.println("NerdyBot Apotheosis Autonomous Start");
+    	System.out.println("NerdyBot Mantis Autonomous Start");
     	
     	drive.resetEncoders();
     	
@@ -61,7 +61,7 @@ public class Robot extends NerdyIterativeRobot {
     }
 
     public void teleopInit()	{
-    	System.out.println("NerdyBot Apotheosis Teleoperated Start");
+    	System.out.println("NerdyBot Mantis Teleoperated Start");
     	
     	drive.resetEncoders();
     	
@@ -75,7 +75,7 @@ public class Robot extends NerdyIterativeRobot {
     }
     
     public void disabledInit()	{
-    	System.out.println("NerdyBot Apotheosis Disabled...enable me!");
+    	System.out.println("NerdyBot Mantis Disabled...enable me!");
     	
     	auto.stop();
     	

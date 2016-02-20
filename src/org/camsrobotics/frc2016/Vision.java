@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 public class Vision {
 	private NetworkTable table;
 	
-	private double[] m_defaultVal = null;
+	private double[] m_defaultVal = new double[0];
 	
 	private int m_max;
 	private int m_maxKey = 0;
@@ -41,7 +41,7 @@ public class Vision {
 	 * @throws Exception 
 	 */
 	private int getMax(double[] array) throws Exception {
-		if (array != null && array != m_defaultVal) {
+		if (array != m_defaultVal) {
 			m_max = 0;
 			for (int i = 0; i < array.length; i++) {
 				m_max = array[i] > m_max ? i : m_max;

@@ -52,7 +52,7 @@ public class Looper {
     public void start() {
         if (looperUpdater == null) {
             looperUpdater = new Timer("Looper - " + this.m_name);
-            looperUpdater.schedule(new Task(this), 0L, (long) (this.period * 1000));
+            looperUpdater.scheduleAtFixedRate(new Task(this), 0L, (long) (this.period * 1000));
         }
     }
 

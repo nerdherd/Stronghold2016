@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Ultrasonic;
  * @author Wesley
  *
  */
-public class WaitForUltrasonicAction extends TimeoutAction {
+public class WaitForUltrasonicBlindAction extends TimeoutAction {
 	private double m_range;
 	private Ultrasonic m_ultrasonic;
 
@@ -20,7 +20,7 @@ public class WaitForUltrasonicAction extends TimeoutAction {
 	 * @param range Max range before triggering, in inches
 	 * @param timeout
 	 */
-	public WaitForUltrasonicAction(double range, double timeout) {
+	public WaitForUltrasonicBlindAction(double range, double timeout) {
 		super(timeout);
 		m_range = range;
 		m_ultrasonic = HardwareAdapter.kUltrasonic;

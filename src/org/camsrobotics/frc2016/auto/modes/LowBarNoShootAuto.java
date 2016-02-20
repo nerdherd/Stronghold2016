@@ -1,19 +1,11 @@
 package org.camsrobotics.frc2016.auto.modes;
 
-import org.camsrobotics.frc2016.Constants;
 import org.camsrobotics.frc2016.auto.AutoMode;
 import org.camsrobotics.frc2016.auto.actions.*;
 import org.camsrobotics.frc2016.subsystems.Drive.DriveSignal;
-import org.camsrobotics.frc2016.subsystems.controllers.DriveRotationController;
 import org.camsrobotics.frc2016.subsystems.controllers.DriveStraightController;
 
-/**
- * Lowbar and shoot
- * 
- * @author Wesley
- *
- */
-public class LowBarAuto extends AutoMode {
+public class LowBarNoShootAuto extends AutoMode {
 
 	@Override
 	public void run() {
@@ -22,20 +14,8 @@ public class LowBarAuto extends AutoMode {
 		runAction(new WaitForUltrasonicSeeAction(45, 15));
 		runAction(new WaitForUltrasonicBlindAction(45, 15));
 		
-		// Turn until vision sees
-		drive.setController(new DriveRotationController(45, 0)); // Tolerance really does not matter
-		runAction(new WaitForVisionTargetAction(15));
-		
 		// Stop
 		drive.driveOpenLoop(DriveSignal.kStop);
-		
-		// Spin Wheels
-		shooter.setDesiredRPM(Constants.kLongRangeRPM);
-		runAction(new WaitForShooterRPMAction(15));
-		
-		// Shoot
-		shooter.shoot();
-		
 	}
-	
+
 }

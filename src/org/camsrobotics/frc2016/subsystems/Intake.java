@@ -1,4 +1,4 @@
-	package org.camsrobotics.frc2016.subsystems;
+package org.camsrobotics.frc2016.subsystems;
 
 import org.camsrobotics.frc2016.Constants;
 import org.camsrobotics.lib.StateHolder;
@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -68,7 +69,7 @@ public class Intake extends Subsystem {
     }
     
     public void zero()	{
-    	m_angleAdjust.setPosition(0);
+    	m_angleAdjust.setEncPosition(0);
     }
     
     public double getHeight()	{
@@ -93,23 +94,18 @@ public class Intake extends Subsystem {
     
 	@Override
 	public void update() {
-		double intakePow;
 		switch(m_rollerState)	{
 		case INTAKE:
-			intakePow = 1;
+			m_intake.set(-1);
 			break;
 		case OUTTAKE:
-			intakePow = -1;
+			m_intake.set(1);
 			break;
 		case IDLE:
-			intakePow = 0;
-			break;
-		default:
-			intakePow = 0;
+			m_intake.set(0);
 			break;
 		}
 		
-		m_intake.set(intakePow);
 		
 		if(m_manual)	{
 			m_angleAdjust.changeControlMode(TalonControlMode.PercentVbus);
@@ -119,7 +115,7 @@ public class Intake extends Subsystem {
 			m_angleAdjust.set(m_desiredAngle);
 		}
 		
-		System.out.println(m_angleAdjust.getPosition());
+		SmartDashboard.putNumber("Intake ANgle",m_angleAdjust.getPosition());
 	}
 
 	@Override

@@ -43,8 +43,8 @@ public class DriverInput {
 		m_buttonBox = buttonBox;
 		
 		m_snapToVisionTarget	= m_driverLeftStick.getButton(1);
-		m_shiftUp				= m_driverRightStick.getButton(4);
-		m_shiftDown				= m_driverRightStick.getButton(3);
+		m_shiftUp				= m_driverLeftStick.getButton(4);
+		m_shiftDown				= m_driverLeftStick.getButton(3);
 		m_shooterShortRange		= m_buttonBox.getButton(11);
 		m_shooterMediumRange	= m_buttonBox.getButton(9);
 		m_shooterLongRange		= m_buttonBox.getButton(7);

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Shooter Interface
@@ -116,7 +117,7 @@ public class Shooter extends Subsystem {
 	}
 	
 	public double getSpeed()	{
-		return (m_shooterLeft.getSpeed() + m_shooterRight.getSpeed()) / 2;
+		return m_shooterLeft.getSpeed();
 	}
 	
 	
@@ -163,6 +164,8 @@ public class Shooter extends Subsystem {
 		}
 		m_lifter.set(m_desiredAngle);
 		
+		SmartDashboard.putNumber("Shooter", m_desiredAngle);
+		
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{
 				if(m_shooterPunch.get() != DoubleSolenoid.Value.kForward)
@@ -176,6 +179,9 @@ public class Shooter extends Subsystem {
 			if(m_shooterPunch.get() != DoubleSolenoid.Value.kReverse)
 				m_shooterPunch.set(DoubleSolenoid.Value.kReverse);
 		}
+		
+		SmartDashboard.putNumber("Left RPM", (m_shooterLeft.getSpeed()));
+		SmartDashboard.putNumber("Right RPM", (m_shooterRight.getSpeed()));
 	}
 
 	@Override

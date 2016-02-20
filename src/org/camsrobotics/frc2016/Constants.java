@@ -45,9 +45,9 @@ public class Constants {
 	public final static int kMediumRangeRPM		= 3000;
 	public final static int kLongRangeRPM		= 4000;
 
-	public final static int kShortRangeActivate	= 2800;
-	public final static int kMediumRangeActivate= 4200;
-	public final static int kLongRangeActivate	= 5600;
+	public final static int kShortRangeActivate	= 2700;
+	public final static int kMediumRangeActivate= 4000;
+	public final static int kLongRangeActivate	= 5400;
 	
 	public final static int kShortRangeAngle	= 0;
 	public final static int kMediumRangeAngle	= 0;
@@ -61,7 +61,6 @@ public class Constants {
 	public final static double kIntakeP			= 3;
 	public final static double kIntakeI			= 0;
 	public final static double kIntakeD			= 16;
-	public final static int kIntakeTicksPerRev	= 0;
 	
 	public final static double kIntakeBallPickup	= -0.095;
 	public final static double kIntakeTuckedIn		= -0.3;

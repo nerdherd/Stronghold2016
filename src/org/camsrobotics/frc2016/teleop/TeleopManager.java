@@ -9,6 +9,8 @@ import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.frc2016.subsystems.controllers.VisionTargetingController;
 import org.camsrobotics.lib.NerdyJoystick;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Executes or outsources the various teleoperated commands.
  * 
@@ -52,7 +54,8 @@ public class TeleopManager {
 			if(c.shooterCommand != Commands.ShooterCommands.MANUAL_SPIN)	{
 				m_shooter.setDesiredRPM(0);
 			}
-			m_shooter.setManualShooterAngle((m_buttonBox.getZ()+1)/4);
+			m_shooter.setManualShooterAngle(-(-m_buttonBox.getThrottle()+1)/3);
+			SmartDashboard.putNumber("ShooterPow", (m_buttonBox.getThrottle()+1)/3);
 			break;
 		case LONG_RANGE:
 //			m_shooter.setShooterAngle(Constants.kLongRangeAngle);

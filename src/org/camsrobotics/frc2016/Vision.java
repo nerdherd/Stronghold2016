@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 public class Vision {
 	private NetworkTable table;
 	
-	private double[] m_defaultVal = new double[0];
+	private double[] m_defaultVal = null;
 	
 	private int m_max;
 	private int m_maxKey = 0;

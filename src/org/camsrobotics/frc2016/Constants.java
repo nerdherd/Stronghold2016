@@ -58,9 +58,9 @@ public class Constants {
 	 */
 	public final static double kIntakeSpeed		= 1;
 	public final static double kIntakeF			= 0;
-	public final static double kIntakeP			= 0;
+	public final static double kIntakeP			= 3;
 	public final static double kIntakeI			= 0;
-	public final static double kIntakeD			= 0;
+	public final static double kIntakeD			= 16;
 	public final static int kIntakeTicksPerRev	= 0;
 	
 	public final static int kIntakeFloorLevel	= 0;

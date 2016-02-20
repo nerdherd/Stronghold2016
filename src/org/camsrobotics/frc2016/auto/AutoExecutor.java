@@ -1,7 +1,5 @@
 package org.camsrobotics.frc2016.auto;
 
-import org.camsrobotics.frc2016.auto.modes.*;
-
 /**
  * Autonomous mode magic
  * 

@@ -25,6 +25,7 @@ public class VisionTargetingController implements DriveController {
 	private double kD = Constants.kDriveVisionD;
 	
 	public VisionTargetingController(double tolerance) {
+		m_tolerance = tolerance;
 		m_pid = new NerdyPID(kP,kI,kD);
 		m_pid.setDesired(Constants.kCameraFrameWidth/2);
 	}

@@ -46,25 +46,30 @@ public class TeleopManager {
 		
 		// Shooter
 		switch(c.shooterCommand)	{
+		case MANUAL_SPIN:
+			m_shooter.setDesiredRPM(Constants.kMediumRangeRPM);
 		case MANUAL:
-			m_shooter.setDesiredRPM(0);
+			if(c.shooterCommand != Commands.ShooterCommands.MANUAL_SPIN)	{
+				m_shooter.setDesiredRPM(0);
+			}
+			m_shooter.setManualShooterAngle((m_buttonBox.getZ()+1)/4);
 			break;
 		case LONG_RANGE:
-			m_shooter.setShooterAngle(Constants.kLongRangeAngle);
+//			m_shooter.setShooterAngle(Constants.kLongRangeAngle);
 			m_shooter.setDesiredRPM(Constants.kLongRangeRPM);
 			if(m_shooter.getSpeed() > Constants.kLongRangeActivate)	{
 				m_shooter.shoot();
 			}
 			break;
 		case MEDIUM_RANGE:
-			m_shooter.setShooterAngle(Constants.kMediumRangeAngle);
+//			m_shooter.setShooterAngle(Constants.kMediumRangeAngle);
 			m_shooter.setDesiredRPM(Constants.kMediumRangeRPM);
 			if(m_shooter.getSpeed() > Constants.kMediumRangeActivate)	{
 				m_shooter.shoot();
 			}
 			break;
 		case SHORT_RANGE:
-			m_shooter.setShooterAngle(Constants.kShortRangeAngle);
+//			m_shooter.setShooterAngle(Constants.kShortRangeAngle);
 			m_shooter.setDesiredRPM(Constants.kShortRangeRPM);
 			if(m_shooter.getSpeed() > Constants.kShortRangeActivate)	{
 				m_shooter.shoot();
@@ -102,6 +107,10 @@ public class TeleopManager {
 		case IDLE:
 			m_intake.idle();
 			break;
+		}
+		
+		if(c.reset)	{
+			m_intake.zero();
 		}
 	}
 }

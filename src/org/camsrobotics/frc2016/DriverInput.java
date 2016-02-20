@@ -25,13 +25,15 @@ public class DriverInput {
 	private NerdyButton m_shooterShortRange;
 	private NerdyButton m_shooterMediumRange;
 	private NerdyButton m_shooterLongRange;
-	private NerdyButton m_shooterVision;
+	private NerdyButton m_shooterManual;
 	private NerdyButton m_shoot;
 
 	private NerdyButton m_intake;
 	private NerdyButton m_outtake;
 	private NerdyButton m_ballPickup;
 	private NerdyButton m_tuckedIn;
+	
+	private NerdyButton m_reset;
 	
 	public DriverInput(NerdyJoystick leftStick, NerdyJoystick rightStick, NerdyJoystick buttonBox)	{
 		m_commands = new Commands();
@@ -46,13 +48,15 @@ public class DriverInput {
 		m_shooterShortRange		= m_buttonBox.getButton(11);
 		m_shooterMediumRange	= m_buttonBox.getButton(9);
 		m_shooterLongRange		= m_buttonBox.getButton(7);
-		m_shooterVision			= m_buttonBox.getButton(2);
+		m_shooterManual			= m_buttonBox.getButton(2);
 		m_shoot					= m_buttonBox.getButton(1);
 		
 		m_intake				= m_buttonBox.getButton(12);
 		m_outtake				= m_buttonBox.getButton(10);
 		m_ballPickup			= m_buttonBox.getButton(3);
 		m_tuckedIn				= m_buttonBox.getButton(5);
+		
+		m_reset					= m_buttonBox.getButton(4);
 	}
 	
 	public Commands update()	{
@@ -63,7 +67,7 @@ public class DriverInput {
 		m_shooterShortRange.update();
 		m_shooterMediumRange.update();
 		m_shooterLongRange.update();
-		m_shooterVision.update();
+		m_shooterManual.update();
 		m_shoot.update();
 		
 		m_intake.update();
@@ -88,8 +92,8 @@ public class DriverInput {
 			m_commands.shooterCommand = Commands.ShooterCommands.MEDIUM_RANGE;
 		}	else if(m_shooterLongRange.get())	{
 			m_commands.shooterCommand = Commands.ShooterCommands.LONG_RANGE;
-		}	else if(m_shooterVision.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.VISION;
+		}	else if(m_shooterManual.get())	{
+			m_commands.shooterCommand = Commands.ShooterCommands.MANUAL_SPIN;
 		}	else	{
 			m_commands.shooterCommand = Commands.ShooterCommands.MANUAL;
 		}
@@ -114,6 +118,12 @@ public class DriverInput {
 			m_commands.intakeCommand = Commands.IntakeCommands.TUCKED_IN;
 		}	else	{
 			m_commands.intakeCommand = Commands.IntakeCommands.MANUAL;
+		}
+		
+		if(m_reset.get())	{
+			m_commands.reset = true;
+		}	else	{
+			m_commands.reset = false;
 		}
 		
 		return m_commands;

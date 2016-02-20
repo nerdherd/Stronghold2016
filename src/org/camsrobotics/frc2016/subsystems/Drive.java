@@ -162,6 +162,8 @@ public class Drive extends Subsystem {
 			m_leftGearbox.setSpeed(0);
 			m_rightGearbox.setSpeed(0);
 		}
+		
+		System.out.println();
 	}
 
 	@Override

@@ -51,8 +51,8 @@ public class DriverInput {
 		
 		m_intake				= m_buttonBox.getButton(12);
 		m_outtake				= m_buttonBox.getButton(10);
-		m_ballPickup			= m_buttonBox.getButton(1);
-		m_tuckedIn				= m_buttonBox.getButton(1);
+		m_ballPickup			= m_buttonBox.getButton(3);
+		m_tuckedIn				= m_buttonBox.getButton(5);
 	}
 	
 	public Commands update()	{

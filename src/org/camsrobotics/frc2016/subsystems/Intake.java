@@ -71,20 +71,15 @@ public class Intake extends Subsystem {
     	m_angleAdjust.setPosition(0);
     }
     
-    public int getHeight()	{
-    	return m_angleAdjust.getEncPosition();
+    public double getHeight()	{
+    	return m_angleAdjust.getPosition();
     }
     
     public void manualDrive(double pow)	{
     	// deadband pow
-    	if(Math.abs(pow) > 0.05)	{
-    		m_manual = true;
-    		m_manualPow = pow;
-    	}	else	{
-    		m_manual = false;
-    		m_manualPow = 0;
-    		m_desiredAngle = getHeight();
-    	}
+		m_manual = true;
+		m_manualPow = pow;
+    	
     }
     
     public boolean isOnTarget(double tolerance)	{
@@ -93,7 +88,7 @@ public class Intake extends Subsystem {
 
     public void stop()	{
     	idle();
-    	setIntakeHeight(getHeight());
+    	manualDrive(0);
     }
     
 	@Override
@@ -101,10 +96,10 @@ public class Intake extends Subsystem {
 		double intakePow;
 		switch(m_rollerState)	{
 		case INTAKE:
-			intakePow = Constants.kIntakeSpeed;
+			intakePow = 1;
 			break;
 		case OUTTAKE:
-			intakePow = -Constants.kIntakeSpeed;
+			intakePow = -1;
 			break;
 		case IDLE:
 			intakePow = 0;
@@ -115,6 +110,7 @@ public class Intake extends Subsystem {
 		}
 		
 		m_intake.set(intakePow);
+		
 		if(m_manual)	{
 			m_angleAdjust.changeControlMode(TalonControlMode.PercentVbus);
 			m_angleAdjust.set(m_manualPow);
@@ -122,6 +118,8 @@ public class Intake extends Subsystem {
 			m_angleAdjust.changeControlMode(TalonControlMode.Position);
 			m_angleAdjust.set(m_desiredAngle);
 		}
+		
+		System.out.println(m_angleAdjust.getPosition());
 	}
 
 	@Override

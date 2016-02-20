@@ -41,6 +41,7 @@ public class Shooter extends Subsystem {
 	private double m_offsetAngle = 0.0;
 	
 	private boolean m_shooting = false;
+	private boolean m_manualLift = true;
 	private Timer m_shootTimer;
 	
 	public Shooter(String name, CANTalon shooterLeft, CANTalon shooterRight, DoubleSolenoid shooterPunch, CANTalon lifter)	{
@@ -97,7 +98,13 @@ public class Shooter extends Subsystem {
 	}
 	
 	public void setShooterAngle(double angle)	{
+		m_manualLift = false;
 		m_desiredAngle = angle + m_offsetAngle;
+	}
+	
+	public void setManualShooterAngle(double pow)	{
+		m_manualLift = true;
+		m_desiredAngle = pow;
 	}
 	
 	public void zeroShooterAngle()	{
@@ -149,9 +156,13 @@ public class Shooter extends Subsystem {
 			m_shooterRight.set(m_desiredRPM);
 		}
 		
+		if(m_manualLift)	{
+			m_lifter.changeControlMode(TalonControlMode.PercentVbus);
+		}	else	{
+			m_lifter.changeControlMode(TalonControlMode.Position);
+		}
 		m_lifter.set(m_desiredAngle);
 		
-		System.out.println(m_shooting);
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{
 				if(m_shooterPunch.get() != DoubleSolenoid.Value.kForward)

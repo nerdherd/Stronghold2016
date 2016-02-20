@@ -17,7 +17,7 @@ public class Commands {
 	}
 	
 	public static enum ShooterCommands	{
-		MANUAL, LONG_RANGE, MEDIUM_RANGE, SHORT_RANGE, VISION
+		MANUAL, LONG_RANGE, MEDIUM_RANGE, SHORT_RANGE, MANUAL_SPIN, VISION
 	}
 	
 	public static enum IntakeCommands	{
@@ -35,4 +35,6 @@ public class Commands {
 	public RollerCommands rollerCommand = RollerCommands.IDLE;
 	
 	public boolean shooting = false;
+	
+	public boolean reset = false;
 }

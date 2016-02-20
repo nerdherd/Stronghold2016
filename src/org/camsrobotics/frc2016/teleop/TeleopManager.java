@@ -47,7 +47,7 @@ public class TeleopManager {
 		// Shooter
 		switch(c.shooterCommand)	{
 		case MANUAL:
-			// insert manual control logic here
+			m_shooter.setDesiredRPM(0);
 			break;
 		case LONG_RANGE:
 			m_shooter.setShooterAngle(Constants.kLongRangeAngle);

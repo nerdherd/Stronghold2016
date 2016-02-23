@@ -24,7 +24,7 @@ public class Robot extends NerdyIterativeRobot {
 	MultiLooper controllers = new MultiLooper("Controllers", 1/200.0);
 	MultiLooper slowControllers = new MultiLooper("SlowControllers", 1/100.0);
 	
-	AutoExecutor auto = new AutoExecutor(new LowBarNoShootAuto());
+	AutoExecutor auto = new AutoExecutor(new DoNothingAuto());
 	
 	Compressor compressor = HardwareAdapter.kCompressor;
 	Drive drive = HardwareAdapter.kDrive;
@@ -50,7 +50,7 @@ public class Robot extends NerdyIterativeRobot {
     	
     	drive.resetEncoders();
     	
-    	auto.start();
+//    	auto.start();
     	
     	controllers.start();
     	slowControllers.start();

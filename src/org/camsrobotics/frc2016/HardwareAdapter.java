@@ -41,8 +41,8 @@ public class HardwareAdapter {
 	public static final CANTalon kShooterRight			= new CANTalon(2);
 	public static final CANTalon kShooterLift			= new CANTalon(3);
 	
-	public static final VictorSP kIntakeRollers			= new VictorSP(6);
-	public static final CANTalon kIntakeArtic			= new CANTalon(4);
+	public static final CANTalon kIntakeRollers			= new CANTalon(4);
+	public static final CANTalon kIntakeArtic			= new CANTalon(5);
 	
 	// Pneumatics
 	public static final Compressor kCompressor			= new Compressor();

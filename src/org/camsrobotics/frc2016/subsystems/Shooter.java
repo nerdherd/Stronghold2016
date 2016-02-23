@@ -1,7 +1,6 @@
 package org.camsrobotics.frc2016.subsystems;
 
 import org.camsrobotics.frc2016.Constants;
-import org.camsrobotics.lib.StateHolder;
 import org.camsrobotics.lib.Subsystem;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -39,7 +38,6 @@ public class Shooter extends Subsystem {
 	
 	private int m_desiredRPM = 0;
 	private double m_desiredAngle = 0.0;
-	private double m_offsetAngle = 0.0;
 	
 	private boolean m_shooting = false;
 	private boolean m_manualLift = true;
@@ -87,6 +85,8 @@ public class Shooter extends Subsystem {
 		m_lifter.setP(m_lifterP);
 		m_lifter.setI(m_lifterI);
 		m_lifter.setD(m_lifterD);
+		
+		m_lifter.setPosition(0);
 	}
 
 	public void setDesiredRPM(int rpm)	{
@@ -100,7 +100,7 @@ public class Shooter extends Subsystem {
 	
 	public void setShooterAngle(double angle)	{
 		m_manualLift = false;
-		m_desiredAngle = angle + m_offsetAngle;
+		m_desiredAngle = angle;
 	}
 	
 	public void setManualShooterAngle(double pow)	{
@@ -108,12 +108,12 @@ public class Shooter extends Subsystem {
 		m_desiredAngle = pow;
 	}
 	
-	public void zeroShooterAngle()	{
-		m_offsetAngle = getShooterAngle();
+	public void zero()	{
+		m_lifter.setPosition(0);
 	}
 	
 	public double getShooterAngle()	{
-		return m_lifter.getPosition() - m_offsetAngle;
+		return m_lifter.getPosition();
 	}
 	
 	public double getSpeed()	{
@@ -164,7 +164,7 @@ public class Shooter extends Subsystem {
 		}
 		m_lifter.set(m_desiredAngle);
 		
-		SmartDashboard.putNumber("Shooter", m_desiredAngle);
+		//SmartDashboard.putNumber("Shooter", m_lifter.getPosition());
 		
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{
@@ -180,15 +180,15 @@ public class Shooter extends Subsystem {
 				m_shooterPunch.set(DoubleSolenoid.Value.kReverse);
 		}
 		
-		SmartDashboard.putNumber("Left RPM", (m_shooterLeft.getSpeed()));
-		SmartDashboard.putNumber("Right RPM", (m_shooterRight.getSpeed()));
 	}
 
 	@Override
-	public void getState(StateHolder states) {
-		states.put("Shooting", Boolean.toString(m_shooting));
-		states.put("DesiredRPM", Double.toString(m_desiredRPM));
-		states.put("EncoderPosition", Double.toString(getShooterAngle()));
-		states.put("DesiredPosition", Double.toString(m_desiredAngle));
+	public void reportState() {		
+		SmartDashboard.putNumber("DesiredRPM", m_desiredRPM);
+		SmartDashboard.putNumber("Left RPM", m_shooterLeft.getSpeed());
+		SmartDashboard.putNumber("Right RPM", m_shooterRight.getSpeed());
+		SmartDashboard.putBoolean("Shooting", m_shooting);
+		SmartDashboard.putNumber("EncoderPosition", getShooterAngle());
+		SmartDashboard.putNumber("DesiredPosition", m_desiredAngle);
 	}
 }

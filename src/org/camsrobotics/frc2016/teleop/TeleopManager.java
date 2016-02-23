@@ -54,8 +54,9 @@ public class TeleopManager {
 			if(c.shooterCommand != Commands.ShooterCommands.MANUAL_SPIN)	{
 				m_shooter.setDesiredRPM(0);
 			}
-			m_shooter.setManualShooterAngle(-(-m_buttonBox.getThrottle()+1)/3);
-			SmartDashboard.putNumber("ShooterPow", (m_buttonBox.getThrottle()+1)/3);
+
+			m_shooter.setManualShooterAngle((-(-m_buttonBox.getThrottle()+1)/3));
+			
 			break;
 		case LONG_RANGE:
 //			m_shooter.setShooterAngle(Constants.kLongRangeAngle);
@@ -113,6 +114,7 @@ public class TeleopManager {
 		}
 		
 		if(c.reset)	{
+			m_shooter.zero();
 			m_intake.zero();
 		}
 	}

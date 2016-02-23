@@ -3,10 +3,11 @@ package org.camsrobotics.frc2016.subsystems;
 import org.camsrobotics.frc2016.Constants;
 import org.camsrobotics.frc2016.Vision;
 import org.camsrobotics.lib.Gearbox;
-import org.camsrobotics.lib.StateHolder;
 import org.camsrobotics.lib.Subsystem;
 
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Drivebase Interface
@@ -163,17 +164,17 @@ public class Drive extends Subsystem {
 			m_rightGearbox.setSpeed(0);
 		}
 		
-		System.out.println();
+		
 	}
 
 	@Override
-	public void getState(StateHolder states) {
-		states.put("LeftSpeed", Double.toString(m_signal.leftSpeed));
-		states.put("RightSpeed", Double.toString(m_signal.rightSpeed));
+	public void reportState() {
+		SmartDashboard.putNumber("LeftSpeed", m_signal.leftSpeed);
+		SmartDashboard.putNumber("RightSpeed", m_signal.rightSpeed);
 		
-		states.put("Yaw", Double.toString(getYaw()));
-		states.put("LeftEncoder", Double.toString(getLeftEncoderDistance()));
-		states.put("RightEncoder", Double.toString(getRightEncoderDistance()));
-		states.put("VisionCenterX", Double.toString(getVision()));
+		SmartDashboard.putNumber("Yaw", getYaw());
+		SmartDashboard.putNumber("LeftEncoder", getLeftEncoderDistance());
+		SmartDashboard.putNumber("RightEncoder", getRightEncoderDistance());
+		SmartDashboard.putNumber("VisionCenterX", getVision());
 	}
 }

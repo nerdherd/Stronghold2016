@@ -4,6 +4,8 @@ import org.camsrobotics.frc2016.teleop.Commands;
 import org.camsrobotics.lib.NerdyButton;
 import org.camsrobotics.lib.NerdyJoystick;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Driver Interface
  * 
@@ -32,6 +34,7 @@ public class DriverInput {
 	private NerdyButton m_outtake;
 	private NerdyButton m_ballPickup;
 	private NerdyButton m_tuckedIn;
+	private NerdyButton m_stop;
 	
 	private NerdyButton m_reset;
 	
@@ -55,8 +58,9 @@ public class DriverInput {
 		m_outtake				= m_buttonBox.getButton(10);
 		m_ballPickup			= m_buttonBox.getButton(3);
 		m_tuckedIn				= m_buttonBox.getButton(5);
+		m_stop 					= m_buttonBox.getButton(4);
 		
-		m_reset					= m_buttonBox.getButton(4);
+		m_reset					= m_buttonBox.getButton(6);
 	}
 	
 	public Commands update()	{
@@ -72,6 +76,12 @@ public class DriverInput {
 		
 		m_intake.update();
 		m_outtake.update();
+		
+		m_ballPickup.update();
+		m_tuckedIn.update();
+		m_stop.update();
+		
+		m_reset.update();
 		
 		// Do the magic
 		if(m_snapToVisionTarget.get())	{
@@ -116,16 +126,15 @@ public class DriverInput {
 			m_commands.intakeCommand = Commands.IntakeCommands.BALL_PICKUP;
 		}	else if(m_tuckedIn.get())	{
 			m_commands.intakeCommand = Commands.IntakeCommands.TUCKED_IN;
-		}	else	{
+		}	else if(m_stop.get())	{
 			m_commands.intakeCommand = Commands.IntakeCommands.MANUAL;
 		}
 		
-		if(m_reset.get())	{
-			m_commands.reset = true;
-		}	else	{
-			m_commands.reset = false;
-		}
+		m_commands.reset = m_reset.get();
+		
+		SmartDashboard.putBoolean("Flag", m_driverRightStick.getRawButton(1));
 		
 		return m_commands;
 	}
+	
 }

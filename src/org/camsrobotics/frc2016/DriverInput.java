@@ -4,8 +4,6 @@ import org.camsrobotics.frc2016.teleop.Commands;
 import org.camsrobotics.lib.NerdyButton;
 import org.camsrobotics.lib.NerdyJoystick;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * Driver Interface
  * 
@@ -46,8 +44,9 @@ public class DriverInput {
 		m_buttonBox = buttonBox;
 		
 		m_snapToVisionTarget	= m_driverLeftStick.getButton(1);
-		m_shiftUp				= m_driverLeftStick.getButton(4);
-		m_shiftDown				= m_driverLeftStick.getButton(3);
+		m_shiftUp				= m_driverRightStick.getButton(4);
+		m_shiftDown				= m_driverRightStick.getButton(3);
+		
 		m_shooterShortRange		= m_buttonBox.getButton(11);
 		m_shooterMediumRange	= m_buttonBox.getButton(9);
 		m_shooterLongRange		= m_buttonBox.getButton(7);
@@ -83,7 +82,9 @@ public class DriverInput {
 		
 		m_reset.update();
 		
-		// Do the magic
+		/* Do the magic */
+		
+		// Drive
 		if(m_snapToVisionTarget.get())	{
 			m_commands.driveCommand = Commands.DriveCommands.VISION;
 		}	else	{
@@ -96,16 +97,17 @@ public class DriverInput {
 			m_commands.shiftCommand = Commands.DriveShiftCommands.DOWN;
 		}
 		
+		// Shooter
 		if(m_shooterShortRange.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.SHORT_RANGE;
+			m_commands.flywheelCommand = Commands.FlywheelCommands.SHORT_RANGE;
 		}	else if(m_shooterMediumRange.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.MEDIUM_RANGE;
+			m_commands.flywheelCommand = Commands.FlywheelCommands.MEDIUM_RANGE;
 		}	else if(m_shooterLongRange.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.LONG_RANGE;
+			m_commands.flywheelCommand = Commands.FlywheelCommands.LONG_RANGE;
 		}	else if(m_shooterManual.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.MANUAL_SPIN;
+			m_commands.flywheelCommand = Commands.FlywheelCommands.MANUAL_SPIN;
 		}	else	{
-			m_commands.shooterCommand = Commands.ShooterCommands.MANUAL;
+			m_commands.flywheelCommand = Commands.FlywheelCommands.MANUAL;
 		}
 		
 		if(m_shoot.wasPressed())	{
@@ -114,6 +116,7 @@ public class DriverInput {
 			m_commands.shooting = false;
 		}
 		
+		// Intake
 		if(m_intake.get())	{
 			m_commands.rollerCommand = Commands.RollerCommands.INTAKE;
 		}	else if(m_outtake.get())	{
@@ -131,9 +134,7 @@ public class DriverInput {
 		}
 		
 		m_commands.reset = m_reset.get();
-		
-		SmartDashboard.putBoolean("Flag", m_driverRightStick.getRawButton(1));
-		
+				
 		return m_commands;
 	}
 	

@@ -9,8 +9,6 @@ import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.frc2016.subsystems.controllers.VisionTargetingController;
 import org.camsrobotics.lib.NerdyJoystick;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * Executes or outsources the various teleoperated commands.
  * 

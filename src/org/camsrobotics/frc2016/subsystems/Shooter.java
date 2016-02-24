@@ -164,8 +164,6 @@ public class Shooter extends Subsystem {
 		}
 		m_lifter.set(m_desiredAngle);
 		
-		//SmartDashboard.putNumber("Shooter", m_lifter.getPosition());
-		
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{
 				if(m_shooterPunch.get() != DoubleSolenoid.Value.kForward)

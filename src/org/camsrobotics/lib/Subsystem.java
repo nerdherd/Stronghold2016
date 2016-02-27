@@ -12,4 +12,6 @@ public abstract class Subsystem implements Loopable {
 	}
 	
 	public abstract void reportState();
+	
+	public abstract void zero();
 }

@@ -48,7 +48,7 @@ public class Robot extends NerdyIterativeRobot {
     public void autonomousInit() {
     	System.out.println("NerdyBot Mantis Autonomous Start");
     	
-    	drive.resetEncoders();
+    	drive.zero();
     	
 //    	auto.start();
     	
@@ -63,7 +63,7 @@ public class Robot extends NerdyIterativeRobot {
     public void teleopInit()	{
     	System.out.println("NerdyBot Mantis Teleoperated Start");
     	
-    	drive.resetEncoders();
+    	drive.zero();
     	
     	controllers.start();
     	slowControllers.start();

@@ -41,6 +41,7 @@ public class Constants {
 	public final static double kLiftD			= 0;
 	public final static double kShootTime		= 0.5;
 	
+	public final static int kManualRPM			= 3000;
 	public final static int kShortRangeRPM		= 2000;
 	public final static int kMediumRangeRPM		= 3000;
 	public final static int kLongRangeRPM		= 4000;

@@ -61,15 +61,8 @@ public class TeleopManager {
 		}
 		
 		switch(c.flywheelCommand)	{
-		case MANUAL_SPIN:
-			m_shooter.setDesiredRPM(Constants.kMediumRangeRPM);
 		case MANUAL:
-			if(c.flywheelCommand != Commands.FlywheelCommands.MANUAL_SPIN)	{
-				m_shooter.setDesiredRPM(0);
-			}
-
-			m_shooter.setManualShooterAngle((-(-m_buttonBox.getThrottle()+1)/3));
-			
+			m_shooter.setDesiredRPM(0);
 			break;
 		case LONG_RANGE:
 			m_shooter.setDesiredRPM(Constants.kLongRangeRPM);
@@ -88,6 +81,9 @@ public class TeleopManager {
 			if(m_shooter.getSpeed() > Constants.kShortRangeActivate)	{
 				m_shooter.shoot();
 			}
+			break;
+		case MANUAL_SPIN:
+			m_shooter.setDesiredRPM(Constants.kManualRPM);
 			break;
 		}
 		

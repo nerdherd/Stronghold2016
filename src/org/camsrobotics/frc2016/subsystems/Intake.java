@@ -68,10 +68,6 @@ public class Intake extends Subsystem {
     	m_desiredAngle = angle;
     }
     
-    public void zero()	{
-    	m_angleAdjust.setPosition(0);
-    }
-    
     public double getHeight()	{
     	return m_angleAdjust.getPosition();
     }
@@ -91,6 +87,12 @@ public class Intake extends Subsystem {
     	idle();
     	manualDrive(0);
     }
+    
+    @Override
+    public void zero()	{
+    	m_angleAdjust.setPosition(0);
+    }
+
     
 	@Override
 	public void update() {

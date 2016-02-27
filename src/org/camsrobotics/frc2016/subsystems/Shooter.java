@@ -108,10 +108,6 @@ public class Shooter extends Subsystem {
 		m_desiredAngle = pow;
 	}
 	
-	public void zero()	{
-		m_lifter.setPosition(0);
-	}
-	
 	public double getShooterAngle()	{
 		return m_lifter.getPosition();
 	}
@@ -139,6 +135,11 @@ public class Shooter extends Subsystem {
 		m_shooterRight.set(0);
 		setShooterAngle(getShooterAngle());
 		setDesiredRPM(0);
+	}
+	
+	@Override
+	public void zero()	{
+		m_lifter.setPosition(0);
 	}
 	
 	@Override

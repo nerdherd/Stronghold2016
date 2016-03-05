@@ -24,7 +24,8 @@ public class Intake extends Subsystem {
 	private double m_manualPow = 0;
 	
 	private double m_desiredAngle = 0;
-	
+	private double m_actualAngle = 0;
+	private double m_intakeAlpha = Constants.kIntakeAlpha;
 	private IntakeStates m_rollerState;
 	
     public Intake(String name, CANTalon rollers, CANTalon angleAdjust)	{
@@ -114,7 +115,8 @@ public class Intake extends Subsystem {
 			m_angleAdjust.set(m_manualPow);
 		}	else	{
 			m_angleAdjust.changeControlMode(TalonControlMode.Position);
-			m_angleAdjust.set(m_desiredAngle);
+			m_actualAngle = m_actualAngle*(1-m_intakeAlpha)+m_desiredAngle*m_intakeAlpha;
+			m_angleAdjust.set(m_actualAngle);
 		}
 		
 		

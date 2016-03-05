@@ -33,11 +33,14 @@ public class Shooter extends Subsystem {
 	private double m_lifterP = Constants.kLiftP;
 	private double m_lifterI = Constants.kLiftI;
 	private double m_lifterD = Constants.kLiftD;
+	private double m_lifterAlpha = Constants.kLiftAlpha;
 	
 	private double m_shootTime = Constants.kShootTime;
 	
 	private int m_desiredRPM = 0;
+	
 	private double m_desiredAngle = 0.0;
+	private double m_actualAngle = 0.0;
 	
 	private boolean m_shooting = false;
 	private boolean m_manualLift = true;
@@ -163,7 +166,8 @@ public class Shooter extends Subsystem {
 		}	else	{
 			m_lifter.changeControlMode(TalonControlMode.Position);
 		}
-		m_lifter.set(m_desiredAngle);
+		m_actualAngle = m_actualAngle*(1-m_lifterAlpha)+m_desiredAngle*m_lifterAlpha;
+		m_lifter.set(m_actualAngle);
 		
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{

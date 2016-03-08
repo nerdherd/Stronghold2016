@@ -23,18 +23,18 @@ public class LowBarAuto extends AutoMode {
 		runAction(new WaitForUltrasonicBlindAction(45, 15));
 		
 		// Turn until vision sees
-		drive.setController(new DriveRotationController(45, 0)); // Tolerance really does not matter
-		runAction(new WaitForVisionTargetAction(15));
+		//drive.setController(new DriveRotationController(45, 0)); // Tolerance really does not matter
+		//runAction(new WaitForVisionTargetAction(15));
 		
 		// Stop
 		drive.driveOpenLoop(DriveSignal.kStop);
 		
 		// Spin Wheels
-		shooter.setDesiredRPM(Constants.kLongRangeRPM);
-		runAction(new WaitForShooterRPMAction(15));
+		//shooter.setDesiredRPM(Constants.kLongRangeRPM);
+		//runAction(new WaitForShooterRPMAction(15));
 		
 		// Shoot
-		shooter.shoot();
+		//shooter.shoot();
 		
 	}
 	

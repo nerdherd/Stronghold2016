@@ -12,6 +12,8 @@ import org.camsrobotics.lib.MultiLooper;
 import org.camsrobotics.lib.NerdyIterativeRobot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This is where the magic happens!
@@ -33,7 +35,7 @@ public class Robot extends NerdyIterativeRobot {
 	
 	DriverInput driverInput = HardwareAdapter.kDriverInput;
 	TeleopManager teleop = new TeleopManager();
-	
+	PowerDistributionPanel pdp = new PowerDistributionPanel();
     public void robotInit() {
     	compressor.start();
     	
@@ -72,6 +74,13 @@ public class Robot extends NerdyIterativeRobot {
     public void teleopPeriodic() {
     	Commands c = driverInput.update();
         teleop.update(c);
+        SmartDashboard.putNumber("Current Channel 0", pdp.getCurrent(0));
+        SmartDashboard.putNumber("Current Channel 1", pdp.getCurrent(1));
+        SmartDashboard.putNumber("Current Channel 2", pdp.getCurrent(2));
+        SmartDashboard.putNumber("Current Channel 13", pdp.getCurrent(13));
+        SmartDashboard.putNumber("Current Channel 14", pdp.getCurrent(14));
+        SmartDashboard.putNumber("Current Channel 15", pdp.getCurrent(15));
+        SmartDashboard.putNumber("Current Channel 10", pdp.getCurrent(10));
     }
     
     public void disabledInit()	{

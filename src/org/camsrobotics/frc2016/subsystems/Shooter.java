@@ -183,6 +183,8 @@ public class Shooter extends Subsystem {
 				m_shooterPunch.set(DoubleSolenoid.Value.kReverse);
 		}
 		
+		reportState();
+		
 	}
 
 	@Override
@@ -191,7 +193,7 @@ public class Shooter extends Subsystem {
 		SmartDashboard.putNumber("Left RPM", m_shooterLeft.getSpeed());
 		SmartDashboard.putNumber("Right RPM", m_shooterRight.getSpeed());
 		SmartDashboard.putBoolean("Shooting", m_shooting);
-		SmartDashboard.putNumber("EncoderPosition", getShooterAngle());
+		SmartDashboard.putNumber("EncoderPosition", m_lifter.getPosition());
 		SmartDashboard.putNumber("DesiredPosition", m_desiredAngle);
 	}
 }

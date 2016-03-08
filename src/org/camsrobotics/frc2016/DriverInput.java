@@ -4,6 +4,8 @@ import org.camsrobotics.frc2016.teleop.Commands;
 import org.camsrobotics.lib.NerdyButton;
 import org.camsrobotics.lib.NerdyJoystick;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Driver Interface
  * 
@@ -32,6 +34,8 @@ public class DriverInput {
 	private NerdyButton m_outtake;
 	private NerdyButton m_ballPickup;
 	private NerdyButton m_tuckedIn;
+	private NerdyButton m_groundIntake;
+	private NerdyButton m_tuckedIntake;
 	private NerdyButton m_stop;
 	
 	private NerdyButton m_reset;
@@ -49,7 +53,7 @@ public class DriverInput {
 		
 		m_shooterShortRange		= m_buttonBox.getButton(11);
 		m_shooterMediumRange	= m_buttonBox.getButton(9);
-		m_shooterLongRange		= m_buttonBox.getButton(7);
+		m_shooterLongRange		= m_buttonBox.getButton(9);
 		m_shooterManual			= m_buttonBox.getButton(2);
 		m_shoot					= m_buttonBox.getButton(1);
 		
@@ -57,9 +61,11 @@ public class DriverInput {
 		m_outtake				= m_buttonBox.getButton(10);
 		m_ballPickup			= m_buttonBox.getButton(3);
 		m_tuckedIn				= m_buttonBox.getButton(5);
+		m_groundIntake			= m_buttonBox.getButton(6);
+		m_tuckedIntake			= m_buttonBox.getButton(7);
 		m_stop 					= m_buttonBox.getButton(4);
 		
-		m_reset					= m_buttonBox.getButton(6);
+		m_reset					= m_buttonBox.getButton(8);
 	}
 	
 	public Commands update()	{
@@ -78,6 +84,7 @@ public class DriverInput {
 		
 		m_ballPickup.update();
 		m_tuckedIn.update();
+		m_groundIntake.update();
 		m_stop.update();
 		
 		m_reset.update();
@@ -129,11 +136,16 @@ public class DriverInput {
 			m_commands.intakeCommand = Commands.IntakeCommands.BALL_PICKUP;
 		}	else if(m_tuckedIn.get())	{
 			m_commands.intakeCommand = Commands.IntakeCommands.TUCKED_IN;
+		}	else if(m_groundIntake.get())	{
+			m_commands.intakeCommand = Commands.IntakeCommands.GROUND;
+		}	else if(m_tuckedIntake.get())	{
+			m_commands.intakeCommand = Commands.IntakeCommands.TUCKED;
 		}	else if(m_stop.get())	{
 			m_commands.intakeCommand = Commands.IntakeCommands.MANUAL;
 		}
 		
 		m_commands.reset = m_reset.get();
+		SmartDashboard.putBoolean("reset", m_reset.get());
 				
 		return m_commands;
 	}

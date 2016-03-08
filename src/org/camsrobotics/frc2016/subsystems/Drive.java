@@ -160,12 +160,14 @@ public class Drive extends Subsystem {
 		if(m_signal != null)	{
 			m_leftGearbox.setSpeed(m_signal.leftSpeed);
 			m_rightGearbox.setSpeed(m_signal.rightSpeed);
+			
+
+			SmartDashboard.putNumber("LeftSpeed", m_signal.leftSpeed);
+			SmartDashboard.putNumber("RightSpeed", m_signal.rightSpeed);
 		}	else	{
 			m_leftGearbox.setSpeed(0);
 			m_rightGearbox.setSpeed(0);
 		}
-		
-		
 	}
 
 	@Override

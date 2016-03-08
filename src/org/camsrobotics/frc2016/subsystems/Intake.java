@@ -117,9 +117,8 @@ public class Intake extends Subsystem {
 			m_angleAdjust.changeControlMode(TalonControlMode.Position);
 			m_actualAngle = m_actualAngle*(1-m_intakeAlpha)+m_desiredAngle*m_intakeAlpha;
 			m_angleAdjust.set(m_actualAngle);
-		}
-		
-		
+		}		
+		SmartDashboard.putNumber("Intake Pos", m_angleAdjust.getPosition());
 	}
 
 	@Override

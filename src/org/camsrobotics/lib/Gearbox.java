@@ -60,7 +60,7 @@ public class Gearbox {
 	 */
 	public void shiftUp()	{
 		if(m_shifter != null)	{
-			m_shifter.set(DoubleSolenoid.Value.kForward);
+			m_shifter.set(DoubleSolenoid.Value.kReverse);
 		}
 	}
 	
@@ -69,7 +69,7 @@ public class Gearbox {
 	 */
 	public void shiftDown()	{
 		if(m_shifter != null)	{
-			m_shifter.set(DoubleSolenoid.Value.kReverse);
+			m_shifter.set(DoubleSolenoid.Value.kForward);
 		}
 	}
 	

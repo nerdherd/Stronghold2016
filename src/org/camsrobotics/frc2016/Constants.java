@@ -39,7 +39,7 @@ public class Constants {
 	public final static double kLiftP			= 0;
 	public final static double kLiftI			= 0;
 	public final static double kLiftD			= 0;
-	public final static double kLiftAlpha		= 0;
+	public final static double kLiftAlpha		= 0.1;
 	public final static double kShootTime		= 0.5;
 	
 	public final static int kManualRPM			= 3000;
@@ -60,11 +60,14 @@ public class Constants {
 	 */
 	public final static double kIntakeSpeed		= 1;
 	public final static double kIntakeF			= 0;
-	public final static double kIntakeP			= 3;
+	public final static double kIntakeP			= 5;
 	public final static double kIntakeI			= 0;
 	public final static double kIntakeD			= 16;
-	public final static double kIntakeAlpha		= 0;
+	public final static double kIntakeAlpha		= 0.05;
 	
-	public final static double kIntakeBallPickup	= -0.115;
-	public final static double kIntakeTuckedIn		= -0.325;
+	public final static double kIntakeBallPickup	= -0.325;
+	public final static double kIntakeTuckedIn		= -0.125;
+	public final static double kIntakeTucked		= -0.01;
+	public final static double kIntakeGround		= -0.4;
+	
 }

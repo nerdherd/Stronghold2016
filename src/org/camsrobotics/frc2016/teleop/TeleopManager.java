@@ -26,14 +26,7 @@ public class TeleopManager {
 	
 	public void update(Commands c)	{
 		// Drive
-		switch(c.driveCommand)	{
-		case TANK_DRIVE:
-			m_drive.driveOpenLoop(new DriveSignal(m_driverLeftStick.getTrueY(), m_driverRightStick.getTrueY()));
-			break;
-		case VISION:
-			m_drive.setController(new VisionTargetingController(3));
-			break;
-		}
+		m_drive.driveOpenLoop(new DriveSignal(m_driverLeftStick.getY(), m_driverRightStick.getY()));
 		
 		switch(c.shiftCommand)	{
 		case UP:
@@ -47,7 +40,7 @@ public class TeleopManager {
 		// Shooter
 		switch(c.shooterCommand)	{
 		case MANUAL:
-			m_shooter.setManualShooterAngle((-(-m_buttonBox.getThrottle()+1)/3));
+			m_shooter.setShooterAngle(((-m_buttonBox.getThrottle()+1)/3));
 			break;
 		case LONG_RANGE:
 			m_shooter.setShooterAngle(Constants.kLongRangeAngle);
@@ -101,6 +94,12 @@ public class TeleopManager {
 			break;
 		case TUCKED_IN:
 			m_intake.setIntakeHeight(Constants.kIntakeTuckedIn);
+			break;
+		case TUCKED:
+			m_intake.setIntakeHeight(Constants.kIntakeTucked);
+			break;
+		case GROUND:
+			m_intake.setIntakeHeight(Constants.kIntakeGround);
 			break;
 		}
 		

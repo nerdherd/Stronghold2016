@@ -25,7 +25,7 @@ public class Commands {
 	}
 	
 	public static enum IntakeCommands	{
-		MANUAL, BALL_PICKUP, TUCKED_IN
+		MANUAL, BALL_PICKUP, TUCKED_IN, GROUND, TUCKED
 	}
 	
 	public static enum RollerCommands	{

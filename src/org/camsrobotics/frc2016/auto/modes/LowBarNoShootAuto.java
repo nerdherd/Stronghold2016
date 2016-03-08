@@ -15,7 +15,7 @@ public class LowBarNoShootAuto extends AutoMode {
 		runAction(new WaitForIntakeAction(15, .025));
 		
 		// Pass the Low Bar
-		drive.setController(new DriveStraightController(3, .5));
+		drive.setController(new DriveStraightController(3, .25));
 		runAction(new TimeoutAction(5));
 		
 		// Stop

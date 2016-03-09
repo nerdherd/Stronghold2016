@@ -74,9 +74,11 @@ public class Shooter extends Subsystem {
 		m_shooterRight.setI(m_flywheelI);
 		m_shooterRight.setD(m_flywheelD);
 		
-		m_shooterLeft.reverseSensor(false);
-		m_shooterRight.reverseOutput(true);
-		
+		m_shooterLeft.reverseSensor(true);
+		m_shooterLeft.reverseOutput(true);
+		m_shooterRight.reverseSensor(false);
+		m_shooterRight.reverseOutput(false);
+
 		m_shootTimer = new Timer();
 		
 		m_lifter.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);

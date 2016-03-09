@@ -26,7 +26,14 @@ public class TeleopManager {
 	
 	public void update(Commands c)	{
 		// Drive
-		m_drive.driveOpenLoop(new DriveSignal(m_driverLeftStick.getY(), m_driverRightStick.getY()));
+		switch(c.driveCommand)	{
+		case TANK_DRIVE:
+			m_drive.driveOpenLoop(new DriveSignal(m_driverLeftStick.getY(), m_driverRightStick.getY()));
+			break;
+		case VISION:
+			m_drive.setController(new VisionTargetingController(3));
+			break;
+		}
 		
 		switch(c.shiftCommand)	{
 		case UP:

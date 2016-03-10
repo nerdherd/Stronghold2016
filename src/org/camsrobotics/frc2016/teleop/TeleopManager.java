@@ -9,7 +9,6 @@ import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.frc2016.subsystems.controllers.VisionTargetingController;
 import org.camsrobotics.lib.NerdyJoystick;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -22,7 +21,6 @@ public class TeleopManager {
 	private Drive m_drive = HardwareAdapter.kDrive;
 	private Shooter m_shooter = HardwareAdapter.kShooter;
 	private Intake m_intake = HardwareAdapter.kIntake;
-	private Compressor p;
 	
 	private NerdyJoystick m_driverLeftStick = HardwareAdapter.kDriveLeftStick;
 	private NerdyJoystick m_driverRightStick = HardwareAdapter.kDriveRightStick;
@@ -50,8 +48,10 @@ public class TeleopManager {
 		
 		// Shooter
 		switch(c.shooterCommand)	{
+		case IDLE:
+			m_shooter.setManualShooterAngle(0);
 		case MANUAL:
-			m_shooter.setShooterAngle(SmartDashboard.getNumber("Angle"));
+			m_shooter.setShooterAngle(m_buttonBox.getThrottle() * (Constants.kMaxHeight - Constants.kMinHeight) + Constants.kMinHeight);
 			break;
 		case LONG_RANGE:
 			m_shooter.setShooterAngle(Constants.kLongRangeAngle);
@@ -65,7 +65,7 @@ public class TeleopManager {
 		}
 		
 		switch(c.flywheelCommand)	{
-		case MANUAL:
+		case IDLE:
 			m_shooter.setDesiredRPM(0);
 			break;
 		case LONG_RANGE:
@@ -86,8 +86,8 @@ public class TeleopManager {
 				m_shooter.shoot();
 			}
 			break;
-		case MANUAL_SPIN:
-			m_shooter.setDesiredRPM((int) SmartDashboard.getNumber("RPM", 3000));
+		case MANUAL:
+			m_shooter.setDesiredRPM(Constants.kManualRPM);
 			break;
 		}
 		
@@ -97,6 +97,9 @@ public class TeleopManager {
 		
 		// Intake
 		switch(c.intakeCommand)	{
+		case IDLE:
+			m_intake.manualDrive(0);
+			break;
 		case MANUAL:
 			m_intake.manualDrive(m_buttonBox.getY());
 			break;

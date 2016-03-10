@@ -55,6 +55,10 @@ public class Constants {
 	public final static int kMediumRangeAngle	= 0;
 	public final static int kLongRangeAngle		= 0;
 	
+	public final static double kMaxHeight		= 0;
+	public final static double kMinHeight		= 0;
+
+	
 	/*
 	 * Intake Constants
 	 */

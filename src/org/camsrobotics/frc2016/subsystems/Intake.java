@@ -92,9 +92,12 @@ public class Intake extends Subsystem {
     
     @Override
     public void zero()	{
-    	m_angleAdjust.setPosition(0);
+//    	m_angleAdjust.setPosition(0);
     }
 
+    public void disable()	{
+    	
+    }
     
 	@Override
 	public void update() {

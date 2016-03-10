@@ -112,9 +112,9 @@ public class DriverInput {
 		}	else if(m_shooterLongRange.get())	{
 			m_commands.flywheelCommand = Commands.FlywheelCommands.LONG_RANGE;
 		}	else if(m_shooterManual.get())	{
-			m_commands.flywheelCommand = Commands.FlywheelCommands.MANUAL_SPIN;
-		}	else	{
 			m_commands.flywheelCommand = Commands.FlywheelCommands.MANUAL;
+		}	else	{
+			m_commands.flywheelCommand = Commands.FlywheelCommands.IDLE;
 		}
 		
 		if(m_shoot.wasPressed())	{

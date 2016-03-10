@@ -17,15 +17,15 @@ public class Commands {
 	}
 	
 	public static enum ShooterCommands	{
-		MANUAL, LONG_RANGE, MEDIUM_RANGE, SHORT_RANGE
+		IDLE, MANUAL, LONG_RANGE, MEDIUM_RANGE, SHORT_RANGE
 	}
 	
 	public static enum FlywheelCommands	{
-		MANUAL, LONG_RANGE, MEDIUM_RANGE, SHORT_RANGE, MANUAL_SPIN
+		IDLE, LONG_RANGE, MEDIUM_RANGE, SHORT_RANGE, MANUAL
 	}
 	
 	public static enum IntakeCommands	{
-		MANUAL, BALL_PICKUP, TUCKED_IN, GROUND, TUCKED
+		IDLE, MANUAL, BALL_PICKUP, TUCKED_IN, GROUND, TUCKED
 	}
 	
 	public static enum RollerCommands	{
@@ -34,9 +34,9 @@ public class Commands {
 	
 	public DriveCommands driveCommand = DriveCommands.TANK_DRIVE;
 	public DriveShiftCommands shiftCommand = DriveShiftCommands.DOWN;
-	public ShooterCommands shooterCommand = ShooterCommands.MANUAL;
-	public FlywheelCommands flywheelCommand = FlywheelCommands.MANUAL;
-	public IntakeCommands intakeCommand = IntakeCommands.MANUAL;
+	public ShooterCommands shooterCommand = ShooterCommands.IDLE;
+	public FlywheelCommands flywheelCommand = FlywheelCommands.IDLE;
+	public IntakeCommands intakeCommand = IntakeCommands.IDLE;
 	public RollerCommands rollerCommand = RollerCommands.IDLE;
 	
 	public boolean shooting = false;

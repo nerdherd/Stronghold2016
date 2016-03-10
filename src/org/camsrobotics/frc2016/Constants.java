@@ -31,12 +31,12 @@ public class Constants {
 	/*
 	 * Shooter Constants
 	 */
-	public final static double kFlywheelF		= 0.075;
-	public final static double kFlywheelP		= 0.1;
-	public final static double kFlywheelI		= 0;
-	public final static double kFlywheelD		= 0;
+	public final static double kFlywheelF		= 0;
+	public final static double kFlywheelP		= 0.08204;
+	public final static double kFlywheelI		= 0.0005;
+	public final static double kFlywheelD		= 0.375;
 	public final static double kLiftF			= 0;
-	public final static double kLiftP			= 0;
+	public final static double kLiftP			= 5;
 	public final static double kLiftI			= 0;
 	public final static double kLiftD			= 0;
 	public final static double kLiftAlpha		= 0.1;

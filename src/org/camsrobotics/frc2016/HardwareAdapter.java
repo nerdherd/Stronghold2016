@@ -35,7 +35,7 @@ public class HardwareAdapter {
 	public static final VictorSP kDriveLeft3			= new VictorSP(2);
 	public static final VictorSP kDriveRight1			= new VictorSP(3);
 	public static final VictorSP kDriveRight2			= new VictorSP(4);
-	public static final VictorSP kDriveRight3			= new VictorSP(6);
+	public static final VictorSP kDriveRight3			= new VictorSP(5);
 	
 	public static final CANTalon kShooterLeft			= new CANTalon(1);
 	public static final CANTalon kShooterRight			= new CANTalon(2);
@@ -63,4 +63,5 @@ public class HardwareAdapter {
 	public static final Drive kDrive = new Drive("Drivebase", kDriveLeftGearbox, kDriveRightGearbox, kNavX);
 	public static final Shooter kShooter = new Shooter("Shooter", kShooterLeft, kShooterRight, kShooterPunch, kShooterLift);
 	public static final Intake kIntake = new Intake("Intakes", kIntakeRollers, kIntakeArtic);
+	
 }

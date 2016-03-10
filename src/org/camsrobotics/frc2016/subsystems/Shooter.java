@@ -84,14 +84,15 @@ public class Shooter extends Subsystem {
 		m_lifter.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
 		m_lifter.changeControlMode(TalonControlMode.Position);
 		
-		m_lifter.enableBrakeMode(true);
+		m_lifter.reverseSensor(false);
+		m_lifter.reverseOutput(false);
 		
 		m_lifter.setF(m_lifterF);
 		m_lifter.setP(m_lifterP);
 		m_lifter.setI(m_lifterI);
 		m_lifter.setD(m_lifterD);
 		
-		m_lifter.setPosition(0);
+//		m_lifter.setPosition(0);
 	}
 
 	public void setDesiredRPM(int rpm)	{
@@ -144,7 +145,7 @@ public class Shooter extends Subsystem {
 	
 	@Override
 	public void zero()	{
-		m_lifter.setPosition(0);
+//		m_lifter.setPosition(0);
 	}
 	
 	@Override
@@ -165,11 +166,8 @@ public class Shooter extends Subsystem {
 		
 		if(m_manualLift)	{
 			m_lifter.changeControlMode(TalonControlMode.PercentVbus);
-		}	else	{
-			m_lifter.changeControlMode(TalonControlMode.Position);
 		}
-		m_actualAngle = m_actualAngle*(1-m_lifterAlpha)+m_desiredAngle*m_lifterAlpha;
-		m_lifter.set(m_actualAngle);
+		m_lifter.set(0);
 		
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{

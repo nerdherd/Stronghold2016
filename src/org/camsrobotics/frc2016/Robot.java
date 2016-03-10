@@ -13,6 +13,7 @@ import org.camsrobotics.lib.NerdyIterativeRobot;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -26,7 +27,7 @@ public class Robot extends NerdyIterativeRobot {
 	MultiLooper controllers = new MultiLooper("Controllers", 1/200.0);
 	MultiLooper slowControllers = new MultiLooper("SlowControllers", 1/100.0);
 	
-	AutoExecutor auto = new AutoExecutor(new DoNothingAuto());
+	AutoExecutor auto = new AutoExecutor(new LowBarNoShootAuto());
 	
 	Compressor compressor = HardwareAdapter.kCompressor;
 	Drive drive = HardwareAdapter.kDrive;
@@ -36,6 +37,11 @@ public class Robot extends NerdyIterativeRobot {
 	DriverInput driverInput = HardwareAdapter.kDriverInput;
 	TeleopManager teleop = new TeleopManager();
 	PowerDistributionPanel pdp = new PowerDistributionPanel();
+	
+	final int DRIVE_TUNE = 0;
+	
+	int mode = DRIVE_TUNE;
+
     public void robotInit() {
     	compressor.start();
     	
@@ -45,6 +51,29 @@ public class Robot extends NerdyIterativeRobot {
     	controllers.addLoopable(intake);
     	
     	slowControllers.addLoopable(drive);
+    	
+    	SmartDashboard.putNumber("RPM", 3000);
+    	SmartDashboard.putNumber("Angle", 0);
+    	if (DRIVE_TUNE == mode) {
+    		
+    		SmartDashboard.putNumber("Drive Right Encoder Position", HardwareAdapter.kDriveRightEncoder.get());
+    		SmartDashboard.putNumber("Drive Left Encoder Position",HardwareAdapter.kDriveLeftEncoder.get());
+    		
+    		SmartDashboard.putNumber("Drive Right Encoder Speed", (HardwareAdapter.kDriveRightEncoder.getRate()));
+    		SmartDashboard.putNumber("Drive Left Encoder Speed", (HardwareAdapter.kDriveLeftEncoder.getRate()));
+    		
+    		SmartDashboard.putNumber("Channel0", pdp.getCurrent(0));
+        	SmartDashboard.putNumber("Channel1", pdp.getCurrent(1));
+        	SmartDashboard.putNumber("Channel2", pdp.getCurrent(2));
+        	SmartDashboard.putNumber("Channel13", pdp.getCurrent(13));
+        	SmartDashboard.putNumber("Channel14", pdp.getCurrent(14));
+        	SmartDashboard.putNumber("Channel15", pdp.getCurrent(15));
+    		
+    		LiveWindow.addActuator("Intake", "Intake Artic", HardwareAdapter.kIntakeArtic);
+    		LiveWindow.addActuator("Intake", "Intake Rollers", HardwareAdapter.kIntakeRollers);
+    		
+    	}
+    	LiveWindow.setEnabled(true);
     }
     
     public void autonomousInit() {
@@ -104,6 +133,12 @@ public class Robot extends NerdyIterativeRobot {
     
     public void allPeriodic()	{
     	// TODO: add the logging
+    }
+    
+    public void testPeriodic() {
+    	System.out.println("Intake Pos:    " + HardwareAdapter.kIntakeArtic.getPosition());
+    	System.out.println("Intake Roller: " + HardwareAdapter.kIntakeRollers.getSpeed());
+    	
     }
     
 }

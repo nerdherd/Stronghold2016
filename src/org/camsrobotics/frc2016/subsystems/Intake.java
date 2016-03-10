@@ -34,6 +34,7 @@ public class Intake extends Subsystem {
     	m_angleAdjust = angleAdjust;
     	
     	m_angleAdjust.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
+    	m_intake.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 
 		m_angleAdjust.changeControlMode(TalonControlMode.Position);
 
@@ -99,12 +100,15 @@ public class Intake extends Subsystem {
 	public void update() {
 		switch(m_rollerState)	{
 		case INTAKE:
+			m_intake.changeControlMode(TalonControlMode.Position);
 			m_intake.set(-Constants.kIntakeSpeed);
 			break;
 		case OUTTAKE:
+			m_intake.changeControlMode(TalonControlMode.Position);
 			m_intake.set(Constants.kIntakeSpeed);
 			break;
 		case IDLE:
+			m_intake.changeControlMode(TalonControlMode.PercentVbus);
 			m_intake.set(0);
 			break;
 		}

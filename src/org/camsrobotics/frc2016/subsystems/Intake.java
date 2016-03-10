@@ -130,9 +130,6 @@ public class Intake extends Subsystem {
 
 	@Override
 	public void reportState() {
-		SmartDashboard.putNumber("RollerPower", m_rollerState == IntakeStates.INTAKE ? Constants.kIntakeSpeed : 
-			m_rollerState == IntakeStates.OUTTAKE ? -Constants.kIntakeSpeed : 0);
-		SmartDashboard.putNumber("AnglePower", m_manual ? m_manualPow : m_desiredAngle);
 		SmartDashboard.putData("Intake", m_intake);
 		SmartDashboard.putData("Intake Articulation", m_angleAdjust);
 	}

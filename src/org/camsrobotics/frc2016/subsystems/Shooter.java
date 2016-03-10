@@ -139,7 +139,7 @@ public class Shooter extends Subsystem {
 		m_shooting = false;
 		m_shooterLeft.set(0);
 		m_shooterRight.set(0);
-		setShooterAngle(getShooterAngle());
+		setManualShooterAngle(0);
 		setDesiredRPM(0);
 	}
 	

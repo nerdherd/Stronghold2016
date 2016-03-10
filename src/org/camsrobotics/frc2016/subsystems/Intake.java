@@ -95,10 +95,6 @@ public class Intake extends Subsystem {
 //    	m_angleAdjust.setPosition(0);
     }
 
-    public void disable()	{
-    	
-    }
-    
 	@Override
 	public void update() {
 		switch(m_rollerState)	{

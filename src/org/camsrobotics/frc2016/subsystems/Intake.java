@@ -121,13 +121,15 @@ public class Intake extends Subsystem {
 			m_actualAngle = m_actualAngle*(1-m_intakeAlpha)+m_desiredAngle*m_intakeAlpha;
 			m_angleAdjust.set(m_actualAngle);
 		}		
-		SmartDashboard.putNumber("Intake Pos", m_angleAdjust.getPosition());
 	}
 
 	@Override
 	public void reportState() {
 		SmartDashboard.putData("Intake", m_intake);
 		SmartDashboard.putData("Intake Articulation", m_angleAdjust);
+		
+		SmartDashboard.putNumber("Intake Pos", m_angleAdjust.getPosition());
+		SmartDashboard.putNumber("Intake RPM", m_intake.getSpeed());
 	}
     
 }

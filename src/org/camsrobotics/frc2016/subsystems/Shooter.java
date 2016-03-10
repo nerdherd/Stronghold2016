@@ -193,5 +193,9 @@ public class Shooter extends Subsystem {
 		SmartDashboard.putData("Shooter Left", m_shooterLeft);
 		SmartDashboard.putData("Shooter Right", m_shooterRight);
 		SmartDashboard.putData("Shooter Lifter", m_lifter);
+		
+		SmartDashboard.putNumber("Shooter Position", m_lifter.getPosition());
+		SmartDashboard.putNumber("Shooter Left RPM", m_shooterLeft.getSpeed());
+		SmartDashboard.putNumber("Shooter Right RPM", m_shooterRight.getSpeed());
 	}
 }

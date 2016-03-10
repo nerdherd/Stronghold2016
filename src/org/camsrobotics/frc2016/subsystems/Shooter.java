@@ -196,5 +196,8 @@ public class Shooter extends Subsystem {
 		SmartDashboard.putBoolean("Shooting", m_shooting);
 		SmartDashboard.putNumber("EncoderPosition", m_lifter.getPosition());
 		SmartDashboard.putNumber("DesiredPosition", m_desiredAngle);
+		SmartDashboard.putData("Shooter Left", m_shooterLeft);
+		SmartDashboard.putData("Shooter Right", m_shooterRight);
+		SmartDashboard.putData("Shooter Lifter", m_lifter);
 	}
 }

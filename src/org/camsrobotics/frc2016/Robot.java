@@ -13,7 +13,6 @@ import org.camsrobotics.lib.NerdyIterativeRobot;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -38,10 +37,6 @@ public class Robot extends NerdyIterativeRobot {
 	TeleopManager teleop = new TeleopManager();
 	PowerDistributionPanel pdp = new PowerDistributionPanel();
 	
-	final int DRIVE_TUNE = 0;
-	
-	int mode = DRIVE_TUNE;
-
     public void robotInit() {
     	compressor.start();
     	
@@ -51,29 +46,6 @@ public class Robot extends NerdyIterativeRobot {
     	controllers.addLoopable(intake);
     	
     	slowControllers.addLoopable(drive);
-    	
-    	SmartDashboard.putNumber("RPM", 3000);
-    	SmartDashboard.putNumber("Angle", 0);
-    	if (DRIVE_TUNE == mode) {
-    		
-    		SmartDashboard.putNumber("Drive Right Encoder Position", HardwareAdapter.kDriveRightEncoder.get());
-    		SmartDashboard.putNumber("Drive Left Encoder Position",HardwareAdapter.kDriveLeftEncoder.get());
-    		
-    		SmartDashboard.putNumber("Drive Right Encoder Speed", (HardwareAdapter.kDriveRightEncoder.getRate()));
-    		SmartDashboard.putNumber("Drive Left Encoder Speed", (HardwareAdapter.kDriveLeftEncoder.getRate()));
-    		
-    		SmartDashboard.putNumber("Channel0", pdp.getCurrent(0));
-        	SmartDashboard.putNumber("Channel1", pdp.getCurrent(1));
-        	SmartDashboard.putNumber("Channel2", pdp.getCurrent(2));
-        	SmartDashboard.putNumber("Channel13", pdp.getCurrent(13));
-        	SmartDashboard.putNumber("Channel14", pdp.getCurrent(14));
-        	SmartDashboard.putNumber("Channel15", pdp.getCurrent(15));
-    		
-    		LiveWindow.addActuator("Intake", "Intake Artic", HardwareAdapter.kIntakeArtic);
-    		LiveWindow.addActuator("Intake", "Intake Rollers", HardwareAdapter.kIntakeRollers);
-    		
-    	}
-    	LiveWindow.setEnabled(true);
     }
     
     public void autonomousInit() {
@@ -103,13 +75,6 @@ public class Robot extends NerdyIterativeRobot {
     public void teleopPeriodic() {
     	Commands c = driverInput.update();
         teleop.update(c);
-        SmartDashboard.putNumber("Current Channel 0", pdp.getCurrent(0));
-        SmartDashboard.putNumber("Current Channel 1", pdp.getCurrent(1));
-        SmartDashboard.putNumber("Current Channel 2", pdp.getCurrent(2));
-        SmartDashboard.putNumber("Current Channel 13", pdp.getCurrent(13));
-        SmartDashboard.putNumber("Current Channel 14", pdp.getCurrent(14));
-        SmartDashboard.putNumber("Current Channel 15", pdp.getCurrent(15));
-        SmartDashboard.putNumber("Current Channel 10", pdp.getCurrent(10));
     }
     
     public void disabledInit()	{
@@ -132,13 +97,38 @@ public class Robot extends NerdyIterativeRobot {
     }
     
     public void allPeriodic()	{
-    	// TODO: add the logging
+    	
     }
     
     public void testPeriodic() {
-    	System.out.println("Intake Pos:    " + HardwareAdapter.kIntakeArtic.getPosition());
-    	System.out.println("Intake Roller: " + HardwareAdapter.kIntakeRollers.getSpeed());
+    	SmartDashboard.putData("PDP", pdp);
     	
+    	// Drive Data
+    	SmartDashboard.putData("Drive Left 1", HardwareAdapter.kDriveLeft1);
+    	SmartDashboard.putData("Drive Left 2", HardwareAdapter.kDriveLeft2);
+    	SmartDashboard.putData("Drive Left 3", HardwareAdapter.kDriveLeft3);
+    	SmartDashboard.putData("Drive Right 1", HardwareAdapter.kDriveRight1);
+    	SmartDashboard.putData("Drive Right 2", HardwareAdapter.kDriveRight2);
+    	SmartDashboard.putData("Drive Right 3", HardwareAdapter.kDriveRight3);
+
+    	SmartDashboard.putData("Drive Left Encoder", HardwareAdapter.kDriveLeftEncoder);
+    	SmartDashboard.putData("Drive Right Encoder", HardwareAdapter.kDriveRightEncoder);
+    	
+    	// Shooter Data
+    	SmartDashboard.putData("Shooter Lift", HardwareAdapter.kShooterLift);
+    	SmartDashboard.putData("Shooter Left", HardwareAdapter.kShooterLeft);
+    	SmartDashboard.putData("Shooter Right", HardwareAdapter.kShooterRight);
+    	
+    	SmartDashboard.putNumber("Shooter Lift Position", HardwareAdapter.kShooterLift.getPosition());
+    	SmartDashboard.putNumber("Shooter Left RPM", HardwareAdapter.kShooterLeft.getSpeed());
+    	SmartDashboard.putNumber("Shooter Right RPM", HardwareAdapter.kShooterRight.getSpeed());
+    	
+    	// Intake Data
+    	SmartDashboard.putData("Intake Artic", HardwareAdapter.kIntakeArtic);
+    	SmartDashboard.putData("Intake Rollers", HardwareAdapter.kIntakeRollers);
+    	
+    	SmartDashboard.putNumber("Intake Position", HardwareAdapter.kIntakeArtic.getPosition());
+    	SmartDashboard.putNumber("Intake RPM", HardwareAdapter.kIntakeRollers.getSpeed());
     }
     
 }

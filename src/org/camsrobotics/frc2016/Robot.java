@@ -13,6 +13,7 @@ import org.camsrobotics.lib.NerdyIterativeRobot;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -37,6 +38,12 @@ public class Robot extends NerdyIterativeRobot {
 	TeleopManager teleop = new TeleopManager();
 	PowerDistributionPanel pdp = new PowerDistributionPanel();
 	
+	SendableChooser testCommands;
+	
+	enum TEST_COMMANDS	{
+		DISABLED, DRIVE_LEFT, DRIVE_RIGHT, SHOOTER_RPM
+	}
+	
     public void robotInit() {
     	compressor.start();
     	
@@ -46,6 +53,11 @@ public class Robot extends NerdyIterativeRobot {
     	controllers.addLoopable(intake);
     	
     	slowControllers.addLoopable(drive);
+    	
+    	testCommands.addDefault("Disabled", TEST_COMMANDS.DISABLED);
+    	testCommands.addObject("Drive Left", TEST_COMMANDS.DRIVE_LEFT);
+    	testCommands.addObject("Drive Right", TEST_COMMANDS.DRIVE_RIGHT);
+    	testCommands.addObject("Shooter RPM", TEST_COMMANDS.SHOOTER_RPM);    	
     }
     
     public void autonomousInit() {
@@ -75,6 +87,10 @@ public class Robot extends NerdyIterativeRobot {
     public void teleopPeriodic() {
     	Commands c = driverInput.update();
         teleop.update(c);
+        
+        drive.reportState();
+        shooter.reportState();
+        intake.reportState();
     }
     
     public void disabledInit()	{
@@ -101,6 +117,35 @@ public class Robot extends NerdyIterativeRobot {
     }
     
     public void testPeriodic() {
+    	// Get the Command
+    	SmartDashboard.putData("Test Mode Commands", testCommands);
+    	if(testCommands.getSelected() == TEST_COMMANDS.DRIVE_LEFT)	{
+    		HardwareAdapter.kDriveLeft1.set(1);
+    		HardwareAdapter.kDriveLeft2.set(1);
+    		HardwareAdapter.kDriveLeft3.set(1);
+
+    		HardwareAdapter.kDriveRight1.set(0);
+    		HardwareAdapter.kDriveRight2.set(0);
+    		HardwareAdapter.kDriveRight3.set(0); 		
+    	}	else if(testCommands.getSelected() == TEST_COMMANDS.DRIVE_RIGHT)	{
+    		HardwareAdapter.kDriveLeft1.set(0);
+    		HardwareAdapter.kDriveLeft2.set(0);
+    		HardwareAdapter.kDriveLeft3.set(0);
+
+    		HardwareAdapter.kDriveRight1.set(1);
+    		HardwareAdapter.kDriveRight2.set(1);
+    		HardwareAdapter.kDriveRight3.set(1); 		
+    	}	else	{
+    		HardwareAdapter.kDriveLeft1.set(0);
+    		HardwareAdapter.kDriveLeft2.set(0);
+    		HardwareAdapter.kDriveLeft3.set(0);
+
+    		HardwareAdapter.kDriveRight1.set(0);
+    		HardwareAdapter.kDriveRight2.set(0);
+    		HardwareAdapter.kDriveRight3.set(0); 		
+    	}
+    	
+    	// PDP
     	SmartDashboard.putData("PDP", pdp);
     	
     	// Drive Data

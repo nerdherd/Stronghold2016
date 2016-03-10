@@ -167,7 +167,8 @@ public class Shooter extends Subsystem {
 		if(m_manualLift)	{
 			m_lifter.changeControlMode(TalonControlMode.PercentVbus);
 		}
-		m_lifter.set(0);
+		m_actualAngle = m_actualAngle*(1-m_lifterAlpha) + m_desiredAngle*m_lifterAlpha; 
+		m_lifter.set(m_actualAngle);
 		
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{

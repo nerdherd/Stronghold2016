@@ -46,7 +46,7 @@ public class Intake extends Subsystem {
 		m_angleAdjust.setI(Constants.kIntakeI);
 		m_angleAdjust.setD(Constants.kIntakeD);
 		
-		m_angleAdjust.setPosition(-0.444);
+//		m_angleAdjust.setPosition(-0.444);
     }
     
     private enum IntakeStates	{
@@ -97,20 +97,20 @@ public class Intake extends Subsystem {
 
 	@Override
 	public void update() {
-		switch(m_rollerState)	{
-		case INTAKE:
-			m_intake.changeControlMode(TalonControlMode.Position);
-			m_intake.set(-Constants.kIntakeSpeed);
-			break;
-		case OUTTAKE:
-			m_intake.changeControlMode(TalonControlMode.Position);
-			m_intake.set(Constants.kIntakeSpeed);
-			break;
-		case IDLE:
-			m_intake.changeControlMode(TalonControlMode.PercentVbus);
-			m_intake.set(0);
-			break;
-		}
+//		switch(m_rollerState)	{
+//		case INTAKE:
+//			m_intake.changeControlMode(TalonControlMode.Position);
+//			m_intake.set(-Constants.kIntakeSpeed);
+//			break;
+//		case OUTTAKE:
+//			m_intake.changeControlMode(TalonControlMode.Position);
+//			m_intake.set(Constants.kIntakeSpeed);
+//			break;
+//		case IDLE:
+//			m_intake.changeControlMode(TalonControlMode.PercentVbus);
+//			m_intake.set(0);
+//			break;
+//		}
 		
 		
 		if(m_manual)	{

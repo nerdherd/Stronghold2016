@@ -40,7 +40,7 @@ public class Shooter extends Subsystem {
 	private int m_desiredRPM = 0;
 	
 	private double m_desiredAngle = 0.0;
-	private double m_actualAngle = 0.0;
+	private double m_actualAngle = Constants.kMinHeight;
 	
 	private boolean m_shooting = false;
 	private boolean m_manualLift = true;
@@ -166,9 +166,13 @@ public class Shooter extends Subsystem {
 		
 		if(m_manualLift)	{
 			m_lifter.changeControlMode(TalonControlMode.PercentVbus);
+			m_actualAngle = Constants.kMinHeight;
+			m_lifter.set(m_desiredAngle);
+		}	else	{
+			m_lifter.changeControlMode(TalonControlMode.Position);
+			m_actualAngle = m_actualAngle*(1-m_lifterAlpha) + m_desiredAngle*m_lifterAlpha; 
+			m_lifter.set(m_actualAngle);
 		}
-		m_actualAngle = m_actualAngle*(1-m_lifterAlpha) + m_desiredAngle*m_lifterAlpha; 
-		m_lifter.set(m_actualAngle);
 		
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{
@@ -190,6 +194,7 @@ public class Shooter extends Subsystem {
 
 	@Override
 	public void reportState() {		
+		SmartDashboard.putNumber("Desired Angle", m_actualAngle);
 		SmartDashboard.putData("Shooter Left", m_shooterLeft);
 		SmartDashboard.putData("Shooter Right", m_shooterRight);
 		SmartDashboard.putData("Shooter Lifter", m_lifter);

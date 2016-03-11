@@ -28,7 +28,7 @@ public class DriverInput {
 	private NerdyButton m_shooterMediumRange;
 	private NerdyButton m_shooterLongRange;
 	private NerdyButton m_shooterManual;
-	private NerdyButton m_shoot;
+	private NerdyButton m_shootStop;
 
 	private NerdyButton m_intake;
 	private NerdyButton m_outtake;
@@ -54,8 +54,8 @@ public class DriverInput {
 		m_shooterShortRange		= m_buttonBox.getButton(11);
 		m_shooterMediumRange	= m_buttonBox.getButton(9);
 		m_shooterLongRange		= m_buttonBox.getButton(9);
-		m_shooterManual			= m_buttonBox.getButton(2);
-		m_shoot					= m_buttonBox.getButton(1);
+		m_shooterManual			= m_buttonBox.getButton(1);
+		m_shootStop				= m_buttonBox.getButton(2);
 		
 		m_intake				= m_buttonBox.getButton(12);
 		m_outtake				= m_buttonBox.getButton(10);
@@ -77,7 +77,7 @@ public class DriverInput {
 		m_shooterMediumRange.update();
 		m_shooterLongRange.update();
 		m_shooterManual.update();
-		m_shoot.update();
+		m_shootStop.update();
 		
 		m_intake.update();
 		m_outtake.update();
@@ -106,30 +106,28 @@ public class DriverInput {
 		
 		// Shooter
 		if(m_shooterShortRange.get())	{
-			m_commands.flywheelCommand = Commands.FlywheelCommands.SHORT_RANGE;
+			m_commands.shooterCommand = Commands.ShooterCommands.SHORT_RANGE;
 		}	else if(m_shooterMediumRange.get())	{
-			m_commands.flywheelCommand = Commands.FlywheelCommands.MEDIUM_RANGE;
+			m_commands.shooterCommand = Commands.ShooterCommands.MEDIUM_RANGE;
 		}	else if(m_shooterLongRange.get())	{
-			m_commands.flywheelCommand = Commands.FlywheelCommands.LONG_RANGE;
-		}	else if(m_shooterManual.get())	{
-			m_commands.flywheelCommand = Commands.FlywheelCommands.MANUAL;
+			m_commands.shooterCommand = Commands.ShooterCommands.LONG_RANGE;
+		}	else if(m_shootStop.get())	{
+			m_commands.shooterCommand = Commands.ShooterCommands.IDLE;
+		}
+			
+		if(m_shooterManual.get())	{
+			m_commands.flywheelCommand = Commands.FlywheelCommands.ON;
 		}	else	{
 			m_commands.flywheelCommand = Commands.FlywheelCommands.IDLE;
 		}
 		
-		if(m_shoot.wasPressed())	{
-			m_commands.shooting = true;
-		}	else	{
-			m_commands.shooting = false;
-		}
-		
 		// Intake
 		if(m_intake.get())	{
-			m_commands.rollerCommand = Commands.RollerCommands.INTAKE;
+			HardwareAdapter.kIntakeRollers.set(1);
 		}	else if(m_outtake.get())	{
-			m_commands.rollerCommand = Commands.RollerCommands.OUTTAKE;
+			HardwareAdapter.kIntakeRollers.set(-1);
 		}	else	{
-			m_commands.rollerCommand = Commands.RollerCommands.IDLE;
+			HardwareAdapter.kIntakeRollers.set(0);
 		}
 		
 		if(m_ballPickup.get())	{

@@ -36,13 +36,13 @@ public class Constants {
 	public final static double kFlywheelI		= 0.0005;
 	public final static double kFlywheelD		= 0.375;
 	public final static double kLiftF			= 0;
-	public final static double kLiftP			= 5;
-	public final static double kLiftI			= 0;
-	public final static double kLiftD			= 16;
-	public final static double kLiftAlpha		= 0.1;
+	public final static double kLiftP			= 3;
+	public final static double kLiftI			= 0.015625;
+	public final static double kLiftD			= 0;
+	public final static double kLiftAlpha		= 0.05;
 	public final static double kShootTime		= 0.5;
 	
-	public final static int kManualRPM			= 3000;
+	public final static int kManualRPM			= 3500;
 	public final static int kShortRangeRPM		= 2000;
 	public final static int kMediumRangeRPM		= 3000;
 	public final static int kLongRangeRPM		= 4000;
@@ -51,13 +51,12 @@ public class Constants {
 	public final static int kMediumRangeActivate= 4000;
 	public final static int kLongRangeActivate	= 5400;
 	
-	public final static int kShortRangeAngle	= 0;
-	public final static int kMediumRangeAngle	= 0;
-	public final static int kLongRangeAngle		= 0;
+	public final static double kShortRangeAngle		= 0.555;
+	public final static double kMediumRangeAngle	= 0.6;
+	public final static double kLongRangeAngle		= 0.481;
 	
-	public final static double kMaxHeight		= 0;
-	public final static double kMinHeight		= 0;
-
+	public final static double kMinHeight		= 0.431;
+	public final static double kMaxHeight		= 0.561;
 	
 	/*
 	 * Intake Constants
@@ -69,9 +68,9 @@ public class Constants {
 	public final static double kIntakeD			= 16;
 	public final static double kIntakeAlpha		= 0.05;
 	
-	public final static double kIntakeBallPickup	= 0.325;
-	public final static double kIntakeTuckedIn		= 0.125;
-	public final static double kIntakeTucked		= 0.01;
-	public final static double kIntakeGround		= 0.4;
+	public final static double kIntakeBallPickup	= -0.294;
+	public final static double kIntakeTuckedIn		= 0.02;
+	public final static double kIntakeTucked		= -0.02;
+	public final static double kIntakeGround		= -0.343;
 	
 }

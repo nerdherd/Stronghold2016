@@ -17,11 +17,11 @@ public class Commands {
 	}
 	
 	public static enum ShooterCommands	{
-		IDLE, MANUAL, LONG_RANGE, MEDIUM_RANGE, SHORT_RANGE
+		IDLE, MANUAL, LONG_RANGE, MEDIUM_RANGE, SHORT_RANGE, RESTING
 	}
 	
 	public static enum FlywheelCommands	{
-		IDLE, LONG_RANGE, MEDIUM_RANGE, SHORT_RANGE, MANUAL
+		IDLE, ON
 	}
 	
 	public static enum IntakeCommands	{

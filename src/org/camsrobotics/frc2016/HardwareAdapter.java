@@ -30,12 +30,12 @@ public class HardwareAdapter {
 	public static final DriverInput kDriverInput		= new DriverInput(kDriveLeftStick, kDriveRightStick, kButtonBox);
 	
 	// Motors
-	public static final VictorSP kDriveLeft1			= new VictorSP(0);
-	public static final VictorSP kDriveLeft2			= new VictorSP(1);
-	public static final VictorSP kDriveLeft3			= new VictorSP(2);
-	public static final VictorSP kDriveRight1			= new VictorSP(3);
-	public static final VictorSP kDriveRight2			= new VictorSP(4);
-	public static final VictorSP kDriveRight3			= new VictorSP(5);
+	public static final VictorSP kDriveLeft1			= new VictorSP(3);
+	public static final VictorSP kDriveLeft2			= new VictorSP(4);
+	public static final VictorSP kDriveLeft3			= new VictorSP(5);
+	public static final VictorSP kDriveRight1			= new VictorSP(0);
+	public static final VictorSP kDriveRight2			= new VictorSP(1);
+	public static final VictorSP kDriveRight3			= new VictorSP(2);
 	
 	public static final CANTalon kShooterLeft			= new CANTalon(1);
 	public static final CANTalon kShooterRight			= new CANTalon(2);
@@ -47,7 +47,7 @@ public class HardwareAdapter {
 	// Pneumatics
 	public static final Compressor kCompressor			= new Compressor();
 	public static final DoubleSolenoid kShifter			= new DoubleSolenoid(3,4);
-	public static final DoubleSolenoid kShooterPunch	= new DoubleSolenoid(2,5);
+	public static final DoubleSolenoid kShooterPunch	= new DoubleSolenoid(1,6);
 	
 	// Sensors
 	public static final AHRS kNavX						= new AHRS(SerialPort.Port.kMXP);

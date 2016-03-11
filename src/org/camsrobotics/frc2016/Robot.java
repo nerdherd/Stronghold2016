@@ -13,6 +13,7 @@ import org.camsrobotics.lib.NerdyIterativeRobot;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -54,6 +55,7 @@ public class Robot extends NerdyIterativeRobot {
     	
     	slowControllers.addLoopable(drive);
     	
+    	testCommands = new SendableChooser();
     	testCommands.addDefault("Disabled", TEST_COMMANDS.DISABLED);
     	testCommands.addObject("Drive Left", TEST_COMMANDS.DRIVE_LEFT);
     	testCommands.addObject("Drive Right", TEST_COMMANDS.DRIVE_RIGHT);
@@ -88,6 +90,8 @@ public class Robot extends NerdyIterativeRobot {
     	Commands c = driverInput.update();
         teleop.update(c);
         
+    	SmartDashboard.putData("PDP", pdp);
+        
         drive.reportState();
         shooter.reportState();
         intake.reportState();
@@ -117,6 +121,8 @@ public class Robot extends NerdyIterativeRobot {
     }
     
     public void testPeriodic() {
+    	LiveWindow.setEnabled(false);
+    	
     	// Get the Command
     	SmartDashboard.putData("Test Mode Commands", testCommands);
     	if(testCommands.getSelected() == TEST_COMMANDS.DRIVE_LEFT)	{

@@ -24,6 +24,8 @@ public class TeleopManager {
 	private NerdyJoystick m_driverRightStick = HardwareAdapter.kDriveRightStick;
 	private NerdyJoystick m_buttonBox = HardwareAdapter.kButtonBox;
 	
+	private int m_oscilateCount = 0;
+	
 	public void update(Commands c)	{
 		// Drive
 		switch(c.driveCommand)	{
@@ -47,9 +49,8 @@ public class TeleopManager {
 		// Shooter
 		switch(c.shooterCommand)	{
 		case IDLE:
-			m_shooter.setManualShooterAngle(0);
 		case MANUAL:
-			m_shooter.setShooterAngle(m_buttonBox.getThrottle() * (Constants.kMaxHeight - Constants.kMinHeight) + Constants.kMinHeight);
+			m_shooter.setManualShooterAngle(0);
 			break;
 		case LONG_RANGE:
 			m_shooter.setShooterAngle(Constants.kLongRangeAngle);
@@ -60,32 +61,26 @@ public class TeleopManager {
 		case SHORT_RANGE:
 			m_shooter.setShooterAngle(Constants.kShortRangeAngle);
 			break;
+		case RESTING:
+			m_shooter.setShooterAngle(Constants.kMinHeight);
+			break;
 		}
 		
 		switch(c.flywheelCommand)	{
 		case IDLE:
 			m_shooter.setDesiredRPM(0);
+			m_oscilateCount = 0;
 			break;
-		case LONG_RANGE:
-			m_shooter.setDesiredRPM(Constants.kLongRangeRPM);
-			if(m_shooter.getSpeed() > Constants.kLongRangeActivate)	{
-				m_shooter.shoot();
-			}
-			break;
-		case MEDIUM_RANGE:
-			m_shooter.setDesiredRPM(Constants.kMediumRangeRPM);
-			if(m_shooter.getSpeed() > Constants.kMediumRangeActivate)	{
-				m_shooter.shoot();
-			}
-			break;
-		case SHORT_RANGE:
-			m_shooter.setDesiredRPM(Constants.kShortRangeRPM);
-			if(m_shooter.getSpeed() > Constants.kShortRangeActivate)	{
-				m_shooter.shoot();
-			}
-			break;
-		case MANUAL:
+		case ON:
 			m_shooter.setDesiredRPM(Constants.kManualRPM);
+			
+			if(Math.abs(m_shooter.getSpeed() - Constants.kManualRPM) < 5)	{
+				m_oscilateCount++;
+				
+				if(m_oscilateCount == 5)	{
+					m_shooter.shoot();
+				}
+			}
 			break;
 		}
 		

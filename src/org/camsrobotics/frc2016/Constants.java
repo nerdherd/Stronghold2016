@@ -68,9 +68,9 @@ public class Constants {
 	public final static double kIntakeD			= 16;
 	public final static double kIntakeAlpha		= 0.05;
 	
-	public final static double kIntakeBallPickup	= -0.294;
-	public final static double kIntakeTuckedIn		= 0.02;
-	public final static double kIntakeTucked		= -0.02;
-	public final static double kIntakeGround		= -0.343;
+	public final static double kIntakeBallPickup	= 0.347;
+	public final static double kIntakeTuckedIn		= 0.626;
+	public final static double kIntakeTucked		= 0.463;
+	public final static double kIntakeGround		= 0.234;
 	
 }

@@ -26,6 +26,8 @@ public class TeleopManager {
 	
 	private int m_oscilateCount = 0;
 	
+	boolean rolling = false;
+	
 	public void update(Commands c)	{
 		// Drive
 		switch(c.driveCommand)	{
@@ -92,34 +94,43 @@ public class TeleopManager {
 		switch(c.intakeCommand)	{
 		case IDLE:
 			m_intake.manualDrive(0);
+			rolling = false;
 			break;
 		case MANUAL:
 			m_intake.manualDrive(m_buttonBox.getY());
+			rolling = false;
 			break;
 		case BALL_PICKUP:
 			m_intake.setIntakeHeight(Constants.kIntakeBallPickup);
+			rolling = false;
 			break;
 		case TUCKED_IN:
-			m_intake.setIntakeHeight(Constants.kIntakeTuckedIn);
+			m_intake.manualDrive(0.25);
+			rolling = false;
 			break;
 		case TUCKED:
 			m_intake.setIntakeHeight(Constants.kIntakeTucked);
+			rolling = false;
 			break;
 		case GROUND:
-			m_intake.setIntakeHeight(Constants.kIntakeGround);
+			m_intake.manualDrive(-0.25);
+			HardwareAdapter.kIntakeRollers.set(0.25);
+			rolling = true;
 			break;
 		}
 		
-		switch(c.rollerCommand)	{
-		case INTAKE:
-			m_intake.intake();
-			break;
-		case OUTTAKE:
-			m_intake.outtake();
-			break;
-		case IDLE:
-			m_intake.idle();
-			break;
+		if(!rolling)	{
+			switch(c.rollerCommand)	{
+			case INTAKE:
+				m_intake.intake();
+				break;
+			case OUTTAKE:
+				m_intake.outtake();
+				break;
+			case IDLE:
+				m_intake.idle();
+				break;
+			}
 		}
 		
 		if(c.reset)	{

@@ -84,6 +84,7 @@ public class DriverInput {
 		
 		m_ballPickup.update();
 		m_tuckedIn.update();
+		m_tuckedIntake.update();
 		m_groundIntake.update();
 		m_stop.update();
 		

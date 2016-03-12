@@ -59,6 +59,8 @@ public class Drive extends Subsystem {
 		public DriveSignal get(DriveSensorSignal sig);
 		
 		public boolean isOnTarget();
+		
+		public void setPID(double p, double i, double d);
 	}
 
 	private Gearbox m_leftGearbox;
@@ -133,6 +135,12 @@ public class Drive extends Subsystem {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Constants.kCameraFrameWidth/2;
+		}
+	}
+	
+	public void setPID(double p, double i, double d)	{
+		if(m_controller != null)	{
+			m_controller.setPID(p, i, d);
 		}
 	}
 	

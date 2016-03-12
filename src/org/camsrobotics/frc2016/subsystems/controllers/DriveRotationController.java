@@ -39,5 +39,11 @@ public class DriveRotationController implements DriveController {
 	public boolean isOnTarget() {
 		return m_pidController.onTarget(m_tolerance);
 	}
+
+	@Override
+	public void setPID(double p, double i, double d) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

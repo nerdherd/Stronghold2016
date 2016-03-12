@@ -52,4 +52,10 @@ public class DriveStraightDistanceController implements DriveController {
 	public boolean isOnTarget() {
 		return m_pidDistController.onTarget(m_tolerance) && m_pidRotController.onTarget(m_tolerance);
 	}
+
+	@Override
+	public void setPID(double p, double i, double d) {
+		// TODO Auto-generated method stub
+		
+	}
 }

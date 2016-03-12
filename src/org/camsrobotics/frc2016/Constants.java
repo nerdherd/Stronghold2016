@@ -13,6 +13,7 @@ public class Constants {
 	 */
 	public final static int kCameraFrameHeight	= 240;
 	public final static int kCameraFrameWidth	= 320;
+	public final static int kCameraAim			= 124;
 	public final static double kCameraFOVAngle	= 21.2505055;
 	
 	/*
@@ -52,7 +53,7 @@ public class Constants {
 	public final static int kLongRangeActivate	= 5400;
 	
 	public static double kOuterWorksAngle		= 0.555;	// Long Range
-	public static double kBatterAngle			= 0.6135;		// Batter
+	public static double kBatterAngle			= 0.61;   // Batter
 	public static double kOffBatterAngle		= 0.5875;	// Off Batter
 	
 	public final static double kMinHeight		= 0.431;
@@ -61,16 +62,16 @@ public class Constants {
 	/*
 	 * Intake Constants
 	 */
-	public final static double kIntakeSpeed		= 1;
+	public final static double kIntakeSpeed		= 0.7;
 	public final static double kIntakeF			= 0;
 	public final static double kIntakeP			= 4;
 	public final static double kIntakeI			= 0;
 	public final static double kIntakeD			= 16;
 	public final static double kIntakeAlpha		= 0.025;
 	
-	public final static double kIntakeBallPickup	= 0.347;
-	public final static double kIntakeTuckedIn		= 0.626;
-	public final static double kIntakeTucked		= 0.463;
-	public final static double kIntakeGround		= 0.234;
+	public final static double kIntakeBallPickup	= 0.042;
+	public final static double kIntakeResting		= 0.412;
+	public final static double kIntakeTucked		= 0.090;
+	public final static double kIntakeGround		=-0.077;
 	
 }

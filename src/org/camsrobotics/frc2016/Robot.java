@@ -11,6 +11,9 @@ import org.camsrobotics.frc2016.teleop.Commands;
 import org.camsrobotics.frc2016.teleop.TeleopManager;
 import org.camsrobotics.lib.MultiLooper;
 import org.camsrobotics.lib.NerdyIterativeRobot;
+import org.camsrobotics.lib.NerdyMath;
+
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -47,6 +50,12 @@ public class Robot extends NerdyIterativeRobot {
 		DISABLED, DRIVE_LEFT, DRIVE_RIGHT, SHOOTER_RPM
 	}
 	
+	enum AUTO_MODES	{
+		LOW_BAR, CAT_D, RAMPARTS
+	}
+	
+	AUTO_MODES autoMode = AUTO_MODES.CAT_D;
+	
     public void robotInit() {
     	compressor.start();
     	
@@ -67,29 +76,92 @@ public class Robot extends NerdyIterativeRobot {
 //    	SmartDashboard.putNumber("OffBatter", shooter.getOffBatterAngle());
 //    	SmartDashboard.putNumber("Batter", shooter.getBatterAngle());
 
+    	SmartDashboard.putNumber("Vision P", Constants.kDriveVisionP);
+    	SmartDashboard.putNumber("Vision I", Constants.kDriveVisionI);
+    	SmartDashboard.putNumber("Vision D", Constants.kDriveVisionD);
+    	
+    	SmartDashboard.putNumber("Time", 3);
+    	
+    	
+    	SmartDashboard.putNumber("Forward Priority", 1);
+
     }
     
     Timer autoTimer = new Timer();
+    double lastTime;
+    AHRS nav = HardwareAdapter.kNavX;
     
     public void autonomousInit() {
     	System.out.println("NerdyBot Mantis Autonomous Start");
-    	
+    	integration = 0;
     	drive.zero();
     	
 //    	auto.start();
+    	
+    	nav.zeroYaw();
 
     	autoTimer.start();
 
     	controllers.start();
     	slowControllers.start();
+    	
+    	lastTime = Timer.getFPGATimestamp();
+    	
+    	
     }
-
+    
+    double driveP = 0.044444;
+    double driveI = 0.00044444;
+    double integration = 0;
+    double lastError = 0;
+    
     public void autonomousPeriodic() {
-    	if(autoTimer.get() < 4)	{
-        	drive.driveOpenLoop(new DriveSignal(-1,-1));
-    	}	else	{
-    		drive.driveOpenLoop(DriveSignal.kStop);
+    	driveP = SmartDashboard.getNumber("Drive P");
+    	driveI = SmartDashboard.getNumber("Drive I");
+    	
+    	SmartDashboard.putNumber("Yaw", nav.getYaw());
+    	
+    	if(autoMode == AUTO_MODES.LOW_BAR)	{
+    		
+    	}	else if(autoMode == AUTO_MODES.CAT_D)	{
+    		if(autoTimer.get() < 4)	{
+	        	drive.driveOpenLoop(new DriveSignal(-1,-1));
+	    	}	else	{
+	    		drive.driveOpenLoop(DriveSignal.kStop);
+	    	}
+    	}	else if(autoMode == AUTO_MODES.RAMPARTS)	{
+    		if(autoTimer.get() < SmartDashboard.getNumber("Time"))	{
+    			double time = Timer.getFPGATimestamp();
+    			double error = nav.getYaw();
+    			double p = error * driveP;
+    			integration += (error + lastError) * (time - lastTime)/2;
+    			lastTime = time;
+    			lastError = error;
+    			double i = integration * driveI;
+    			SmartDashboard.putNumber("P", p);
+    			SmartDashboard.putNumber("I",i);
+    			double pow = p + i;
+    			SmartDashboard.putNumber("Pow", pow);
+    			double leftPow  =  pow - 1;
+    			double rightPow = -pow - 1;
+    			SmartDashboard.putNumber("Left Power", leftPow);
+    			SmartDashboard.putNumber("Right Power", rightPow);
+    			SmartDashboard.putNumber("Yaw", error);
+    			
+    			double[] unnormalized = {leftPow, rightPow};
+    		 	double[] normalized = NerdyMath.normalize(unnormalized, true);
+    			
+    			double leftNormalized = normalized[0];
+    			double rightNormalized = normalized[1];
+    			SmartDashboard.putNumber("Left Normalized", leftNormalized);
+    			SmartDashboard.putNumber("Right Normalized", rightNormalized);
+    			
+    			drive.driveOpenLoop(new DriveSignal(leftNormalized, rightNormalized));
+    		}	else	{
+    			drive.driveOpenLoop(DriveSignal.kStop);
+    		}
     	}
+    	
     }
 
     public void teleopInit()	{
@@ -110,6 +182,10 @@ public class Robot extends NerdyIterativeRobot {
         drive.reportState();
         shooter.reportState();
         intake.reportState();
+        
+        drive.setPID(SmartDashboard.getNumber("Vision P", Constants.kDriveVisionP), 
+        		SmartDashboard.getNumber("Vision I", Constants.kDriveVisionI), 
+        		SmartDashboard.getNumber("Vision D", Constants.kDriveVisionD));
     }
     
     public void disabledInit()	{

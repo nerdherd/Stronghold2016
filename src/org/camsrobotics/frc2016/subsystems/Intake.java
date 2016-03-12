@@ -24,7 +24,7 @@ public class Intake extends Subsystem {
 	private double m_manualPow = 0;
 	
 	private double m_desiredAngle = 0;
-	private double m_actualAngle = 0;
+	private double m_actualAngle = Constants.kIntakeResting;
 	private double m_intakeAlpha = Constants.kIntakeAlpha;
 	private IntakeStates m_rollerState;
 	
@@ -39,6 +39,7 @@ public class Intake extends Subsystem {
 		m_angleAdjust.changeControlMode(TalonControlMode.Position);
 
 		m_angleAdjust.reverseSensor(false);
+		m_angleAdjust.reverseOutput(false);
 		m_angleAdjust.enableBrakeMode(true);
 		
 		m_angleAdjust.setF(Constants.kIntakeF);

@@ -7,6 +7,8 @@ import org.camsrobotics.frc2016.subsystems.Drive.DriveSensorSignal;
 import org.camsrobotics.frc2016.subsystems.Drive.DriveSignal;
 import org.camsrobotics.lib.NerdyPID;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Snaps to vision target 
  * 
@@ -27,12 +29,17 @@ public class VisionTargetingController implements DriveController {
 	public VisionTargetingController(double tolerance) {
 		m_tolerance = tolerance;
 		m_pid = new NerdyPID(kP,kI,kD);
-		m_pid.setDesired(Constants.kCameraFrameWidth/2);
+		m_pid.setDesired(Constants.kCameraAim);
 	}
 	
 	public DriveSignal get(DriveSensorSignal sig) {
 		m_pwr = m_pid.calculate(sig.vision);
+		SmartDashboard.putNumber("Vision Signal", sig.vision);
 		return new DriveSignal(m_pwr, -m_pwr);
+	}
+	
+	public void setPID(double p, double i, double d)	{
+		m_pid.setPID(p, i, d);
 	}
 	
 	public boolean isOnTarget() {

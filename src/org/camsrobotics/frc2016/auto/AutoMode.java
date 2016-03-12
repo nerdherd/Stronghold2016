@@ -18,7 +18,7 @@ public abstract class AutoMode {
 	protected Intake intake = HardwareAdapter.kIntake;
 	
 	private double m_period = 1/50.0;
-	private boolean m_enabled = false;
+	private boolean m_enabled = true;
 
 	public abstract void run();
 	

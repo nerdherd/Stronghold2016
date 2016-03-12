@@ -4,6 +4,7 @@ package org.camsrobotics.frc2016;
 import org.camsrobotics.frc2016.auto.AutoExecutor;
 import org.camsrobotics.frc2016.auto.modes.*;
 import org.camsrobotics.frc2016.subsystems.Drive;
+import org.camsrobotics.frc2016.subsystems.Drive.DriveSignal;
 import org.camsrobotics.frc2016.subsystems.Intake;
 import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.frc2016.teleop.Commands;
@@ -13,6 +14,7 @@ import org.camsrobotics.lib.NerdyIterativeRobot;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,7 +30,7 @@ public class Robot extends NerdyIterativeRobot {
 	MultiLooper controllers = new MultiLooper("Controllers", 1/200.0);
 	MultiLooper slowControllers = new MultiLooper("SlowControllers", 1/100.0);
 	
-	AutoExecutor auto = new AutoExecutor(new LowBarNoShootAuto());
+	AutoExecutor auto = new AutoExecutor(new RockWallAuto());
 	
 	Compressor compressor = HardwareAdapter.kCompressor;
 	Drive drive = HardwareAdapter.kDrive;
@@ -59,8 +61,15 @@ public class Robot extends NerdyIterativeRobot {
     	testCommands.addDefault("Disabled", TEST_COMMANDS.DISABLED);
     	testCommands.addObject("Drive Left", TEST_COMMANDS.DRIVE_LEFT);
     	testCommands.addObject("Drive Right", TEST_COMMANDS.DRIVE_RIGHT);
-    	testCommands.addObject("Shooter RPM", TEST_COMMANDS.SHOOTER_RPM);    	
+    	testCommands.addObject("Shooter RPM", TEST_COMMANDS.SHOOTER_RPM);
+    	
+//    	SmartDashboard.putNumber("OuterWorks", shooter.getOuterWorksAngle());
+//    	SmartDashboard.putNumber("OffBatter", shooter.getOffBatterAngle());
+//    	SmartDashboard.putNumber("Batter", shooter.getBatterAngle());
+
     }
+    
+    Timer autoTimer = new Timer();
     
     public void autonomousInit() {
     	System.out.println("NerdyBot Mantis Autonomous Start");
@@ -68,13 +77,19 @@ public class Robot extends NerdyIterativeRobot {
     	drive.zero();
     	
 //    	auto.start();
-    	
+
+    	autoTimer.start();
+
     	controllers.start();
     	slowControllers.start();
     }
 
     public void autonomousPeriodic() {
-    	
+    	if(autoTimer.get() < 4)	{
+        	drive.driveOpenLoop(new DriveSignal(-1,-1));
+    	}	else	{
+    		drive.driveOpenLoop(DriveSignal.kStop);
+    	}
     }
 
     public void teleopInit()	{
@@ -123,63 +138,70 @@ public class Robot extends NerdyIterativeRobot {
     public void testPeriodic() {
     	LiveWindow.setEnabled(false);
     	
-    	// Get the Command
-    	SmartDashboard.putData("Test Mode Commands", testCommands);
-    	if(testCommands.getSelected() == TEST_COMMANDS.DRIVE_LEFT)	{
-    		HardwareAdapter.kDriveLeft1.set(1);
-    		HardwareAdapter.kDriveLeft2.set(1);
-    		HardwareAdapter.kDriveLeft3.set(1);
-
-    		HardwareAdapter.kDriveRight1.set(0);
-    		HardwareAdapter.kDriveRight2.set(0);
-    		HardwareAdapter.kDriveRight3.set(0); 		
-    	}	else if(testCommands.getSelected() == TEST_COMMANDS.DRIVE_RIGHT)	{
-    		HardwareAdapter.kDriveLeft1.set(0);
-    		HardwareAdapter.kDriveLeft2.set(0);
-    		HardwareAdapter.kDriveLeft3.set(0);
-
-    		HardwareAdapter.kDriveRight1.set(1);
-    		HardwareAdapter.kDriveRight2.set(1);
-    		HardwareAdapter.kDriveRight3.set(1); 		
-    	}	else	{
-    		HardwareAdapter.kDriveLeft1.set(0);
-    		HardwareAdapter.kDriveLeft2.set(0);
-    		HardwareAdapter.kDriveLeft3.set(0);
-
-    		HardwareAdapter.kDriveRight1.set(0);
-    		HardwareAdapter.kDriveRight2.set(0);
-    		HardwareAdapter.kDriveRight3.set(0); 		
-    	}
+//    	// Get the Command
+//    	SmartDashboard.putData("Test Mode Commands", testCommands);
+//    	if(testCommands.getSelected() == TEST_COMMANDS.DRIVE_LEFT)	{
+//    		HardwareAdapter.kDriveLeft1.set(1);
+//    		HardwareAdapter.kDriveLeft2.set(1);
+//    		HardwareAdapter.kDriveLeft3.set(1);
+//
+//    		HardwareAdapter.kDriveRight1.set(0);
+//    		HardwareAdapter.kDriveRight2.set(0);
+//    		HardwareAdapter.kDriveRight3.set(0); 		
+//    	}	else if(testCommands.getSelected() == TEST_COMMANDS.DRIVE_RIGHT)	{
+//    		HardwareAdapter.kDriveLeft1.set(0);
+//    		HardwareAdapter.kDriveLeft2.set(0);
+//    		HardwareAdapter.kDriveLeft3.set(0);
+//
+//    		HardwareAdapter.kDriveRight1.set(1);
+//    		HardwareAdapter.kDriveRight2.set(1);
+//    		HardwareAdapter.kDriveRight3.set(1); 		
+//    	}	else	{
+//    		HardwareAdapter.kDriveLeft1.set(0);
+//    		HardwareAdapter.kDriveLeft2.set(0);
+//    		HardwareAdapter.kDriveLeft3.set(0);
+//
+//    		HardwareAdapter.kDriveRight1.set(0);
+//    		HardwareAdapter.kDriveRight2.set(0);
+//    		HardwareAdapter.kDriveRight3.set(0); 		
+//    	}
     	
     	// PDP
     	SmartDashboard.putData("PDP", pdp);
     	
     	// Drive Data
-    	SmartDashboard.putData("Drive Left 1", HardwareAdapter.kDriveLeft1);
-    	SmartDashboard.putData("Drive Left 2", HardwareAdapter.kDriveLeft2);
-    	SmartDashboard.putData("Drive Left 3", HardwareAdapter.kDriveLeft3);
-    	SmartDashboard.putData("Drive Right 1", HardwareAdapter.kDriveRight1);
-    	SmartDashboard.putData("Drive Right 2", HardwareAdapter.kDriveRight2);
-    	SmartDashboard.putData("Drive Right 3", HardwareAdapter.kDriveRight3);
+//    	SmartDashboard.putData("Drive Left 1", HardwareAdapter.kDriveLeft1);
+//    	SmartDashboard.putData("Drive Left 2", HardwareAdapter.kDriveLeft2);
+//    	SmartDashboard.putData("Drive Left 3", HardwareAdapter.kDriveLeft3);
+//    	SmartDashboard.putData("Drive Right 1", HardwareAdapter.kDriveRight1);
+//    	SmartDashboard.putData("Drive Right 2", HardwareAdapter.kDriveRight2);
+//    	SmartDashboard.putData("Drive Right 3", HardwareAdapter.kDriveRight3);
 
     	SmartDashboard.putData("Drive Left Encoder", HardwareAdapter.kDriveLeftEncoder);
     	SmartDashboard.putData("Drive Right Encoder", HardwareAdapter.kDriveRightEncoder);
     	
     	// Shooter Data
-    	SmartDashboard.putData("Shooter Lift", HardwareAdapter.kShooterLift);
-    	SmartDashboard.putData("Shooter Left", HardwareAdapter.kShooterLeft);
-    	SmartDashboard.putData("Shooter Right", HardwareAdapter.kShooterRight);
+//    	SmartDashboard.putData("Shooter Lift", HardwareAdapter.kShooterLift);
+//    	SmartDashboard.putData("Shooter Left", HardwareAdapter.kShooterLeft);
+//    	SmartDashboard.putData("Shooter Right", HardwareAdapter.kShooterRight);
     	
     	SmartDashboard.putNumber("Shooter Lift Position", HardwareAdapter.kShooterLift.getPosition());
     	SmartDashboard.putNumber("Shooter Left RPM", HardwareAdapter.kShooterLeft.getSpeed());
     	SmartDashboard.putNumber("Shooter Right RPM", HardwareAdapter.kShooterRight.getSpeed());
     	
     	// Intake Data
-    	SmartDashboard.putData("Intake Artic", HardwareAdapter.kIntakeArtic);
-    	SmartDashboard.putData("Intake Rollers", HardwareAdapter.kIntakeRollers);
+//    	SmartDashboard.putData("Intake Artic", HardwareAdapter.kIntakeArtic);
+//    	SmartDashboard.putData("Intake Rollers", HardwareAdapter.kIntakeRollers);
     	
     	SmartDashboard.putNumber("Intake Position", HardwareAdapter.kIntakeArtic.getPosition());
     	SmartDashboard.putNumber("Intake RPM", HardwareAdapter.kIntakeRollers.getSpeed());
+    	
+//    	shooter.setOuterWorksAngle(SmartDashboard.getNumber("OuterWorks"));
+//    	shooter.setOffBatterAngle(SmartDashboard.getNumber("OffBatter"));
+//    	shooter.setBatterAngle(SmartDashboard.getNumber("Batter"));
+    	
+    	Commands c = driverInput.update();
+        teleop.update(c);
     }
     
 }

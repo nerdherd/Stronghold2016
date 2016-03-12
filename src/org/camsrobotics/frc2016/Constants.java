@@ -42,7 +42,7 @@ public class Constants {
 	public final static double kLiftAlpha		= 0.05;
 	public final static double kShootTime		= 0.5;
 	
-	public final static int kManualRPM			= 3500;
+	public final static int kManualRPM			= 4000;
 	public final static int kShortRangeRPM		= 2000;
 	public final static int kMediumRangeRPM		= 3000;
 	public final static int kLongRangeRPM		= 4000;
@@ -51,9 +51,9 @@ public class Constants {
 	public final static int kMediumRangeActivate= 4000;
 	public final static int kLongRangeActivate	= 5400;
 	
-	public final static double kShortRangeAngle		= 0.555;
-	public final static double kMediumRangeAngle	= 0.6;
-	public final static double kLongRangeAngle		= 0.481;
+	public static double kOuterWorksAngle		= 0.555;	// Long Range
+	public static double kBatterAngle			= 0.6135;		// Batter
+	public static double kOffBatterAngle		= 0.5875;	// Off Batter
 	
 	public final static double kMinHeight		= 0.431;
 	public final static double kMaxHeight		= 0.561;
@@ -63,10 +63,10 @@ public class Constants {
 	 */
 	public final static double kIntakeSpeed		= 1;
 	public final static double kIntakeF			= 0;
-	public final static double kIntakeP			= 5;
+	public final static double kIntakeP			= 4;
 	public final static double kIntakeI			= 0;
 	public final static double kIntakeD			= 16;
-	public final static double kIntakeAlpha		= 0.05;
+	public final static double kIntakeAlpha		= 0.025;
 	
 	public final static double kIntakeBallPickup	= 0.347;
 	public final static double kIntakeTuckedIn		= 0.626;

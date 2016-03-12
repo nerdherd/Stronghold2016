@@ -24,9 +24,9 @@ public class DriverInput {
 	private NerdyButton m_shiftUp;
 	private NerdyButton m_shiftDown;
 	
-	private NerdyButton m_shooterShortRange;
-	private NerdyButton m_shooterMediumRange;
-	private NerdyButton m_shooterLongRange;
+	private NerdyButton m_shooterOuterWorks;
+	private NerdyButton m_shooterBatter;
+	private NerdyButton m_shooterOffBatter;
 	private NerdyButton m_shooterManual;
 	private NerdyButton m_shootStop;
 
@@ -51,9 +51,9 @@ public class DriverInput {
 		m_shiftUp				= m_driverRightStick.getButton(4);
 		m_shiftDown				= m_driverRightStick.getButton(3);
 		
-		m_shooterShortRange		= m_buttonBox.getButton(11);
-		m_shooterMediumRange	= m_buttonBox.getButton(9);
-		m_shooterLongRange		= m_buttonBox.getButton(9);
+		m_shooterOuterWorks		= m_buttonBox.getButton(11);
+		m_shooterBatter	= m_buttonBox.getButton(8);
+		m_shooterOffBatter		= m_buttonBox.getButton(9);
 		m_shooterManual			= m_buttonBox.getButton(1);
 		m_shootStop				= m_buttonBox.getButton(2);
 		
@@ -73,9 +73,9 @@ public class DriverInput {
 		m_snapToVisionTarget.update();
 		m_shiftUp.update();
 		m_shiftDown.update();
-		m_shooterShortRange.update();
-		m_shooterMediumRange.update();
-		m_shooterLongRange.update();
+		m_shooterOuterWorks.update();
+		m_shooterBatter.update();
+		m_shooterOffBatter.update();
 		m_shooterManual.update();
 		m_shootStop.update();
 		
@@ -88,7 +88,7 @@ public class DriverInput {
 		m_groundIntake.update();
 		m_stop.update();
 		
-		m_reset.update();
+//		m_reset.update();
 		
 		/* Do the magic */
 		
@@ -106,12 +106,12 @@ public class DriverInput {
 		}
 		
 		// Shooter
-		if(m_shooterShortRange.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.SHORT_RANGE;
-		}	else if(m_shooterMediumRange.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.MEDIUM_RANGE;
-		}	else if(m_shooterLongRange.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.LONG_RANGE;
+		if(m_shooterOuterWorks.get())	{
+			m_commands.shooterCommand = Commands.ShooterCommands.OUTER_WORKS;
+		}	else if(m_shooterBatter.get())	{
+			m_commands.shooterCommand = Commands.ShooterCommands.BATTER;
+		}	else if(m_shooterOffBatter.get())	{
+			m_commands.shooterCommand = Commands.ShooterCommands.OFF_BATTER;
 		}	else if(m_shootStop.get())	{
 			m_commands.shooterCommand = Commands.ShooterCommands.IDLE;
 		}

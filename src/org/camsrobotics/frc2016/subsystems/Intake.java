@@ -125,8 +125,8 @@ public class Intake extends Subsystem {
 
 	@Override
 	public void reportState() {
-		SmartDashboard.putData("Intake", m_intake);
-		SmartDashboard.putData("Intake Articulation", m_angleAdjust);
+//		SmartDashboard.putData("Intake", m_intake);
+//		SmartDashboard.putData("Intake Articulation", m_angleAdjust);
 		
 		SmartDashboard.putNumber("Intake Pos", m_angleAdjust.getPosition());
 		SmartDashboard.putNumber("Intake RPM", m_intake.getSpeed());

@@ -9,6 +9,8 @@ import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.frc2016.subsystems.controllers.VisionTargetingController;
 import org.camsrobotics.lib.NerdyJoystick;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Executes or outsources the various teleoperated commands.
  * 
@@ -53,18 +55,23 @@ public class TeleopManager {
 		case IDLE:
 		case MANUAL:
 			m_shooter.setManualShooterAngle(0);
+			SmartDashboard.putNumber("ShooterAngleSet", 0);
 			break;
-		case LONG_RANGE:
-			m_shooter.setShooterAngle(Constants.kLongRangeAngle);
+		case OFF_BATTER:
+			m_shooter.setShooterAngle(Constants.kOffBatterAngle);
+			SmartDashboard.putNumber("ShooterAngleSet", Constants.kOffBatterAngle);
 			break;
-		case MEDIUM_RANGE:
-			m_shooter.setShooterAngle(Constants.kMediumRangeAngle);
+		case BATTER:
+			m_shooter.setShooterAngle(Constants.kBatterAngle);
+			SmartDashboard.putNumber("ShooterAngleSet", Constants.kBatterAngle);
 			break;
-		case SHORT_RANGE:
-			m_shooter.setShooterAngle(Constants.kShortRangeAngle);
+		case OUTER_WORKS:
+			m_shooter.setShooterAngle(Constants.kOuterWorksAngle);
+			SmartDashboard.putNumber("ShooterAngleSet", Constants.kOuterWorksAngle);
 			break;
 		case RESTING:
 			m_shooter.setShooterAngle(Constants.kMinHeight);
+			SmartDashboard.putNumber("ShooterAngleSet", Constants.kMinHeight);
 			break;
 		}
 		

@@ -17,7 +17,7 @@ public class Commands {
 	}
 	
 	public static enum ShooterCommands	{
-		IDLE, MANUAL, LONG_RANGE, MEDIUM_RANGE, SHORT_RANGE, RESTING
+		IDLE, MANUAL, OFF_BATTER, BATTER, OUTER_WORKS, RESTING
 	}
 	
 	public static enum FlywheelCommands	{

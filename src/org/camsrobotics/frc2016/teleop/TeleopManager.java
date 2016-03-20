@@ -139,10 +139,5 @@ public class TeleopManager {
 				break;
 			}
 		}
-		
-		if(c.reset)	{
-			m_shooter.zero();
-			m_intake.zero();
-		}
 	}
 }

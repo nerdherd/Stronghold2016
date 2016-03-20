@@ -46,8 +46,6 @@ public class Intake extends Subsystem {
 		m_angleAdjust.setP(Constants.kIntakeP);
 		m_angleAdjust.setI(Constants.kIntakeI);
 		m_angleAdjust.setD(Constants.kIntakeD);
-		
-//		m_angleAdjust.setPosition(-0.444);
     }
     
     private enum IntakeStates	{
@@ -76,7 +74,6 @@ public class Intake extends Subsystem {
     }
     
     public void manualDrive(double pow)	{
-    	// deadband pow
 		m_manual = true;
 		m_manualPow = pow;
     	
@@ -90,28 +87,20 @@ public class Intake extends Subsystem {
     	idle();
     	manualDrive(0);
     }
-    
-    @Override
-    public void zero()	{
-//    	m_angleAdjust.setPosition(0);
-    }
 
 	@Override
 	public void update() {
-//		switch(m_rollerState)	{
-//		case INTAKE:
-//			m_intake.changeControlMode(TalonControlMode.Position);
-//			m_intake.set(-Constants.kIntakeSpeed);
-//			break;
-//		case OUTTAKE:
-//			m_intake.changeControlMode(TalonControlMode.Position);
-//			m_intake.set(Constants.kIntakeSpeed);
-//			break;
-//		case IDLE:
-//			m_intake.changeControlMode(TalonControlMode.PercentVbus);
-//			m_intake.set(0);
-//			break;
-//		}
+		switch(m_rollerState)	{
+		case INTAKE:
+			m_intake.set(-Constants.kIntakeSpeed);
+			break;
+		case OUTTAKE:
+			m_intake.set(Constants.kIntakeSpeed);
+			break;
+		case IDLE:
+			m_intake.set(0);
+			break;
+		}
 		
 		
 		if(m_manual)	{
@@ -126,9 +115,6 @@ public class Intake extends Subsystem {
 
 	@Override
 	public void reportState() {
-//		SmartDashboard.putData("Intake", m_intake);
-//		SmartDashboard.putData("Intake Articulation", m_angleAdjust);
-		
 		SmartDashboard.putNumber("Intake Pos", m_angleAdjust.getPosition());
 		SmartDashboard.putNumber("Intake RPM", m_intake.getSpeed());
 	}

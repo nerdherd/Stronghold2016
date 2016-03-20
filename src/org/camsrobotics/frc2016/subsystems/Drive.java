@@ -150,7 +150,6 @@ public class Drive extends Subsystem {
 		m_signal = null;
 	}
 	
-	@Override
 	public void zero()	{
 		m_leftGearbox.resetEncoder();
 		m_rightGearbox.resetEncoder();

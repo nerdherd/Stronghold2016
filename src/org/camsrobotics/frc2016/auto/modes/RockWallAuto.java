@@ -7,7 +7,7 @@ import org.camsrobotics.frc2016.subsystems.Drive.DriveSignal;
 public class RockWallAuto extends AutoMode {
 
 	@Override
-	public void run() {
+	public void routine() {
 		// Pass the Low Bar
 		drive.driveOpenLoop(new DriveSignal(1,1));
 		runAction(new TimeoutAction(5));

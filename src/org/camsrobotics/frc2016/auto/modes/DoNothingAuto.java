@@ -11,7 +11,7 @@ import org.camsrobotics.frc2016.auto.AutoMode;
 public class DoNothingAuto extends AutoMode {
 
 	@Override
-	public void run() {
+	public void routine() {
 		
 	}
 

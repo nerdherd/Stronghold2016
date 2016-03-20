@@ -16,7 +16,7 @@ import org.camsrobotics.frc2016.subsystems.controllers.DriveStraightController;
 public class LowBarAuto extends AutoMode {
 
 	@Override
-	public void run() {
+	public void routine() {
 		// Pass the Low Bar
 		drive.setController(new DriveStraightController(3, .5));
 		runAction(new WaitForUltrasonicSeeAction(45, 15));

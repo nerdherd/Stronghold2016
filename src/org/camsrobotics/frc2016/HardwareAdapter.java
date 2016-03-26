@@ -8,6 +8,8 @@ import org.camsrobotics.lib.NerdyJoystick;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -54,6 +56,9 @@ public class HardwareAdapter {
 	public static final Encoder kDriveLeftEncoder		= new Encoder(0,1);
 	public static final Encoder kDriveRightEncoder		= new Encoder(2,3);
 	public static final Ultrasonic kUltrasonic			= new Ultrasonic(4,5);
+	public static final BuiltInAccelerometer kAccelerometer = new BuiltInAccelerometer();
+	public static final AnalogInput kCompressLeft		= new AnalogInput(1);
+	public static final AnalogInput kCompressRight		= new AnalogInput(2);
 	
 	// Gearboxes
 	public static final Gearbox kDriveLeftGearbox		= new Gearbox(kDriveLeft1, kDriveLeft2, kDriveLeft3, kDriveLeftEncoder, kShifter);

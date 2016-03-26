@@ -54,8 +54,10 @@ public class Robot extends NerdyIterativeRobot {
 		LOW_BAR, CAT_D, RAMPARTS
 	}
 	
-	AUTO_MODES autoMode = AUTO_MODES.CAT_D;
-	
+	AUTO_MODES autoMode = AUTO_MODES.RAMPARTS;
+    double driveP = 0.044444;
+    double driveI = 0.00044444;
+    
     public void robotInit() {
     	compressor.start();
     	
@@ -79,11 +81,14 @@ public class Robot extends NerdyIterativeRobot {
     	SmartDashboard.putNumber("Vision P", Constants.kDriveVisionP);
     	SmartDashboard.putNumber("Vision I", Constants.kDriveVisionI);
     	SmartDashboard.putNumber("Vision D", Constants.kDriveVisionD);
-    	
+    	SmartDashboard.putNumber("driveP", driveP);
+    	SmartDashboard.putNumber("driveI", driveI);
     	SmartDashboard.putNumber("Time", 3);
     	
     	
     	SmartDashboard.putNumber("Forward Priority", 1);
+    	
+		SmartDashboard.putNumber("Ramparts Straight Power", 1);
 
     }
     
@@ -102,22 +107,20 @@ public class Robot extends NerdyIterativeRobot {
 
     	autoTimer.start();
 
-    	controllers.start();
+//    	controllers.start();
     	slowControllers.start();
     	
     	lastTime = Timer.getFPGATimestamp();
     	
     	
     }
-    
-    double driveP = 0.044444;
-    double driveI = 0.00044444;
+   
     double integration = 0;
     double lastError = 0;
     
     public void autonomousPeriodic() {
-    	driveP = SmartDashboard.getNumber("Drive P");
-    	driveI = SmartDashboard.getNumber("Drive I");
+    	driveP = SmartDashboard.getNumber("driveP");
+    	driveI = SmartDashboard.getNumber("driveI");
     	
     	SmartDashboard.putNumber("Yaw", nav.getYaw());
     	
@@ -131,6 +134,7 @@ public class Robot extends NerdyIterativeRobot {
 	    	}
     	}	else if(autoMode == AUTO_MODES.RAMPARTS)	{
     		if(autoTimer.get() < SmartDashboard.getNumber("Time"))	{
+    			double straightPower = SmartDashboard.getNumber("Ramparts Straight Power");
     			double time = Timer.getFPGATimestamp();
     			double error = nav.getYaw();
     			double p = error * driveP;
@@ -142,8 +146,8 @@ public class Robot extends NerdyIterativeRobot {
     			SmartDashboard.putNumber("I",i);
     			double pow = p + i;
     			SmartDashboard.putNumber("Pow", pow);
-    			double leftPow  =  pow - 1;
-    			double rightPow = -pow - 1;
+    			double leftPow  =  pow - straightPower;
+    			double rightPow = -pow - straightPower;
     			SmartDashboard.putNumber("Left Power", leftPow);
     			SmartDashboard.putNumber("Right Power", rightPow);
     			SmartDashboard.putNumber("Yaw", error);
@@ -169,7 +173,7 @@ public class Robot extends NerdyIterativeRobot {
     	
     	drive.zero();
     	
-    	controllers.start();
+//    	controllers.start();
     	slowControllers.start();
     }
     

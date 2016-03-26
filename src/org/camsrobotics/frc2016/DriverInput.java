@@ -27,13 +27,13 @@ public class DriverInput {
 	private NerdyButton m_shooterOuterWorks;
 	private NerdyButton m_shooterBatter;
 	private NerdyButton m_shooterOffBatter;
-	private NerdyButton m_shooterManual;
+	private NerdyButton m_shoot;
 	private NerdyButton m_shootStop;
 
 	private NerdyButton m_intake;
 	private NerdyButton m_outtake;
 	private NerdyButton m_ballPickup;
-	private NerdyButton m_tuckedIn;
+	private NerdyButton m_tuckedInAll;
 	private NerdyButton m_groundIntake;
 	private NerdyButton m_tuckedIntake;
 	private NerdyButton m_stop;
@@ -51,18 +51,18 @@ public class DriverInput {
 		m_shiftUp				= m_driverRightStick.getButton(4);
 		m_shiftDown				= m_driverRightStick.getButton(3);
 		
-		m_shooterOuterWorks		= m_buttonBox.getButton(11);
-		m_shooterBatter	= m_buttonBox.getButton(8);
-		m_shooterOffBatter		= m_buttonBox.getButton(9);
-		m_shooterManual			= m_buttonBox.getButton(1);
+		m_shooterOuterWorks		= m_buttonBox.getButton(12);
+		m_shooterBatter			= m_buttonBox.getButton(8);
+		m_shooterOffBatter		= m_buttonBox.getButton(10);
+		m_shoot					= m_buttonBox.getButton(1);
 		m_shootStop				= m_buttonBox.getButton(2);
 		
-		m_intake				= m_buttonBox.getButton(12);
-		m_outtake				= m_buttonBox.getButton(10);
-		m_ballPickup			= m_buttonBox.getButton(3);
-		m_tuckedIn				= m_buttonBox.getButton(5);
-		m_groundIntake			= m_buttonBox.getButton(6);
-		m_tuckedIntake			= m_buttonBox.getButton(7);
+		m_intake				= m_buttonBox.getButton(3);
+		m_outtake				= m_buttonBox.getButton(5);
+		m_ballPickup			= m_buttonBox.getButton(9);
+		m_tuckedInAll			= m_buttonBox.getButton(5);
+		m_groundIntake			= m_buttonBox.getButton(7);
+		m_tuckedIntake			= m_buttonBox.getButton(1);
 		m_stop 					= m_buttonBox.getButton(4);
 		
 		m_reset					= m_buttonBox.getButton(8);
@@ -76,14 +76,14 @@ public class DriverInput {
 		m_shooterOuterWorks.update();
 		m_shooterBatter.update();
 		m_shooterOffBatter.update();
-		m_shooterManual.update();
+		m_shoot.update();
 		m_shootStop.update();
 		
 		m_intake.update();
 		m_outtake.update();
 		
 		m_ballPickup.update();
-		m_tuckedIn.update();
+		m_tuckedInAll.update();
 		m_tuckedIntake.update();
 		m_groundIntake.update();
 		m_stop.update();
@@ -103,6 +103,8 @@ public class DriverInput {
 			m_commands.shiftCommand = Commands.DriveShiftCommands.UP;
 		}	else if(m_shiftDown.wasPressed())	{
 			m_commands.shiftCommand = Commands.DriveShiftCommands.DOWN;
+		}	else	{
+			m_commands.shiftCommand = Commands.DriveShiftCommands.IDLE;
 		}
 		
 		// Shooter
@@ -116,7 +118,7 @@ public class DriverInput {
 			m_commands.shooterCommand = Commands.ShooterCommands.IDLE;
 		}
 			
-		if(m_shooterManual.get())	{
+		if(m_shoot.get())	{
 			m_commands.flywheelCommand = Commands.FlywheelCommands.ON;
 		}	else	{
 			m_commands.flywheelCommand = Commands.FlywheelCommands.IDLE;
@@ -133,8 +135,8 @@ public class DriverInput {
 		
 		if(m_ballPickup.get())	{
 			m_commands.intakeCommand = Commands.IntakeCommands.BALL_PICKUP;
-		}	else if(m_tuckedIn.get())	{
-			m_commands.intakeCommand = Commands.IntakeCommands.TUCKED_IN;
+		}	else if(m_tuckedInAll.get())	{
+			m_commands.intakeCommand = Commands.IntakeCommands.TUCKED_IN_ALL;
 		}	else if(m_groundIntake.get())	{
 			m_commands.intakeCommand = Commands.IntakeCommands.GROUND;
 		}	else if(m_tuckedIntake.get())	{

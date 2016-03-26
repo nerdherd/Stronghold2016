@@ -106,12 +106,12 @@ public class Drive extends Subsystem {
 		return m_rightGearbox.getEncoderDistance();
 	}
 	
-	public void shiftUp()	{
+	public void shiftDown()	{
 		m_leftGearbox.shiftUp();
 		m_rightGearbox.shiftUp();
 	}
 	
-	public void shiftDown()	{
+	public void shiftUp()	{
 		m_leftGearbox.shiftDown();
 		m_rightGearbox.shiftDown();
 	}

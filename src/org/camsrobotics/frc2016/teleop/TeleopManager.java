@@ -9,6 +9,7 @@ import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.frc2016.subsystems.controllers.VisionTargetingController;
 import org.camsrobotics.lib.NerdyJoystick;
 
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -25,6 +26,8 @@ public class TeleopManager {
 	private NerdyJoystick m_driverLeftStick = HardwareAdapter.kDriveLeftStick;
 	private NerdyJoystick m_driverRightStick = HardwareAdapter.kDriveRightStick;
 	private NerdyJoystick m_buttonBox = HardwareAdapter.kButtonBox;
+	
+	private BuiltInAccelerometer m_accelerometer = HardwareAdapter.kAccelerometer;
 	
 	private int m_oscilateCount = 0;
 	
@@ -47,6 +50,11 @@ public class TeleopManager {
 			break;
 		case DOWN:
 			m_drive.shiftDown();
+			break;
+		case IDLE:
+			if(Math.abs(m_accelerometer.getY()) > Constants.kDriveMaxAccel)	{
+				m_drive.shiftDown();
+			}
 			break;
 		}
 		
@@ -111,7 +119,7 @@ public class TeleopManager {
 			m_intake.setIntakeHeight(Constants.kIntakeBallPickup);
 			rolling = false;
 			break;
-		case TUCKED_IN:
+		case TUCKED_IN_ALL:
 			m_intake.manualDrive(0.25);
 			rolling = false;
 			break;

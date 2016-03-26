@@ -28,6 +28,7 @@ public class Constants {
 	public final static double kDriveTranslationP	= 0;
 	public final static double kDriveTranslationI	= 0;
 	public final static double kDriveTranslationD	= 0;
+	public final static double kDriveMaxAccel		= 1.5;
 	
 	/*
 	 * Shooter Constants
@@ -43,15 +44,11 @@ public class Constants {
 	public final static double kLiftAlpha		= 0.05;
 	public final static double kShootTime		= 0.5;
 	
-	public final static int kManualRPM			= 4000;
+	public final static int kManualRPM			= 4300;
 	public final static int kShortRangeRPM		= 2000;
 	public final static int kMediumRangeRPM		= 3000;
 	public final static int kLongRangeRPM		= 4000;
 
-	public final static int kShortRangeActivate	= 2700;
-	public final static int kMediumRangeActivate= 4000;
-	public final static int kLongRangeActivate	= 5400;
-	
 	public static double kOuterWorksAngle		= 0.555;	// Long Range
 	public static double kBatterAngle			= 0.61;   // Batter
 	public static double kOffBatterAngle		= 0.5875;	// Off Batter

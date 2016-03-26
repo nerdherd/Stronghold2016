@@ -13,7 +13,7 @@ public class Commands {
 	}
 	
 	public static enum DriveShiftCommands	{
-		DOWN, UP
+		DOWN, UP, IDLE
 	}
 	
 	public static enum ShooterCommands	{
@@ -25,7 +25,7 @@ public class Commands {
 	}
 	
 	public static enum IntakeCommands	{
-		IDLE, MANUAL, BALL_PICKUP, TUCKED_IN, GROUND, TUCKED
+		IDLE, MANUAL, BALL_PICKUP, TUCKED_IN_ALL, GROUND, TUCKED
 	}
 	
 	public static enum RollerCommands	{

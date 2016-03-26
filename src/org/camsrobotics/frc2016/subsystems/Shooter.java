@@ -46,10 +46,6 @@ public class Shooter extends Subsystem {
 	private boolean m_manualLift = true;
 	private Timer m_shootTimer;
 	
-//	private double m_outerWorksAngle	= 0.555;	// Long Range
-//	private double m_batterAngle		= 0.6;		// Batter
-//	private double m_offBatterAngle		= 0.575;	// Off Batter
-	
 	public Shooter(String name, CANTalon shooterLeft, CANTalon shooterRight, DoubleSolenoid shooterPunch, CANTalon lifter)	{
 		super(name);
 		
@@ -95,33 +91,7 @@ public class Shooter extends Subsystem {
 		m_lifter.setP(m_lifterP);
 		m_lifter.setI(m_lifterI);
 		m_lifter.setD(m_lifterD);
-		
-//		m_lifter.setPosition(0);
 	}
-	
-//	public void setOuterWorksAngle(double angle)	{
-//		m_outerWorksAngle = angle;
-//	}
-//
-//	public void setOffBatterAngle(double angle)	{
-//		m_offBatterAngle = angle;
-//	}
-//
-//	public void setBatterAngle(double angle)	{
-//		m_batterAngle = angle;
-//	}
-//	
-//	public double getOuterWorksAngle()	{
-//		return m_outerWorksAngle;
-//	}
-//
-//	public double getOffBatterAngle()	{
-//		return m_offBatterAngle;
-//	}
-//	
-//	public double getBatterAngle()	{
-//		return m_batterAngle;
-//	}
 	
 	public void setDesiredRPM(int rpm)	{
 		m_desiredRPM = rpm;
@@ -172,11 +142,6 @@ public class Shooter extends Subsystem {
 	}
 	
 	@Override
-	public void zero()	{
-//		m_lifter.setPosition(0);
-	}
-	
-	@Override
 	public void update() {
 		if(m_desiredRPM != 0)	{
 			m_shooterLeft.changeControlMode(TalonControlMode.Speed);
@@ -221,10 +186,6 @@ public class Shooter extends Subsystem {
 	@Override
 	public void reportState() {		
 		SmartDashboard.putNumber("Desired Angle", m_actualAngle);
-//		SmartDashboard.putData("Shooter Left", m_shooterLeft);
-//		SmartDashboard.putData("Shooter Right", m_shooterRight);
-//		SmartDashboard.putData("Shooter Lifter", m_lifter);
-		
 		SmartDashboard.putNumber("Shooter Position", m_lifter.getPosition());
 		SmartDashboard.putNumber("Shooter Left RPM", m_shooterLeft.getSpeed());
 		SmartDashboard.putNumber("Shooter Right RPM", m_shooterRight.getSpeed());

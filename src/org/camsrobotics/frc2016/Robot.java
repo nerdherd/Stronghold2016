@@ -81,9 +81,12 @@ public class Robot extends NerdyIterativeRobot {
     	SmartDashboard.putNumber("Vision P", Constants.kDriveVisionP);
     	SmartDashboard.putNumber("Vision I", Constants.kDriveVisionI);
     	SmartDashboard.putNumber("Vision D", Constants.kDriveVisionD);
+
     	SmartDashboard.putNumber("driveP", driveP);
     	SmartDashboard.putNumber("driveI", driveI);
-    	SmartDashboard.putNumber("Time", 3);
+
+    	
+    	SmartDashboard.putNumber("Time", 5);
     	
     	
     	SmartDashboard.putNumber("Forward Priority", 1);

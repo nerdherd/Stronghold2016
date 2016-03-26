@@ -19,8 +19,8 @@ public class Constants {
 	/*
 	 * Drive Constants
 	 */
-	public final static double kDriveRotationP		= 0;
-	public final static double kDriveRotationI		= 0;
+	public final static double kDriveRotationP		= 0.04444444;
+	public final static double kDriveRotationI		= 0.00044444;
 	public final static double kDriveRotationD		= 0;
 	public final static double kDriveVisionP		= 0.00245;
 	public final static double kDriveVisionI		= 0;

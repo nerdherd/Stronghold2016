@@ -9,7 +9,7 @@ import org.camsrobotics.frc2016.subsystems.controllers.DriveStraightController;
 public class LowBarNoShootAuto extends AutoMode {
 
 	@Override
-	public void run() {
+	public void routine() {
 		// Lower Intake
 		intake.setIntakeHeight(Constants.kIntakeBallPickup);
 		runAction(new WaitForIntakeAction(15, .025));

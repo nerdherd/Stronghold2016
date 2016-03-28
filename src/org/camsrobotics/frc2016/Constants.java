@@ -16,6 +16,8 @@ public class Constants {
 	public static int kCameraAim				= 124;
 	public static int kCameraDefault			= 123;
 	public final static double kCameraFOVAngle	= 21.2505055;
+	public static double kCameraLiftP			= 0;
+	public static double kCameraLiftD			= 0;
 	
 	/*
 	 * Drive Constants

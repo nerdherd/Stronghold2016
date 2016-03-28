@@ -96,6 +96,9 @@ public class Robot extends NerdyIterativeRobot {
 		SmartDashboard.putNumber("Ramparts Straight Power", 1);
 		
 		SmartDashboard.putNumber("RPM", Constants.kManualRPM);
+		
+		SmartDashboard.putNumber("Camera Lift P", Constants.kCameraLiftP);
+		SmartDashboard.putNumber("Camera Lift D", Constants.kCameraLiftD);
 
     }
     
@@ -226,6 +229,9 @@ public class Robot extends NerdyIterativeRobot {
         Constants.kBatterAngle = SmartDashboard.getNumber("Batter");
         Constants.kOffBatterAngle = SmartDashboard.getNumber("OffBatter");
         Constants.kOuterWorksAngle = SmartDashboard.getNumber("OuterWorks");
+        
+        Constants.kCameraLiftP = SmartDashboard.getNumber("Camera Lift P");
+        Constants.kCameraLiftD = SmartDashboard.getNumber("Camera Lift D");
         
         Constants.kManualRPM = (int) SmartDashboard.getNumber("RPM");
         

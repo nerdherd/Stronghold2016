@@ -50,11 +50,10 @@ public class Shooter extends Subsystem {
 	private double m_desiredAngle = 0.0;
 	private double m_actualAngle = Constants.kMinHeight;
 	
-	private NerdyPID m_visionPID = new NerdyPID();
 	private Vision m_table = Vision.getInstance();
 	private double m_cameraError = 0;
-	private double kCameraLiftP = 0;
-	private double kCameraLiftD = 0;
+	private double m_CameraLiftP = Constants.kCameraLiftP;
+	private double m_CameraLiftD = Constants.kCameraLiftD;
 	private double m_cameraSetPos = 0;
 	private double m_cameraLastError = 0;
 	
@@ -112,8 +111,6 @@ public class Shooter extends Subsystem {
 		m_lifter.setI(m_lifterI);
 		m_lifter.setD(m_lifterD);
 		
-		//TODO tune
-		m_visionPID.setPID(0, 0, 0);
 	}
 	
 	public void setDesiredRPM(int rpm)	{
@@ -137,7 +134,6 @@ public class Shooter extends Subsystem {
 		m_cameraLift = true;
 		m_setLift = false;
 		m_desiredTargetPos = targetPos;
-		m_visionPID.setDesired(m_desiredTargetPos);
 	}
 	
 	public void setManualShooterAngle(double pow)	{
@@ -207,7 +203,7 @@ public class Shooter extends Subsystem {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			m_cameraSetPos += m_cameraError*kCameraLiftP+(m_cameraError-m_cameraLastError)*kCameraLiftD;
+			m_cameraSetPos += m_cameraError*m_CameraLiftP+(m_cameraError-m_cameraLastError)*m_CameraLiftD;
 			m_lifter.set(m_cameraSetPos);
 			
 		}

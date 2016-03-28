@@ -13,7 +13,8 @@ public class Constants {
 	 */
 	public final static int kCameraFrameHeight	= 240;
 	public final static int kCameraFrameWidth	= 320;
-	public final static int kCameraAim			= 124;
+	public static int kCameraAim				= 124;
+	public static int kCameraDefault			= 123;
 	public final static double kCameraFOVAngle	= 21.2505055;
 	
 	/*
@@ -22,7 +23,7 @@ public class Constants {
 	public final static double kDriveRotationP		= 0.04444444;
 	public final static double kDriveRotationI		= 0.00044444;
 	public final static double kDriveRotationD		= 0;
-	public final static double kDriveVisionP		= 0.00245;
+	public final static double kDriveVisionP		= 0.0055;
 	public final static double kDriveVisionI		= 0;
 	public final static double kDriveVisionD		= 0;
 	public final static double kDriveTranslationP	= 0;
@@ -44,14 +45,14 @@ public class Constants {
 	public final static double kLiftAlpha		= 0.05;
 	public final static double kShootTime		= 0.5;
 	
-	public final static int kManualRPM			= 4300;
+	public static int kManualRPM			= 4000;
 	public final static int kShortRangeRPM		= 2000;
 	public final static int kMediumRangeRPM		= 3000;
 	public final static int kLongRangeRPM		= 4000;
 
-	public static double kOuterWorksAngle		= 0.555;	// Long Range
-	public static double kBatterAngle			= 0.61;   // Batter
-	public static double kOffBatterAngle		= 0.5875;	// Off Batter
+	public static double kOuterWorksAngle		= 1;	// Long Range
+	public static double kBatterAngle			= 1.031;   // Batter
+	public static double kOffBatterAngle		= 1.010;	// Off Batter
 	
 	public final static double kMinHeight		= 0.431;
 	public final static double kMaxHeight		= 0.561;
@@ -66,9 +67,9 @@ public class Constants {
 	public final static double kIntakeD			= 16;
 	public final static double kIntakeAlpha		= 0.025;
 	
-	public final static double kIntakeBallPickup	= 0.042;
-	public final static double kIntakeResting		= 0.412;
-	public final static double kIntakeTucked		= 0.090;
-	public final static double kIntakeGround		=-0.077;
+	public final static double kIntakeBallPickup	= 0.406;
+	public final static double kIntakeResting		= 0.732;
+	public final static double kIntakeTucked		= 0.543;
+	public final static double kIntakeGround		= 0.300;
 	
 }

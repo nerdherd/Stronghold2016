@@ -7,6 +7,7 @@ import org.camsrobotics.frc2016.subsystems.Drive;
 import org.camsrobotics.frc2016.subsystems.Drive.DriveSignal;
 import org.camsrobotics.frc2016.subsystems.Intake;
 import org.camsrobotics.frc2016.subsystems.Shooter;
+import org.camsrobotics.frc2016.subsystems.controllers.VisionTargetingController;
 import org.camsrobotics.frc2016.teleop.Commands;
 import org.camsrobotics.frc2016.teleop.TeleopManager;
 import org.camsrobotics.lib.MultiLooper;
@@ -74,9 +75,9 @@ public class Robot extends NerdyIterativeRobot {
     	testCommands.addObject("Drive Right", TEST_COMMANDS.DRIVE_RIGHT);
     	testCommands.addObject("Shooter RPM", TEST_COMMANDS.SHOOTER_RPM);
     	
-//    	SmartDashboard.putNumber("OuterWorks", shooter.getOuterWorksAngle());
-//    	SmartDashboard.putNumber("OffBatter", shooter.getOffBatterAngle());
-//    	SmartDashboard.putNumber("Batter", shooter.getBatterAngle());
+    	SmartDashboard.putNumber("OuterWorks", Constants.kOuterWorksAngle);
+    	SmartDashboard.putNumber("OffBatter", Constants.kOffBatterAngle);
+    	SmartDashboard.putNumber("Batter", Constants.kBatterAngle);
 
     	SmartDashboard.putNumber("Vision P", Constants.kDriveVisionP);
     	SmartDashboard.putNumber("Vision I", Constants.kDriveVisionI);
@@ -85,13 +86,16 @@ public class Robot extends NerdyIterativeRobot {
     	SmartDashboard.putNumber("driveP", driveP);
     	SmartDashboard.putNumber("driveI", driveI);
 
+    	SmartDashboard.putNumber("Default Vision", Constants.kCameraDefault);
     	
-    	SmartDashboard.putNumber("Time", 5);
-    	
+    	SmartDashboard.putNumber("Time", 3);
+    	SmartDashboard.putNumber("Time2", 10);
     	
     	SmartDashboard.putNumber("Forward Priority", 1);
     	
 		SmartDashboard.putNumber("Ramparts Straight Power", 1);
+		
+		SmartDashboard.putNumber("RPM", Constants.kManualRPM);
 
     }
     
@@ -103,6 +107,7 @@ public class Robot extends NerdyIterativeRobot {
     	System.out.println("NerdyBot Mantis Autonomous Start");
     	integration = 0;
     	drive.zero();
+    	drive.shiftDown();
     	
 //    	auto.start();
     	
@@ -110,7 +115,7 @@ public class Robot extends NerdyIterativeRobot {
 
     	autoTimer.start();
 
-//    	controllers.start();
+    	controllers.start();
     	slowControllers.start();
     	
     	lastTime = Timer.getFPGATimestamp();
@@ -121,7 +126,12 @@ public class Robot extends NerdyIterativeRobot {
     double integration = 0;
     double lastError = 0;
     
+    double m_oscilateCount = 0;
+    
+    int state = 0;
+    
     public void autonomousPeriodic() {
+    	Constants.kCameraDefault = (int) SmartDashboard.getNumber("Default Vision");
     	driveP = SmartDashboard.getNumber("driveP");
     	driveI = SmartDashboard.getNumber("driveI");
     	
@@ -136,37 +146,60 @@ public class Robot extends NerdyIterativeRobot {
 	    		drive.driveOpenLoop(DriveSignal.kStop);
 	    	}
     	}	else if(autoMode == AUTO_MODES.RAMPARTS)	{
-    		if(autoTimer.get() < SmartDashboard.getNumber("Time"))	{
-    			double straightPower = SmartDashboard.getNumber("Ramparts Straight Power");
-    			double time = Timer.getFPGATimestamp();
-    			double error = nav.getYaw();
-    			double p = error * driveP;
-    			integration += (error + lastError) * (time - lastTime)/2;
-    			lastTime = time;
-    			lastError = error;
-    			double i = integration * driveI;
-    			SmartDashboard.putNumber("P", p);
-    			SmartDashboard.putNumber("I",i);
-    			double pow = p + i;
-    			SmartDashboard.putNumber("Pow", pow);
-    			double leftPow  =  pow - straightPower;
-    			double rightPow = -pow - straightPower;
-    			SmartDashboard.putNumber("Left Power", leftPow);
-    			SmartDashboard.putNumber("Right Power", rightPow);
-    			SmartDashboard.putNumber("Yaw", error);
-    			
-    			double[] unnormalized = {leftPow, rightPow};
-    		 	double[] normalized = NerdyMath.normalize(unnormalized, true);
-    			
-    			double leftNormalized = normalized[0];
-    			double rightNormalized = normalized[1];
-    			SmartDashboard.putNumber("Left Normalized", leftNormalized);
-    			SmartDashboard.putNumber("Right Normalized", rightNormalized);
-    			
-    			drive.driveOpenLoop(new DriveSignal(leftNormalized, rightNormalized));
-    		}	else	{
-    			drive.driveOpenLoop(DriveSignal.kStop);
+    		if(true)	{
+	    		if(autoTimer.get() < SmartDashboard.getNumber("Time"))	{
+	    			intake.setIntakeHeight(Constants.kIntakeBallPickup);
+	    			double straightPower = SmartDashboard.getNumber("Ramparts Straight Power");
+	    			double time = Timer.getFPGATimestamp();
+	    			double error = nav.getYaw();
+	    			double p = error * driveP;
+	    			integration += (error + lastError) * (time - lastTime)/2;
+	    			lastTime = time;
+	    			lastError = error;
+	    			double i = integration * driveI;
+	    			SmartDashboard.putNumber("P", p);
+	    			SmartDashboard.putNumber("I",i);
+	    			double pow = p + i;
+	    			SmartDashboard.putNumber("Pow", pow);
+	    			double leftPow  =  pow - straightPower;
+	    			double rightPow = -pow - straightPower;
+	    			SmartDashboard.putNumber("Left Power", leftPow);
+	    			SmartDashboard.putNumber("Right Power", rightPow);
+	    			SmartDashboard.putNumber("Yaw", error);
+	    			
+	    			double[] unnormalized = {leftPow, rightPow};
+	    		 	double[] normalized = NerdyMath.normalize(unnormalized, true);
+	    			
+	    			double leftNormalized = normalized[0];
+	    			double rightNormalized = normalized[1];
+	    			SmartDashboard.putNumber("Left Normalized", leftNormalized);
+	    			SmartDashboard.putNumber("Right Normalized", rightNormalized);
+	    			
+	    			drive.driveOpenLoop(new DriveSignal(leftNormalized, rightNormalized));
+	    		}	else	{
+	    			drive.driveOpenLoop(DriveSignal.kStop);
+	    			state++;
+	    		}
     		}
+//    		}	else if(state == 1)	{
+//    			shooter.setShooterAngle(Constants.kOffBatterAngle);
+//    			if(autoTimer.get() < SmartDashboard.getNumber("Time2"))	{
+//        			drive.setController(new VisionTargetingController(3));
+//    			}	else	{
+//    				drive.driveOpenLoop(DriveSignal.kStop);
+//    				state++;
+//    			}
+//    		}	else if(state == 2)	{
+//    			shooter.setDesiredRPM(Constants.kManualRPM);
+//    			
+//    			if(Math.abs(shooter.getSpeed() - Constants.kManualRPM) < 5)	{
+//    				m_oscilateCount++;
+//    				
+//    				if(m_oscilateCount == 5)	{
+//    					shooter.shoot();
+//    				}
+//    			}
+//    		}
     	}
     	
     }
@@ -176,7 +209,7 @@ public class Robot extends NerdyIterativeRobot {
     	
     	drive.zero();
     	
-//    	controllers.start();
+    	controllers.start();
     	slowControllers.start();
     }
     
@@ -189,6 +222,12 @@ public class Robot extends NerdyIterativeRobot {
         drive.reportState();
         shooter.reportState();
         intake.reportState();
+        
+        Constants.kBatterAngle = SmartDashboard.getNumber("Batter");
+        Constants.kOffBatterAngle = SmartDashboard.getNumber("OffBatter");
+        Constants.kOuterWorksAngle = SmartDashboard.getNumber("OuterWorks");
+        
+        Constants.kManualRPM = (int) SmartDashboard.getNumber("RPM");
         
         drive.setPID(SmartDashboard.getNumber("Vision P", Constants.kDriveVisionP), 
         		SmartDashboard.getNumber("Vision I", Constants.kDriveVisionI), 

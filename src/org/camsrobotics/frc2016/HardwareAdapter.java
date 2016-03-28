@@ -39,9 +39,9 @@ public class HardwareAdapter {
 	public static final VictorSP kDriveRight2			= new VictorSP(1);
 	public static final VictorSP kDriveRight3			= new VictorSP(2);
 	
-	public static final CANTalon kShooterLeft			= new CANTalon(1);
+	public static final CANTalon kShooterLeft			= new CANTalon(3);
 	public static final CANTalon kShooterRight			= new CANTalon(2);
-	public static final CANTalon kShooterLift			= new CANTalon(3);
+	public static final CANTalon kShooterLift			= new CANTalon(1);
 	
 	public static final CANTalon kIntakeRollers			= new CANTalon(4);
 	public static final CANTalon kIntakeArtic			= new CANTalon(5);
@@ -49,7 +49,8 @@ public class HardwareAdapter {
 	// Pneumatics
 	public static final Compressor kCompressor			= new Compressor();
 	public static final DoubleSolenoid kShifter			= new DoubleSolenoid(3,4);
-	public static final DoubleSolenoid kShooterPunch	= new DoubleSolenoid(1,6);
+	public static final DoubleSolenoid kShooterPunch	= new DoubleSolenoid(2,5);
+	public static final DoubleSolenoid kCompress		= new DoubleSolenoid(1,6);
 	
 	// Sensors
 	public static final AHRS kNavX						= new AHRS(SerialPort.Port.kMXP);

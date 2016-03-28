@@ -38,6 +38,8 @@ public class DriverInput {
 	private NerdyButton m_tuckedIntake;
 	private NerdyButton m_stop;
 	
+	private NerdyButton m_compress;
+	
 	private NerdyButton m_reset;
 	
 	public DriverInput(NerdyJoystick leftStick, NerdyJoystick rightStick, NerdyJoystick buttonBox)	{
@@ -65,6 +67,8 @@ public class DriverInput {
 		m_tuckedIntake			= m_buttonBox.getButton(1);
 		m_stop 					= m_buttonBox.getButton(4);
 		
+		m_compress				= m_driverLeftStick.getButton(9);
+		
 		m_reset					= m_buttonBox.getButton(8);
 	}
 	
@@ -87,6 +91,8 @@ public class DriverInput {
 		m_tuckedIntake.update();
 		m_groundIntake.update();
 		m_stop.update();
+		
+		m_compress.update();
 		
 //		m_reset.update();
 		
@@ -144,6 +150,8 @@ public class DriverInput {
 		}	else if(m_stop.get())	{
 			m_commands.intakeCommand = Commands.IntakeCommands.MANUAL;
 		}
+		
+		m_commands.compress = m_compress.get();
 		
 		m_commands.reset = m_reset.get();
 		SmartDashboard.putBoolean("reset", m_reset.get());

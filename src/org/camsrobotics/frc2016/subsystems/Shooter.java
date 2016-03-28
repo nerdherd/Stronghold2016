@@ -1,8 +1,10 @@
 package org.camsrobotics.frc2016.subsystems;
 
 import org.camsrobotics.frc2016.Constants;
+import org.camsrobotics.frc2016.HardwareAdapter;
 import org.camsrobotics.lib.Subsystem;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
@@ -23,6 +25,9 @@ public class Shooter extends Subsystem {
 	private DoubleSolenoid m_shooterPunch;
 	
 	private CANTalon m_lifter;
+	
+	AnalogInput m_leftCompress = HardwareAdapter.kCompressLeft;
+	AnalogInput m_rightCompress = HardwareAdapter.kCompressRight;
 	
 	private double m_flywheelF = Constants.kFlywheelF;
 	private double m_flywheelP = Constants.kFlywheelP;
@@ -169,22 +174,25 @@ public class Shooter extends Subsystem {
 		
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{
-				if(m_shooterPunch.get() != DoubleSolenoid.Value.kForward)
-					m_shooterPunch.set(DoubleSolenoid.Value.kForward);
+				if(m_shooterPunch.get() != DoubleSolenoid.Value.kReverse)
+					m_shooterPunch.set(DoubleSolenoid.Value.kReverse);
 			}	else	{
-				m_shooterPunch.set(DoubleSolenoid.Value.kReverse);
+				m_shooterPunch.set(DoubleSolenoid.Value.kForward);
 				m_shootTimer.stop();
 				m_shooting = false;
 			}
 		}	else	{
-			if(m_shooterPunch.get() != DoubleSolenoid.Value.kReverse)
-				m_shooterPunch.set(DoubleSolenoid.Value.kReverse);
+			if(m_shooterPunch.get() != DoubleSolenoid.Value.kForward)
+				m_shooterPunch.set(DoubleSolenoid.Value.kForward);
 		}
 		
 	}
 
 	@Override
 	public void reportState() {		
+		SmartDashboard.putNumber("Left Compress", m_leftCompress.getVoltage());
+		SmartDashboard.putNumber("Right Compress", m_rightCompress.getVoltage());
+		
 		SmartDashboard.putNumber("Desired Angle", m_actualAngle);
 		SmartDashboard.putNumber("Shooter Position", m_lifter.getPosition());
 		SmartDashboard.putNumber("Shooter Left RPM", m_shooterLeft.getSpeed());

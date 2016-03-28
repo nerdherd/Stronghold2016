@@ -134,7 +134,7 @@ public class Drive extends Subsystem {
 			return m_table.getCenterX();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return Constants.kCameraFrameWidth/2;
+			return Constants.kCameraDefault;
 		}
 	}
 	

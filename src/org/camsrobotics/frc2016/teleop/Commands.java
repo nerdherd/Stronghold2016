@@ -39,6 +39,8 @@ public class Commands {
 	public IntakeCommands intakeCommand = IntakeCommands.IDLE;
 	public RollerCommands rollerCommand = RollerCommands.IDLE;
 	
+	public boolean compress = false;
+	
 	public boolean shooting = false;
 	
 	public boolean reset = false;

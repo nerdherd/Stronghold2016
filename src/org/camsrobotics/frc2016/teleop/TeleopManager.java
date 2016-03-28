@@ -10,6 +10,7 @@ import org.camsrobotics.frc2016.subsystems.controllers.VisionTargetingController
 import org.camsrobotics.lib.NerdyJoystick;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -26,6 +27,8 @@ public class TeleopManager {
 	private NerdyJoystick m_driverLeftStick = HardwareAdapter.kDriveLeftStick;
 	private NerdyJoystick m_driverRightStick = HardwareAdapter.kDriveRightStick;
 	private NerdyJoystick m_buttonBox = HardwareAdapter.kButtonBox;
+	
+	private DoubleSolenoid m_compress = HardwareAdapter.kCompress;
 	
 	private BuiltInAccelerometer m_accelerometer = HardwareAdapter.kAccelerometer;
 	
@@ -146,6 +149,12 @@ public class TeleopManager {
 				m_intake.idle();
 				break;
 			}
+		}
+		
+		if(!c.compress)	{
+			m_compress.set(DoubleSolenoid.Value.kForward);
+		}	else	{
+			m_compress.set(DoubleSolenoid.Value.kReverse);
 		}
 	}
 }

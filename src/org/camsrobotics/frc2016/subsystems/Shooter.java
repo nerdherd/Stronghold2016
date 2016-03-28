@@ -46,8 +46,8 @@ public class Shooter extends Subsystem {
 	
 	private NerdyPID m_visionPID = new NerdyPID();
 	private Vision m_table = Vision.getInstance();
-	private double m_currentCenterX = 0;
-	private double m_targetingPwr = 0;
+	private double m_currentCenterY = 0;
+	private double m_desiredTargetPos = 0;
 	
 	private boolean m_shooting = false;
 	private boolean m_setLift = false;
@@ -125,7 +125,8 @@ public class Shooter extends Subsystem {
 		m_manualLift = false;
 		m_cameraLift = true;
 		m_setLift = false;
-		m_visionPID.setDesired(targetPos);
+		m_desiredTargetPos = targetPos;
+		m_visionPID.setDesired(m_desiredTargetPos);
 	}
 	
 	public void setManualShooterAngle(double pow)	{
@@ -189,14 +190,14 @@ public class Shooter extends Subsystem {
 			m_actualAngle = m_actualAngle*(1-m_lifterAlpha) + m_desiredAngle*m_lifterAlpha; 
 			m_lifter.set(m_actualAngle);
 		}	else if (m_cameraLift) {
-			m_lifter.changeControlMode(TalonControlMode.PercentVbus);
+			m_lifter.changeControlMode(TalonControlMode.Position);
 			try {
-				m_currentCenterX = m_table.getCenterX();
+				m_currentCenterY = m_table.getCenterY();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			m_targetingPwr = m_visionPID.calculate(m_currentCenterX);
-			m_lifter.set(m_targetingPwr);
+			m_currentCenterY = m_currentCenterY*(1-m_lifterAlpha)+m_desiredTargetPos*m_lifterAlpha;
+			m_lifter.set(m_currentCenterY);
 			
 		}
 		

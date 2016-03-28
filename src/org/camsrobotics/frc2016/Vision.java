@@ -101,5 +101,4 @@ public class Vision {
 		m_maxKey = getMax(m_areas);
 		return m_centerys[m_maxKey];
 	}
-	//TODO Distance method, clean this code up
 }

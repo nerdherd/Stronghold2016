@@ -2,6 +2,9 @@ package org.camsrobotics.frc2016.subsystems;
 
 import org.camsrobotics.frc2016.Constants;
 import org.camsrobotics.frc2016.HardwareAdapter;
+import org.camsrobotics.frc2016.Vision;
+import org.camsrobotics.lib.NerdyPID;
+
 import org.camsrobotics.lib.Subsystem;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -47,7 +50,14 @@ public class Shooter extends Subsystem {
 	private double m_desiredAngle = 0.0;
 	private double m_actualAngle = Constants.kMinHeight;
 	
+	private NerdyPID m_visionPID = new NerdyPID();
+	private Vision m_table = Vision.getInstance();
+	private double m_currentCenterY = 0;
+	private double m_desiredTargetPos = 0;
+	
 	private boolean m_shooting = false;
+	private boolean m_setLift = false;
+	private boolean m_cameraLift = false;
 	private boolean m_manualLift = true;
 	private Timer m_shootTimer;
 	
@@ -96,6 +106,9 @@ public class Shooter extends Subsystem {
 		m_lifter.setP(m_lifterP);
 		m_lifter.setI(m_lifterI);
 		m_lifter.setD(m_lifterD);
+		
+		//TODO tune
+		m_visionPID.setPID(0, 0, 0);
 	}
 	
 	public void setDesiredRPM(int rpm)	{
@@ -109,11 +122,23 @@ public class Shooter extends Subsystem {
 	
 	public void setShooterAngle(double angle)	{
 		m_manualLift = false;
+		m_cameraLift = false;
+		m_setLift = true;
 		m_desiredAngle = angle;
+	}
+	
+	public void setShooterCamera(double targetPos)	{
+		m_manualLift = false;
+		m_cameraLift = true;
+		m_setLift = false;
+		m_desiredTargetPos = targetPos;
+		m_visionPID.setDesired(m_desiredTargetPos);
 	}
 	
 	public void setManualShooterAngle(double pow)	{
 		m_manualLift = true;
+		m_cameraLift = false;
+		m_setLift = false;
 		m_desiredAngle = pow;
 	}
 	
@@ -166,10 +191,20 @@ public class Shooter extends Subsystem {
 			m_lifter.changeControlMode(TalonControlMode.PercentVbus);
 			m_actualAngle = Constants.kMinHeight;
 			m_lifter.set(m_desiredAngle);
-		}	else	{
+		}	else if (m_setLift)	{
 			m_lifter.changeControlMode(TalonControlMode.Position);
 			m_actualAngle = m_actualAngle*(1-m_lifterAlpha) + m_desiredAngle*m_lifterAlpha; 
 			m_lifter.set(m_actualAngle);
+		}	else if (m_cameraLift) {
+			m_lifter.changeControlMode(TalonControlMode.Position);
+			try {
+				m_currentCenterY = m_table.getCenterY();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			m_currentCenterY = m_currentCenterY*(1-m_lifterAlpha)+m_desiredTargetPos*m_lifterAlpha;
+			m_lifter.set(m_currentCenterY);
+			
 		}
 		
 		if(m_shooting)	{

@@ -52,7 +52,12 @@ public class Shooter extends Subsystem {
 	
 	private NerdyPID m_visionPID = new NerdyPID();
 	private Vision m_table = Vision.getInstance();
-	private double m_currentCenterY = 0;
+	private double m_cameraError = 0;
+	private double kCameraLiftP = 0;
+	private double kCameraLiftD = 0;
+	private double m_cameraSetPos = 0;
+	private double m_cameraLastError = 0;
+	
 	private double m_desiredTargetPos = 0;
 	
 	private boolean m_shooting = false;
@@ -198,12 +203,12 @@ public class Shooter extends Subsystem {
 		}	else if (m_cameraLift) {
 			m_lifter.changeControlMode(TalonControlMode.Position);
 			try {
-				m_currentCenterY = m_table.getCenterY();
+				m_cameraError = m_table.getCenterY()-120;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			m_currentCenterY = m_currentCenterY*(1-m_lifterAlpha)+m_desiredTargetPos*m_lifterAlpha;
-			m_lifter.set(m_currentCenterY);
+			m_cameraSetPos += m_cameraError*kCameraLiftP+(m_cameraError-m_cameraLastError)*kCameraLiftD;
+			m_lifter.set(m_cameraSetPos);
 			
 		}
 		

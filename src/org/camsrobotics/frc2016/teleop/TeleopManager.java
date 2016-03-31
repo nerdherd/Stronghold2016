@@ -80,6 +80,9 @@ public class TeleopManager {
 			m_shooter.setShooterAngle(Constants.kOuterWorksAngle);
 			SmartDashboard.putNumber("ShooterAngleSet", Constants.kOuterWorksAngle);
 			break;
+		case VERTICAL_ALIGN:
+			m_shooter.setShooterCamera(Constants.kCameraFrameHeight/2);
+			break;
 		case RESTING:
 			m_shooter.setShooterAngle(Constants.kMinHeight);
 			SmartDashboard.putNumber("ShooterAngleSet", Constants.kMinHeight);

@@ -199,7 +199,7 @@ public class Shooter extends Subsystem {
 		}	else if (m_cameraLift) {
 			m_lifter.changeControlMode(TalonControlMode.Position);
 			try {
-				m_cameraError = m_table.getCenterY()-120;
+				m_cameraError = m_table.getCenterY()-SmartDashboard.getNumber("ShooterPositionVision");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -207,6 +207,7 @@ public class Shooter extends Subsystem {
 			m_lifter.set(m_cameraSetPos);
 			
 		}
+		
 		
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{
@@ -231,6 +232,7 @@ public class Shooter extends Subsystem {
 		
 		SmartDashboard.putNumber("Desired Angle", m_actualAngle);
 		SmartDashboard.putNumber("Shooter Position", m_lifter.getPosition());
+		SmartDashboard.putNumber("Error", m_lifter.getError());
 		SmartDashboard.putNumber("Shooter Left RPM", m_shooterLeft.getSpeed());
 		SmartDashboard.putNumber("Shooter Right RPM", m_shooterRight.getSpeed());
 	}

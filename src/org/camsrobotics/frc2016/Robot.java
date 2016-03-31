@@ -99,6 +99,12 @@ public class Robot extends NerdyIterativeRobot {
 		
 		SmartDashboard.putNumber("Camera Lift P", Constants.kCameraLiftP);
 		SmartDashboard.putNumber("Camera Lift D", Constants.kCameraLiftD);
+		
+		SmartDashboard.putNumber("ShooterPositionVision", 120);
+		
+		SmartDashboard.putNumber("Intakes Tucked", Constants.kIntakeTucked);
+		SmartDashboard.putNumber("Intakes Ground", Constants.kIntakeGround);
+		SmartDashboard.putNumber("Intakes Resting", Constants.kIntakeResting);
 
     }
     
@@ -151,7 +157,7 @@ public class Robot extends NerdyIterativeRobot {
     	}	else if(autoMode == AUTO_MODES.RAMPARTS)	{
     		if(true)	{
 	    		if(autoTimer.get() < SmartDashboard.getNumber("Time"))	{
-	    			intake.setIntakeHeight(Constants.kIntakeBallPickup);
+	    			intake.setIntakeHeight (Constants.kIntakeBallPickup);
 	    			double straightPower = SmartDashboard.getNumber("Ramparts Straight Power");
 	    			double time = Timer.getFPGATimestamp();
 	    			double error = nav.getYaw();
@@ -220,7 +226,7 @@ public class Robot extends NerdyIterativeRobot {
     	Commands c = driverInput.update();
         teleop.update(c);
         
-    	SmartDashboard.putData("PDP", pdp);
+    	//SmartDashboard.putData("PDP", pdp);
         
         drive.reportState();
         shooter.reportState();
@@ -234,6 +240,7 @@ public class Robot extends NerdyIterativeRobot {
         Constants.kCameraLiftD = SmartDashboard.getNumber("Camera Lift D");
         
         Constants.kManualRPM = (int) SmartDashboard.getNumber("RPM");
+     
         
         drive.setPID(SmartDashboard.getNumber("Vision P", Constants.kDriveVisionP), 
         		SmartDashboard.getNumber("Vision I", Constants.kDriveVisionI), 

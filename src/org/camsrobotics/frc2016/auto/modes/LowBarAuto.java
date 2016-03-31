@@ -19,8 +19,8 @@ public class LowBarAuto extends AutoMode {
 	public void routine() {
 		// Pass the Low Bar
 		drive.setController(new DriveStraightController(3, .5));
-		runAction(new WaitForUltrasonicSeeAction(45, 15));
-		runAction(new WaitForUltrasonicBlindAction(45, 15));
+		//runAction(new WaitForUltrasonicSeeAction(45, 15));
+		//runAction(new WaitForUltrasonicBlindAction(45, 15));
 		
 		// Turn until vision sees
 		drive.setController(new DriveRotationController(45, 0)); // Tolerance really does not matter
@@ -29,6 +29,9 @@ public class LowBarAuto extends AutoMode {
 		// Stop
 		drive.driveOpenLoop(DriveSignal.kStop);
 		
+		//Line up with target
+		//runAction(new WaitForVisionAlignX(15));
+		//runAction(new WaitForVisionAlignY());
 		// Spin Wheels
 		shooter.setDesiredRPM(Constants.kLongRangeRPM);
 		runAction(new WaitForShooterRPMAction(15));

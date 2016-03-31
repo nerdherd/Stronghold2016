@@ -1,5 +1,7 @@
 package org.camsrobotics.frc2016;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Assorted Constants
  * 
@@ -16,8 +18,8 @@ public class Constants {
 	public static int kCameraAim				= 124;
 	public static int kCameraDefault			= 123;
 	public final static double kCameraFOVAngle	= 21.2505055;
-	public static double kCameraLiftP			= 0;
-	public static double kCameraLiftD			= 0;
+	public static double kCameraLiftP			= 0.055;
+	public static double kCameraLiftD			= 0.00000833;
 	
 	/*
 	 * Drive Constants
@@ -47,7 +49,7 @@ public class Constants {
 	public final static double kLiftAlpha		= 0.05;
 	public final static double kShootTime		= 0.5;
 	
-	public static int kManualRPM			= 4000;
+	public static int kManualRPM				= 4000;
 	public final static int kShortRangeRPM		= 2000;
 	public final static int kMediumRangeRPM		= 3000;
 	public final static int kLongRangeRPM		= 4000;

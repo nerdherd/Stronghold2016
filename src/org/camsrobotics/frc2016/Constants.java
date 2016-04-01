@@ -16,11 +16,13 @@ public class Constants {
 	public static int kCameraAim				    = 124;
 	public static int kCameraDefault			    = 123;
 	public final static double kCameraFOVAngle	    = 21.2505055*2;
-	public static double kCameraLiftP			    = 0.055/1000d;
+	public static double kCameraLiftP			    = 0.000055;
 	public static double kCameraLiftD			    = 0.00000833;
+	public static double kCameraLiftAlpha			= 0.1;
 	public final static double kCameraActualWidth   = 16;
 	public final static double kCameraActualHeight  = 12;
 	public static double kCameraDistortion		    = 0;
+	public static double kCameraVerticalAim			= 120;
 	
 	/*
 	 * Drive Constants

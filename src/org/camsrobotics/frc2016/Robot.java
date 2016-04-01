@@ -100,6 +100,7 @@ public class Robot extends NerdyIterativeRobot {
 		
 		SmartDashboard.putNumber("Camera Lift P", Constants.kCameraLiftP);
 		SmartDashboard.putNumber("Camera Lift D", Constants.kCameraLiftD);
+		SmartDashboard.putNumber("Camera Lift Alpha", Constants.kCameraLiftAlpha);
 		
 		SmartDashboard.putNumber("ShooterPositionVision", 120);
 		
@@ -243,6 +244,7 @@ public class Robot extends NerdyIterativeRobot {
         
         Constants.kCameraLiftP = SmartDashboard.getNumber("Camera Lift P");
         Constants.kCameraLiftD = SmartDashboard.getNumber("Camera Lift D");
+        Constants.kCameraLiftAlpha = SmartDashboard.getNumber("Camera Lift Alpha");
         Constants.kCameraDistortion = SmartDashboard.getNumber("Distortion");
         
         Constants.kManualRPM = (int) SmartDashboard.getNumber("RPM");

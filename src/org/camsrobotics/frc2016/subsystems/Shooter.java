@@ -50,12 +50,13 @@ public class Shooter extends Subsystem {
 	private double m_actualAngle = Constants.kMinHeight;
 	
 	private Vision m_table = Vision.getInstance();
+	private double m_kCameraLiftAlpha = Constants.kCameraLiftAlpha;
+	private double m_kCameraLiftP = Constants.kCameraLiftP;
+	private double m_kCameraLiftD = Constants.kCameraLiftD;
+	private double m_lastCameraError = 0;
+	private double m_currentCenterY = 0;
 	private double m_cameraError = 0;
-	private double m_CameraLiftP = Constants.kCameraLiftP;
-	private double m_CameraLiftD = Constants.kCameraLiftD;
-	private double m_cameraSetPos = Constants.kOffBatterAngle;
 	private double m_cameraLastError = 0;
-	private double m_cameraActualSet = Constants.kOffBatterAngle;
 	
 	private boolean m_shooting = false;
 	private boolean m_setLift = false;
@@ -202,25 +203,23 @@ public class Shooter extends Subsystem {
 		}
 		
 		if(m_manualLift)	{
-			m_cameraSetPos = m_lifter.getPosition();
 			m_lifter.changeControlMode(TalonControlMode.PercentVbus);
 			m_actualAngle = Constants.kMinHeight;
 			m_lifter.set(m_desiredAngle);
 		}	else if (m_setLift)	{
-			m_cameraSetPos = m_lifter.getPosition();
 			m_lifter.changeControlMode(TalonControlMode.Position);
 			m_actualAngle = m_actualAngle*(1-m_lifterAlpha) + m_desiredAngle*m_lifterAlpha; 
 			m_lifter.set(m_actualAngle);
 		}	else if (m_cameraLift) {
-			m_lifter.changeControlMode(TalonControlMode.Position);
 			try {
-				m_cameraError = m_table.getCenterY()-SmartDashboard.getNumber("ShooterPositionVision");
+				m_currentCenterY = m_table.getCenterY();
 			} catch (Exception e) {
-				e.printStackTrace();
+				m_currentCenterY = 110; //If target is not found, keep moving up. 
 			}
-			m_cameraSetPos += m_cameraError*m_CameraLiftP+(m_cameraError-m_cameraLastError)*m_CameraLiftD;
-			m_lifter.set(m_cameraSetPos);
-			
+			m_cameraError = m_currentCenterY-Constants.kCameraVerticalAim;
+			m_actualAngle += m_kCameraLiftP*m_cameraError + m_kCameraLiftD*(m_cameraError-m_cameraLastError);
+			m_cameraLastError = m_cameraError;
+			m_lifter.set(m_actualAngle);
 		}
 		
 		
@@ -250,9 +249,7 @@ public class Shooter extends Subsystem {
 		SmartDashboard.putNumber("Error", m_lifter.getError());
 		SmartDashboard.putNumber("Shooter Left RPM", m_shooterLeft.getSpeed());
 		SmartDashboard.putNumber("Shooter Right RPM", m_shooterRight.getSpeed());
-		
-		SmartDashboard.putNumber("Camera Error", m_cameraError);
-		SmartDashboard.putNumber("Camera Set Pos", m_cameraSetPos);
+	
 		SmartDashboard.putNumber("Compression", m_compression);
 	}
 }

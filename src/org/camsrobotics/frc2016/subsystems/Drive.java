@@ -182,5 +182,10 @@ public class Drive extends Subsystem {
 		SmartDashboard.putNumber("LeftEncoder", getLeftEncoderDistance());
 		SmartDashboard.putNumber("RightEncoder", getRightEncoderDistance());
 		SmartDashboard.putNumber("VisionCenterX", getVision());
+		
+		try {
+			SmartDashboard.putNumber("Vision Distance", m_table.getDistance());
+		} catch (Exception e) {
+		}
 	}
 }

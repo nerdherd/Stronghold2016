@@ -55,38 +55,42 @@ public class TeleopManager {
 			m_drive.shiftDown();
 			break;
 		case IDLE:
-			if(Math.abs(m_accelerometer.getY()) > Constants.kDriveMaxAccel)	{
-				m_drive.shiftDown();
-			}
+//			if(Math.abs(m_accelerometer.getY()) > Constants.kDriveMaxAccel)	{
+//				m_drive.shiftDown();
+//			}
 			break;
 		}
 		
 		// Shooter
-		switch(c.shooterCommand)	{
-		case IDLE:
-		case MANUAL:
+		if(c.intakeCommand != Commands.IntakeCommands.TUCKED_IN_ALL)	{
+			switch(c.shooterCommand)	{
+			case IDLE:
+			case MANUAL:
+				m_shooter.setManualShooterAngle(0);
+				SmartDashboard.putNumber("ShooterAngleSet", 0);
+				break;
+			case OFF_BATTER:
+				m_shooter.setShooterAngle(Constants.kOffBatterAngle);
+				SmartDashboard.putNumber("ShooterAngleSet", Constants.kOffBatterAngle);
+				break;
+			case BATTER:
+				m_shooter.setShooterAngle(Constants.kBatterAngle);
+				SmartDashboard.putNumber("ShooterAngleSet", Constants.kBatterAngle);
+				break;
+			case OUTER_WORKS:
+				m_shooter.setShooterAngle(Constants.kOuterWorksAngle);
+				SmartDashboard.putNumber("ShooterAngleSet", Constants.kOuterWorksAngle);
+				break;
+			case VERTICAL_ALIGN:
+				m_shooter.verticalAlign();
+				break;
+			case RESTING:
+				m_shooter.setShooterAngle(Constants.kMinHeight);
+				SmartDashboard.putNumber("ShooterAngleSet", Constants.kMinHeight);
+				break;
+			}
+		}	else	{
 			m_shooter.setManualShooterAngle(0);
-			SmartDashboard.putNumber("ShooterAngleSet", 0);
-			break;
-		case OFF_BATTER:
-			m_shooter.setShooterAngle(Constants.kOffBatterAngle);
-			SmartDashboard.putNumber("ShooterAngleSet", Constants.kOffBatterAngle);
-			break;
-		case BATTER:
-			m_shooter.setShooterAngle(Constants.kBatterAngle);
-			SmartDashboard.putNumber("ShooterAngleSet", Constants.kBatterAngle);
-			break;
-		case OUTER_WORKS:
-			m_shooter.setShooterAngle(Constants.kOuterWorksAngle);
-			SmartDashboard.putNumber("ShooterAngleSet", Constants.kOuterWorksAngle);
-			break;
-		case VERTICAL_ALIGN:
-			m_shooter.setShooterCamera(Constants.kCameraFrameHeight/2);
-			break;
-		case RESTING:
-			m_shooter.setShooterAngle(Constants.kMinHeight);
-			SmartDashboard.putNumber("ShooterAngleSet", Constants.kMinHeight);
-			break;
 		}
 		
 		switch(c.flywheelCommand)	{
@@ -140,24 +144,20 @@ public class TeleopManager {
 			break;
 		}
 		
-		if(!rolling)	{
-			switch(c.rollerCommand)	{
-			case INTAKE:
-				m_intake.intake();
-				break;
-			case OUTTAKE:
-				m_intake.outtake();
-				break;
-			case IDLE:
-				m_intake.idle();
-				break;
-			}
-		}
+//		if(!rolling)	{
+//			switch(c.rollerCommand)	{
+//			case INTAKE:
+//				m_intake.intake();
+//				break;
+//			case OUTTAKE:
+//				m_intake.outtake();
+//				break;
+//			case IDLE:
+//				m_intake.idle();
+//				break;
+//			}
+//		}
 		
-		if(!c.compress)	{
-			m_compress.set(DoubleSolenoid.Value.kForward);
-		}	else	{
-			m_compress.set(DoubleSolenoid.Value.kReverse);
-		}
+		m_shooter.compress(c.compress);
 	}
 }

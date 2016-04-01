@@ -3,7 +3,6 @@ package org.camsrobotics.frc2016.subsystems;
 import org.camsrobotics.frc2016.Constants;
 import org.camsrobotics.frc2016.HardwareAdapter;
 import org.camsrobotics.frc2016.Vision;
-import org.camsrobotics.lib.NerdyPID;
 
 import org.camsrobotics.lib.Subsystem;
 
@@ -54,16 +53,22 @@ public class Shooter extends Subsystem {
 	private double m_cameraError = 0;
 	private double m_CameraLiftP = Constants.kCameraLiftP;
 	private double m_CameraLiftD = Constants.kCameraLiftD;
-	private double m_cameraSetPos = 0;
+	private double m_cameraSetPos = Constants.kOffBatterAngle;
 	private double m_cameraLastError = 0;
-	
-	private double m_desiredTargetPos = 0;
+	private double m_cameraActualSet = Constants.kOffBatterAngle;
 	
 	private boolean m_shooting = false;
 	private boolean m_setLift = false;
 	private boolean m_cameraLift = false;
 	private boolean m_manualLift = true;
 	private Timer m_shootTimer;
+	
+	private DoubleSolenoid m_compress = HardwareAdapter.kCompress;
+	
+	private AnalogInput m_compressLeft = HardwareAdapter.kCompressLeft;
+	private AnalogInput m_compressRight = HardwareAdapter.kCompressRight;
+	
+	private double m_compression = 0;
 	
 	public Shooter(String name, CANTalon shooterLeft, CANTalon shooterRight, DoubleSolenoid shooterPunch, CANTalon lifter)	{
 		super(name);
@@ -129,11 +134,10 @@ public class Shooter extends Subsystem {
 		m_desiredAngle = angle;
 	}
 	
-	public void setShooterCamera(double targetPos)	{
+	public void verticalAlign()	{
 		m_manualLift = false;
 		m_cameraLift = true;
 		m_setLift = false;
-		m_desiredTargetPos = targetPos;
 	}
 	
 	public void setManualShooterAngle(double pow)	{
@@ -164,6 +168,15 @@ public class Shooter extends Subsystem {
 		}
 	}
 	
+	public void compress(boolean in)	{
+		if(in)	{
+			m_compress.set(DoubleSolenoid.Value.kForward);
+			m_compression = m_compressLeft.getVoltage() + m_compressRight.getVoltage();
+		}	else	{
+			m_compress.set(DoubleSolenoid.Value.kReverse);
+		}
+	}
+	
 	public void stop()	{
 		m_shooting = false;
 		m_shooterLeft.set(0);
@@ -189,10 +202,12 @@ public class Shooter extends Subsystem {
 		}
 		
 		if(m_manualLift)	{
+			m_cameraSetPos = m_lifter.getPosition();
 			m_lifter.changeControlMode(TalonControlMode.PercentVbus);
 			m_actualAngle = Constants.kMinHeight;
 			m_lifter.set(m_desiredAngle);
 		}	else if (m_setLift)	{
+			m_cameraSetPos = m_lifter.getPosition();
 			m_lifter.changeControlMode(TalonControlMode.Position);
 			m_actualAngle = m_actualAngle*(1-m_lifterAlpha) + m_desiredAngle*m_lifterAlpha; 
 			m_lifter.set(m_actualAngle);
@@ -211,16 +226,16 @@ public class Shooter extends Subsystem {
 		
 		if(m_shooting)	{
 			if(m_shootTimer.get() < m_shootTime)	{
-				if(m_shooterPunch.get() != DoubleSolenoid.Value.kReverse)
-					m_shooterPunch.set(DoubleSolenoid.Value.kReverse);
+				if(m_shooterPunch.get() != DoubleSolenoid.Value.kForward)
+					m_shooterPunch.set(DoubleSolenoid.Value.kForward);
 			}	else	{
-				m_shooterPunch.set(DoubleSolenoid.Value.kForward);
+				m_shooterPunch.set(DoubleSolenoid.Value.kReverse);
 				m_shootTimer.stop();
 				m_shooting = false;
 			}
 		}	else	{
-			if(m_shooterPunch.get() != DoubleSolenoid.Value.kForward)
-				m_shooterPunch.set(DoubleSolenoid.Value.kForward);
+			if(m_shooterPunch.get() != DoubleSolenoid.Value.kReverse)
+				m_shooterPunch.set(DoubleSolenoid.Value.kReverse);
 		}
 		
 	}
@@ -235,5 +250,9 @@ public class Shooter extends Subsystem {
 		SmartDashboard.putNumber("Error", m_lifter.getError());
 		SmartDashboard.putNumber("Shooter Left RPM", m_shooterLeft.getSpeed());
 		SmartDashboard.putNumber("Shooter Right RPM", m_shooterRight.getSpeed());
+		
+		SmartDashboard.putNumber("Camera Error", m_cameraError);
+		SmartDashboard.putNumber("Camera Set Pos", m_cameraSetPos);
+		SmartDashboard.putNumber("Compression", m_compression);
 	}
 }

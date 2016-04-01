@@ -1,11 +1,12 @@
 package org.camsrobotics.frc2016;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * NetworkTables Vision Adapter
  * 
- * @author Michael
+ * @author Mike
  *
  */
 public class Vision {
@@ -16,6 +17,16 @@ public class Vision {
 	private int m_max;
 	private int m_maxKey = 0;
 	
+	private double m_apparentWidth  = 0;
+	private double m_actualWidth    = Constants.kCameraActualWidth;
+	private double m_apparentHeight = 0;
+	private double m_actualHeightPX = 0;
+	private double m_actualHeight	= Constants.kCameraActualHeight;
+	private double m_viewAngle		= 0;
+	private double m_theta			= 0;
+	private double m_distanceToGoal = 0;
+	private double m_distance		= 0;
+	
 	private static Vision m_instance = null;
 	
 	/**
@@ -23,7 +34,7 @@ public class Vision {
 	 * @param key
 	 */
 	private Vision() {
-		table = NetworkTable.getTable("GRIP/myContourReport");
+		table = NetworkTable.getTable("GRIP/Courtyard");
 	}
 	 /**
 	  * Get one instance of vision object. (Since we will never need more than one.)
@@ -72,6 +83,7 @@ public class Vision {
 		m_maxKey = getMax(m_areas);
 		return m_heights[m_maxKey];
 	}
+	
 	/**
 	 * Returns largest measured area. Only works for contour reports.
 	 * @throws Exception 
@@ -100,5 +112,27 @@ public class Vision {
 		double[] m_centerys = table.getNumberArray("centerY", m_defaultVal);
 		m_maxKey = getMax(m_areas);
 		return m_centerys[m_maxKey];
+	}
+	
+	/** 
+	 * @return Distance in inches
+	 * @throws Exception
+	 */
+	public double getDistance() throws Exception	{
+		double m_distortion		= Constants.kCameraDistortion;
+		m_apparentWidth  = getWidth();
+		SmartDashboard.putNumber("Apparent Width", m_apparentWidth);
+		m_apparentHeight = getHeight();
+		SmartDashboard.putNumber("Apparent Height", m_apparentHeight);
+		m_actualHeightPX = m_apparentWidth*(m_actualHeight/m_actualWidth);
+		SmartDashboard.putNumber("Height PX", m_actualHeightPX);
+		m_viewAngle 	 = Math.acos(m_apparentHeight/m_actualHeightPX);
+		SmartDashboard.putNumber("View Angle", m_viewAngle);
+		m_theta			 = m_distortion*(m_apparentWidth/Constants.kCameraFrameWidth)*Constants.kCameraFOVAngle*Math.PI/180;
+		SmartDashboard.putNumber("theta", m_theta);
+		m_distanceToGoal = m_actualWidth/2*Math.tan(m_theta);
+		SmartDashboard.putNumber("Distance to goal", m_distanceToGoal);
+		m_distance		 = m_distanceToGoal*Math.cos(m_viewAngle);
+		return m_distance;
 	}
 }

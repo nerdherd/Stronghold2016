@@ -7,7 +7,6 @@ import org.camsrobotics.frc2016.subsystems.Drive;
 import org.camsrobotics.frc2016.subsystems.Drive.DriveSignal;
 import org.camsrobotics.frc2016.subsystems.Intake;
 import org.camsrobotics.frc2016.subsystems.Shooter;
-import org.camsrobotics.frc2016.subsystems.controllers.VisionTargetingController;
 import org.camsrobotics.frc2016.teleop.Commands;
 import org.camsrobotics.frc2016.teleop.TeleopManager;
 import org.camsrobotics.lib.MultiLooper;
@@ -57,7 +56,7 @@ public class Robot extends NerdyIterativeRobot {
 	
 	AUTO_MODES autoMode = AUTO_MODES.RAMPARTS;
     double driveP = 0.044444;
-    double driveI = 0.00044444;
+    double driveI = 0;
     
     public void robotInit() {
     	compressor.start();
@@ -82,6 +81,8 @@ public class Robot extends NerdyIterativeRobot {
     	SmartDashboard.putNumber("Vision P", Constants.kDriveVisionP);
     	SmartDashboard.putNumber("Vision I", Constants.kDriveVisionI);
     	SmartDashboard.putNumber("Vision D", Constants.kDriveVisionD);
+    	
+    	SmartDashboard.putNumber("Camera Aim", Constants.kCameraAim);
 
     	SmartDashboard.putNumber("driveP", driveP);
     	SmartDashboard.putNumber("driveI", driveI);
@@ -105,7 +106,8 @@ public class Robot extends NerdyIterativeRobot {
 		SmartDashboard.putNumber("Intakes Tucked", Constants.kIntakeTucked);
 		SmartDashboard.putNumber("Intakes Ground", Constants.kIntakeGround);
 		SmartDashboard.putNumber("Intakes Resting", Constants.kIntakeResting);
-
+		
+		SmartDashboard.putNumber("Distortion", Constants.kCameraDistortion);
     }
     
     Timer autoTimer = new Timer();
@@ -129,6 +131,7 @@ public class Robot extends NerdyIterativeRobot {
     	
     	lastTime = Timer.getFPGATimestamp();
     	
+    	drive.shiftUp();
     	
     }
    
@@ -156,7 +159,7 @@ public class Robot extends NerdyIterativeRobot {
 	    	}
     	}	else if(autoMode == AUTO_MODES.RAMPARTS)	{
     		if(true)	{
-	    		if(autoTimer.get() < SmartDashboard.getNumber("Time"))	{
+	    		if(autoTimer.get() < 5)	{
 	    			intake.setIntakeHeight (Constants.kIntakeBallPickup);
 	    			double straightPower = SmartDashboard.getNumber("Ramparts Straight Power");
 	    			double time = Timer.getFPGATimestamp();
@@ -185,9 +188,9 @@ public class Robot extends NerdyIterativeRobot {
 	    			SmartDashboard.putNumber("Right Normalized", rightNormalized);
 	    			
 	    			drive.driveOpenLoop(new DriveSignal(leftNormalized, rightNormalized));
-	    		}	else	{
-	    			drive.driveOpenLoop(DriveSignal.kStop);
-	    			state++;
+//	    		}	else	{
+//	    			drive.driveOpenLoop(DriveSignal.kStop);
+//	    			state++;
 	    		}
     		}
 //    		}	else if(state == 1)	{
@@ -223,10 +226,12 @@ public class Robot extends NerdyIterativeRobot {
     }
     
     public void teleopPeriodic() {
+    	Constants.kCameraAim = (int) SmartDashboard.getNumber("Camera Aim");
+    	
     	Commands c = driverInput.update();
         teleop.update(c);
         
-    	//SmartDashboard.putData("PDP", pdp);
+    	SmartDashboard.putData("PDP", pdp);
         
         drive.reportState();
         shooter.reportState();
@@ -238,6 +243,7 @@ public class Robot extends NerdyIterativeRobot {
         
         Constants.kCameraLiftP = SmartDashboard.getNumber("Camera Lift P");
         Constants.kCameraLiftD = SmartDashboard.getNumber("Camera Lift D");
+        Constants.kCameraDistortion = SmartDashboard.getNumber("Distortion");
         
         Constants.kManualRPM = (int) SmartDashboard.getNumber("RPM");
      
@@ -267,7 +273,23 @@ public class Robot extends NerdyIterativeRobot {
     }
     
     public void allPeriodic()	{
-    	
+    	SmartDashboard.putNumber("PDP 0", pdp.getCurrent(0));
+    	SmartDashboard.putNumber("PDP 1", pdp.getCurrent(1));
+    	SmartDashboard.putNumber("PDP 2", pdp.getCurrent(2));
+    	SmartDashboard.putNumber("PDP 3", pdp.getCurrent(3));
+    	SmartDashboard.putNumber("PDP 4", pdp.getCurrent(4));
+    	SmartDashboard.putNumber("PDP 5", pdp.getCurrent(5));
+    	SmartDashboard.putNumber("PDP 6", pdp.getCurrent(6));
+    	SmartDashboard.putNumber("PDP 7", pdp.getCurrent(7));
+    	SmartDashboard.putNumber("PDP 8", pdp.getCurrent(8));
+    	SmartDashboard.putNumber("PDP 9", pdp.getCurrent(9));
+    	SmartDashboard.putNumber("PDP 10", pdp.getCurrent(10));
+    	SmartDashboard.putNumber("PDP 11", pdp.getCurrent(11));
+    	SmartDashboard.putNumber("PDP 12", pdp.getCurrent(12));
+    	SmartDashboard.putNumber("PDP 13", pdp.getCurrent(13));
+    	SmartDashboard.putNumber("PDP 14", pdp.getCurrent(14));
+    	SmartDashboard.putNumber("PDP 15", pdp.getCurrent(15));
+
     }
     
     public void testPeriodic() {

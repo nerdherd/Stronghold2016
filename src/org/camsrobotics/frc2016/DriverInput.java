@@ -58,7 +58,7 @@ public class DriverInput {
 		m_shooterOuterWorks		= m_buttonBox.getButton(12);
 		m_shooterBatter			= m_buttonBox.getButton(8);
 		m_shooterOffBatter		= m_buttonBox.getButton(10);
-		m_shooterVerticalAlign  = m_driverLeftStick.getButton(6);
+		m_shooterVerticalAlign  = m_driverRightStick.getButton(7);
 		m_shoot					= m_buttonBox.getButton(1);
 		m_shootStop				= m_buttonBox.getButton(2);
 		
@@ -67,7 +67,7 @@ public class DriverInput {
 		m_ballPickup			= m_buttonBox.getButton(9);
 		m_tuckedInAll			= m_buttonBox.getButton(6);
 		m_groundIntake			= m_buttonBox.getButton(7);
-		m_tuckedIntake			= m_buttonBox.getButton(1);
+		m_tuckedIntake			= m_buttonBox.getButton(11);
 		
 		m_stop 					= m_buttonBox.getButton(4);
 		
@@ -133,6 +133,7 @@ public class DriverInput {
 			
 		if(m_shoot.get())	{
 			m_commands.flywheelCommand = Commands.FlywheelCommands.ON;
+			m_commands.intakeCommand = Commands.IntakeCommands.TUCKED;
 		}	else	{
 			m_commands.flywheelCommand = Commands.FlywheelCommands.IDLE;
 		}

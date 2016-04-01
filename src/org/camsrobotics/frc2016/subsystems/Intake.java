@@ -90,17 +90,17 @@ public class Intake extends Subsystem {
 
 	@Override
 	public void update() {
-		switch(m_rollerState)	{
-		case INTAKE:
-			m_intake.set(-Constants.kIntakeSpeed);
-			break;
-		case OUTTAKE:
-			m_intake.set(Constants.kIntakeSpeed);
-			break;
-		case IDLE:
-			m_intake.set(0);
-			break;
-		}
+//		switch(m_rollerState)	{
+//		case INTAKE:
+//			m_intake.set(-Constants.kIntakeSpeed);
+//			break;
+//		case OUTTAKE:
+//			m_intake.set(Constants.kIntakeSpeed);
+//			break;
+//		case IDLE:
+//			m_intake.set(0);
+//			break;
+//		}
 		
 		
 		if(m_manual)	{

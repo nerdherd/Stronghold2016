@@ -55,9 +55,9 @@ public class TeleopManager {
 			m_drive.shiftDown();
 			break;
 		case IDLE:
-//			if(Math.abs(m_accelerometer.getY()) > Constants.kDriveMaxAccel)	{
-//				m_drive.shiftDown();
-//			}
+			if(Math.abs(m_accelerometer.getY()) > Constants.kDriveMaxAccel)	{
+				m_drive.shiftUp();
+			}
 			break;
 		}
 		
@@ -98,10 +98,21 @@ public class TeleopManager {
 			m_shooter.setDesiredRPM(0);
 			m_oscilateCount = 0;
 			break;
-		case ON:
-			m_shooter.setDesiredRPM(Constants.kManualRPM);
+		case HIGH:
+			m_shooter.setDesiredRPM(Constants.kHighGoalRPM);
 			
-			if(Math.abs(m_shooter.getSpeed() - Constants.kManualRPM) < 5)	{
+			if(Math.abs(m_shooter.getSpeed() - Constants.kHighGoalRPM) < 5)	{
+				m_oscilateCount++;
+				
+				if(m_oscilateCount == 5)	{
+					m_shooter.shoot();
+				}
+			}
+			break;
+		case LOW:
+			m_shooter.setDesiredRPM(Constants.kLowGoalRPM);
+			
+			if(Math.abs(m_shooter.getSpeed() - Constants.kLowGoalRPM) < 5)	{
 				m_oscilateCount++;
 				
 				if(m_oscilateCount == 5)	{

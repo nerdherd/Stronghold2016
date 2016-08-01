@@ -7,13 +7,13 @@ package org.camsrobotics.frc2016;
  *
  */
 public class Constants {
-	
+
 	/*
 	 * Camera Constants
 	 */
 	public final static int kCameraFrameHeight	    = 240;
 	public final static int kCameraFrameWidth	    = 320;
-	public static int kCameraAim				    = 124;
+	public static int kCameraAim				    = 157;
 	public static int kCameraDefault			    = 123;
 	public final static double kCameraFOVAngle	    = 21.2505055*2;
 	public static double kCameraLiftP			    = 0.000055;
@@ -23,6 +23,7 @@ public class Constants {
 	public final static double kCameraActualHeight  = 12;
 	public static double kCameraDistortion		    = 0;
 	public static double kCameraVerticalAim			= 120;
+	public static double kGoalHeight				= 77.25;
 	
 	/*
 	 * Drive Constants
@@ -30,9 +31,9 @@ public class Constants {
 	public final static double kDriveRotationP		= 0.04444444;
 	public final static double kDriveRotationI		= 0.00044444;
 	public final static double kDriveRotationD		= 0;
-	public final static double kDriveVisionP		= 0.0055;
-	public final static double kDriveVisionI		= 0;
-	public final static double kDriveVisionD		= 0;
+	public final static double kDriveVisionP		= 0.007;
+	public final static double kDriveVisionI		= 0.0005;
+	public final static double kDriveVisionD		= 0.15;
 	public final static double kDriveTranslationP	= 0;
 	public final static double kDriveTranslationI	= 0;
 	public final static double kDriveTranslationD	= 0;
@@ -52,31 +53,32 @@ public class Constants {
 	public final static double kLiftAlpha			= 0.05;
 	public final static double kShootTime			= 0.5;
 	
-	public static int kManualRPM					= 4000;
+	public static int kHighGoalRPM					= 4000;
+	public static int kLowGoalRPM					= 1000; //THIS ONE
 	public final static int kShortRangeRPM			= 2000;
 	public final static int kMediumRangeRPM			= 3000;
 	public final static int kLongRangeRPM			= 4000;
 
-	public static double kOuterWorksAngle			= 0.797;	// Long Range
-	public static double kBatterAngle				= 0.797;	// Batter
-	public static double kOffBatterAngle			= 0.797;	// Off Batter
+	public static double kOuterWorksAngle			= 0.819;	// Long Range
+	public static double kBatterAngle				= 0.819;	// Batter THIS ONE
+	public static double kOffBatterAngle			= 0.819;	// Off Batter
 	
-	public final static double kMinHeight			= 0.68;
-	public final static double kMaxHeight			= 0.561;
+	public final static double kMinHeight			= 0.652;
+	public final static double kMaxHeight			= 0.823;
 	
 	/*
 	 * Intake Constants
 	 */
-	public final static double kIntakeSpeed			= 0.7;
+	public final static double kIntakeSpeed			= 0.8;
 	public final static double kIntakeF				= 0;
 	public final static double kIntakeP				= 4;
 	public final static double kIntakeI				= 0;
 	public final static double kIntakeD				= 16;
 	public final static double kIntakeAlpha			= 0.025;
 	
-	public final static double kIntakeBallPickup	= 0.507;
+	public final static double kIntakeBallPickup	= 0.473;
 	public final static double kIntakeResting		= 0.787;
-	public final static double kIntakeTucked		= 0.588;
-	public final static double kIntakeGround		= 0.389;
+	public final static double kIntakeTucked		= 0.575;
+	public final static double kIntakeGround		= 0.421;
 	
 }

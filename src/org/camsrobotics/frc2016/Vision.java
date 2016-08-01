@@ -1,5 +1,8 @@
 package org.camsrobotics.frc2016;
 
+import org.camsrobotics.frc2016.subsystems.Shooter;
+
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -26,6 +29,10 @@ public class Vision {
 	private double m_theta			= 0;
 	private double m_distanceToGoal = 0;
 	private double m_distance		= 0;
+	
+	private CANTalon m_lifter = HardwareAdapter.kShooterLift;
+	
+//	private CANTalon m_lifter = HardwareAdapter.kShooterLift;
 	
 	private static Vision m_instance = null;
 	
@@ -115,24 +122,17 @@ public class Vision {
 	}
 	
 	/** 
+	 * After vertical alignment, gets shooter angle and uses it to calculate distance.
 	 * @return Distance in inches
 	 * @throws Exception
 	 */
 	public double getDistance() throws Exception	{
-		double m_distortion		= Constants.kCameraDistortion;
-		m_apparentWidth  = getWidth();
-		SmartDashboard.putNumber("Apparent Width", m_apparentWidth);
-		m_apparentHeight = getHeight();
-		SmartDashboard.putNumber("Apparent Height", m_apparentHeight);
-		m_actualHeightPX = m_apparentWidth*(m_actualHeight/m_actualWidth);
-		SmartDashboard.putNumber("Height PX", m_actualHeightPX);
-		m_viewAngle 	 = Math.acos(m_apparentHeight/m_actualHeightPX);
-		SmartDashboard.putNumber("View Angle", m_viewAngle);
-		m_theta			 = m_distortion*(m_apparentWidth/Constants.kCameraFrameWidth)*Constants.kCameraFOVAngle*Math.PI/180;
-		SmartDashboard.putNumber("theta", m_theta);
-		m_distanceToGoal = m_actualWidth/2*Math.tan(m_theta);
-		SmartDashboard.putNumber("Distance to goal", m_distanceToGoal);
-		m_distance		 = m_distanceToGoal*Math.cos(m_viewAngle);
+		if(Math.abs(getCenterY()-Constants.kCameraFrameHeight/2) < 3)	{
+			m_theta = m_lifter.getPosition()/360+0.595; //Convert Encoder Reading to Angle
+			m_distance = Math.tan(m_theta)/Constants.kGoalHeight;
+		}	else	{
+			throw new Exception("Target is not centered!");
+		}
 		return m_distance;
 	}
 }

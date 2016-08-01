@@ -21,7 +21,7 @@ public class Commands {
 	}
 	
 	public static enum FlywheelCommands	{
-		IDLE, ON
+		IDLE, HIGH, LOW
 	}
 	
 	public static enum IntakeCommands	{

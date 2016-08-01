@@ -96,8 +96,6 @@ public class Robot extends NerdyIterativeRobot {
     	
 		SmartDashboard.putNumber("Ramparts Straight Power", 1);
 		
-		SmartDashboard.putNumber("RPM", Constants.kManualRPM);
-		
 		SmartDashboard.putNumber("Camera Lift P", Constants.kCameraLiftP);
 		SmartDashboard.putNumber("Camera Lift D", Constants.kCameraLiftD);
 		SmartDashboard.putNumber("Camera Lift Alpha", Constants.kCameraLiftAlpha);
@@ -109,6 +107,10 @@ public class Robot extends NerdyIterativeRobot {
 		SmartDashboard.putNumber("Intakes Resting", Constants.kIntakeResting);
 		
 		SmartDashboard.putNumber("Distortion", Constants.kCameraDistortion);
+		
+		SmartDashboard.putNumber("High Goal RPM", Constants.kHighGoalRPM);
+		SmartDashboard.putNumber("Low Goal RPM", Constants.kLowGoalRPM);
+		
     }
     
     Timer autoTimer = new Timer();
@@ -159,40 +161,37 @@ public class Robot extends NerdyIterativeRobot {
 	    		drive.driveOpenLoop(DriveSignal.kStop);
 	    	}
     	}	else if(autoMode == AUTO_MODES.RAMPARTS)	{
-    		if(true)	{
-	    		if(autoTimer.get() < 5)	{
-	    			intake.setIntakeHeight (Constants.kIntakeBallPickup);
-	    			double straightPower = SmartDashboard.getNumber("Ramparts Straight Power");
-	    			double time = Timer.getFPGATimestamp();
-	    			double error = nav.getYaw();
-	    			double p = error * driveP;
-	    			integration += (error + lastError) * (time - lastTime)/2;
-	    			lastTime = time;
-	    			lastError = error;
-	    			double i = integration * driveI;
-	    			SmartDashboard.putNumber("P", p);
-	    			SmartDashboard.putNumber("I",i);
-	    			double pow = p + i;
-	    			SmartDashboard.putNumber("Pow", pow);
-	    			double leftPow  =  pow - straightPower;
-	    			double rightPow = -pow - straightPower;
-	    			SmartDashboard.putNumber("Left Power", leftPow);
-	    			SmartDashboard.putNumber("Right Power", rightPow);
-	    			SmartDashboard.putNumber("Yaw", error);
-	    			
-	    			double[] unnormalized = {leftPow, rightPow};
-	    		 	double[] normalized = NerdyMath.normalize(unnormalized, true);
-	    			
-	    			double leftNormalized = normalized[0];
-	    			double rightNormalized = normalized[1];
-	    			SmartDashboard.putNumber("Left Normalized", leftNormalized);
-	    			SmartDashboard.putNumber("Right Normalized", rightNormalized);
-	    			
-	    			drive.driveOpenLoop(new DriveSignal(leftNormalized, rightNormalized));
-//	    		}	else	{
-//	    			drive.driveOpenLoop(DriveSignal.kStop);
-//	    			state++;
-	    		}
+    		if(autoTimer.get() < 5)	{
+//	    			intake.setIntakeHeight (Constants.kIntakeBallPickup);
+    			double straightPower = SmartDashboard.getNumber("Ramparts Straight Power");
+    			double time = Timer.getFPGATimestamp();
+    			double error = nav.getYaw();
+    			double p = error * driveP;
+    			integration += (error + lastError) * (time - lastTime)/2;
+    			lastTime = time;
+    			lastError = error;
+    			double i = integration * driveI;
+    			SmartDashboard.putNumber("P", p);
+    			SmartDashboard.putNumber("I",i);
+    			double pow = p + i;
+    			SmartDashboard.putNumber("Pow", pow);
+    			double leftPow  =  pow - straightPower;
+    			double rightPow = -pow - straightPower;
+    			SmartDashboard.putNumber("Left Power", leftPow);
+    			SmartDashboard.putNumber("Right Power", rightPow);
+    			SmartDashboard.putNumber("Yaw", error);
+    			
+    			double[] unnormalized = {leftPow, rightPow};
+    		 	double[] normalized = NerdyMath.normalize(unnormalized, true);
+    			
+    			double leftNormalized = normalized[0];
+    			double rightNormalized = normalized[1];
+    			SmartDashboard.putNumber("Left Normalized", leftNormalized);
+    			SmartDashboard.putNumber("Right Normalized", rightNormalized);
+    			
+    			drive.driveOpenLoop(new DriveSignal(leftNormalized, rightNormalized));
+    		}	else	{
+    			drive.driveOpenLoop(DriveSignal.kStop);
     		}
 //    		}	else if(state == 1)	{
 //    			shooter.setShooterAngle(Constants.kOffBatterAngle);
@@ -247,7 +246,8 @@ public class Robot extends NerdyIterativeRobot {
         Constants.kCameraLiftAlpha = SmartDashboard.getNumber("Camera Lift Alpha");
         Constants.kCameraDistortion = SmartDashboard.getNumber("Distortion");
         
-        Constants.kManualRPM = (int) SmartDashboard.getNumber("RPM");
+        Constants.kHighGoalRPM = (int) SmartDashboard.getNumber("High Goal RPM");
+        Constants.kLowGoalRPM = (int) SmartDashboard.getNumber("Low Goal RPM");
      
         
         drive.setPID(SmartDashboard.getNumber("Vision P", Constants.kDriveVisionP), 

@@ -111,6 +111,8 @@ public class Robot extends NerdyIterativeRobot {
 		SmartDashboard.putNumber("High Goal RPM", Constants.kHighGoalRPM);
 		SmartDashboard.putNumber("Low Goal RPM", Constants.kLowGoalRPM);
 		
+		SmartDashboard.putNumber("Auto Mode", 0); // Use this to select auto mode
+		
     }
     
     Timer autoTimer = new Timer();
@@ -136,6 +138,13 @@ public class Robot extends NerdyIterativeRobot {
     	
     	drive.shiftUp();
     	
+    	double aMode = SmartDashboard.getNumber("Auto Mode");
+    	if(aMode == 0)	{
+    		autoMode = AUTO_MODES.RAMPARTS;
+    	}	else if(aMode == 1)	{
+    		autoMode = AUTO_MODES.CAT_D;
+    	}
+    	
     }
    
     double integration = 0;
@@ -153,7 +162,12 @@ public class Robot extends NerdyIterativeRobot {
     	SmartDashboard.putNumber("Yaw", nav.getYaw());
     	
     	if(autoMode == AUTO_MODES.LOW_BAR)	{
-    		
+    		intake.manualDrive(-0.25);
+    		if(autoTimer.get() < 4)	{
+	        	drive.driveOpenLoop(new DriveSignal(-1,-1));
+	    	}	else	{
+	    		drive.driveOpenLoop(DriveSignal.kStop);
+	    	}
     	}	else if(autoMode == AUTO_MODES.CAT_D)	{
     		if(autoTimer.get() < 4)	{
 	        	drive.driveOpenLoop(new DriveSignal(-1,-1));

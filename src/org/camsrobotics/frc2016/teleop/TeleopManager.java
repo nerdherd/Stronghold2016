@@ -100,9 +100,14 @@ public class TeleopManager {
 			break;
 		case HIGH:
 			m_shooter.setDesiredRPM(Constants.kHighGoalRPM);
+			m_shooter.compress(true);
 			
 			if(Math.abs(m_shooter.getSpeed() - Constants.kHighGoalRPM) < 5)	{
 				m_oscilateCount++;
+				
+				if(m_oscilateCount > 3)	{
+					m_shooter.compress(false);
+				}
 				
 				if(m_oscilateCount == 5)	{
 					m_shooter.shoot();
@@ -111,9 +116,14 @@ public class TeleopManager {
 			break;
 		case LOW:
 			m_shooter.setDesiredRPM(Constants.kLowGoalRPM);
+			m_shooter.compress(true);
 			
 			if(Math.abs(m_shooter.getSpeed() - Constants.kLowGoalRPM) < 5)	{
 				m_oscilateCount++;
+
+				if(m_oscilateCount > 3)	{
+					m_shooter.compress(false);
+				}
 				
 				if(m_oscilateCount == 5)	{
 					m_shooter.shoot();
@@ -169,6 +179,6 @@ public class TeleopManager {
 //			}
 //		}
 		
-		m_shooter.compress(c.compress);
+//		m_shooter.compress(c.compress);
 	}
 }

@@ -145,9 +145,6 @@ public class Robot extends NerdyIterativeRobot {
     		autoMode = AUTO_MODES.CAT_D;
     	}	else if(aMode == 2)	{
     		autoMode = AUTO_MODES.LOW_BAR;
-    	}	else	{
-    		//Default
-    		autoMode = AUTO_MODES.RAMPARTS;
     	}
     	
     }

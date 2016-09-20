@@ -28,8 +28,8 @@ public class DriverInput {
 	private NerdyButton m_shooterBatter;
 	private NerdyButton m_shooterLowGoal;
 	private NerdyButton m_shooterVerticalAlign;
-	private NerdyButton m_shoot;
-	private NerdyButton m_shootStop;
+	private NerdyButton m_shootFire;
+	private NerdyButton m_shootReady;
 
 	private NerdyButton m_intake;
 	private NerdyButton m_outtake;
@@ -57,10 +57,10 @@ public class DriverInput {
 		
 		m_shooterOuterWorks		= m_buttonBox.getButton(12);
 		m_shooterBatter			= m_buttonBox.getButton(10);
-		m_shooterLowGoal		= m_buttonBox.getButton(1);
+		m_shooterLowGoal		= m_buttonBox.getButton(8);
 		m_shooterVerticalAlign  = m_driverRightStick.getButton(7);
-		m_shoot					= m_buttonBox.getButton(8);
-		m_shootStop				= m_buttonBox.getButton(2);
+		m_shootFire					= m_buttonBox.getButton(1);
+		m_shootReady				= m_buttonBox.getButton(2);
 		
 		m_intake				= m_buttonBox.getButton(3);
 		m_outtake				= m_buttonBox.getButton(5);
@@ -86,7 +86,7 @@ public class DriverInput {
 		m_shooterLowGoal.update();
 //		m_shooterVerticalAlign.update();
 //		m_shoot.update();
-		m_shootStop.update();
+		m_shootReady.update();
 		
 		m_intake.update();
 		m_outtake.update();
@@ -119,18 +119,17 @@ public class DriverInput {
 		}
 		
 		// Shooter
-		if(m_shooterOuterWorks.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.OUTER_WORKS;
-		}	else if(m_shooterBatter.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.BATTER;
-		}	else if(m_shootStop.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.IDLE;
-		}	else if(m_shooterVerticalAlign.get())	{
-			m_commands.shooterCommand = Commands.ShooterCommands.VERTICAL_ALIGN;
-		}
+//		if(m_shooterOuterWorks.get())	{
+//			m_commands.shooterCommand = Commands.ShooterCommands.OUTER_WORKS;
+//		}	else if(m_shooterBatter.get())	{
+//			m_commands.shooterCommand = Commands.ShooterCommands.BATTER;
+//		}	else if(m_shooterVerticalAlign.get())	{
+//			m_commands.shooterCommand = Commands.ShooterCommands.VERTICAL_ALIGN;
+//		}
 			
-		if(m_shoot.get())	{
+		if(m_shootReady.get())	{
 			m_commands.flywheelCommand = Commands.FlywheelCommands.HIGH;
+			m_commands.shooterCommand = Commands.ShooterCommands.BATTER;
 			m_commands.intakeCommand = Commands.IntakeCommands.TUCKED;
 		}	else if(m_shooterLowGoal.get())	{
 			m_commands.flywheelCommand = Commands.FlywheelCommands.LOW;
@@ -138,7 +137,10 @@ public class DriverInput {
 			m_commands.intakeCommand = Commands.IntakeCommands.TUCKED;
 		}	else	{
 			m_commands.flywheelCommand = Commands.FlywheelCommands.IDLE;
+			m_commands.shooterCommand = Commands.ShooterCommands.IDLE;
 		}
+		
+		m_commands.shooterFire = m_shootFire.get();
 		
 		// Intake
 		if(m_intake.get())	{

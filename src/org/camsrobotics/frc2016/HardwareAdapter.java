@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.VictorSP;
 
@@ -51,6 +52,7 @@ public class HardwareAdapter {
 	public static final DoubleSolenoid kShifter				= new DoubleSolenoid(3,4);
 	public static final DoubleSolenoid kShooterPunch		= new DoubleSolenoid(1,6);
 	public static final DoubleSolenoid kCompress			= new DoubleSolenoid(2,5);
+	public static final Solenoid kPhotonCannon				= new Solenoid(7);
 	
 	// Sensors
 	public static final AHRS kNavX							= new AHRS(SerialPort.Port.kMXP);

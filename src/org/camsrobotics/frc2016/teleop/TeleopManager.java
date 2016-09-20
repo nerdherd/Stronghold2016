@@ -11,6 +11,7 @@ import org.camsrobotics.lib.NerdyJoystick;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -29,10 +30,12 @@ public class TeleopManager {
 	private NerdyJoystick m_buttonBox = HardwareAdapter.kButtonBox;
 	
 	private DoubleSolenoid m_compress = HardwareAdapter.kCompress;
+	private Solenoid m_photonCannon = HardwareAdapter.kPhotonCannon;
 	
 	private BuiltInAccelerometer m_accelerometer = HardwareAdapter.kAccelerometer;
 	
 	private int m_oscilateCount = 0;
+	private int m_compressCount = 0;
 	
 	boolean rolling = false;
 	
@@ -97,43 +100,46 @@ public class TeleopManager {
 		case IDLE:
 			m_shooter.setDesiredRPM(0);
 			m_oscilateCount = 0;
+			m_compressCount = 0;
 			break;
 		case HIGH:
 			m_shooter.setDesiredRPM(Constants.kHighGoalRPM);
 			m_shooter.compress(true);
+			m_photonCannon.set(true);
 			
 			if(Math.abs(m_shooter.getSpeed() - Constants.kHighGoalRPM) < 5)	{
 				m_oscilateCount++;
 				
-				if(m_oscilateCount > 3)	{
+				if(m_oscilateCount > 5 && c.shooterFire)	{
 					m_shooter.compress(false);
-				}
-				
-				if(m_oscilateCount == 5)	{
-					m_shooter.shoot();
+					m_compressCount++;
+					
+					if(m_compressCount > 2)	{
+						m_shooter.shoot();
+						m_photonCannon.set(false);
+					}
 				}
 			}
 			break;
 		case LOW:
 			m_shooter.setDesiredRPM(Constants.kLowGoalRPM);
 			m_shooter.compress(true);
+			m_photonCannon.set(true);
 			
 			if(Math.abs(m_shooter.getSpeed() - Constants.kLowGoalRPM) < 5)	{
 				m_oscilateCount++;
-
-				if(m_oscilateCount > 3)	{
-					m_shooter.compress(false);
-				}
 				
-				if(m_oscilateCount == 5)	{
-					m_shooter.shoot();
+				if(m_oscilateCount > 5 && c.shooterFire)	{
+					m_shooter.compress(false);
+					m_compressCount++;
+					
+					if(m_compressCount > 2)	{
+						m_shooter.shoot();
+						m_photonCannon.set(false);
+					}
 				}
 			}
 			break;
-		}
-		
-		if(c.shooting)	{
-			m_shooter.shoot();
 		}
 		
 		// Intake
@@ -165,20 +171,5 @@ public class TeleopManager {
 			break;
 		}
 		
-//		if(!rolling)	{
-//			switch(c.rollerCommand)	{
-//			case INTAKE:
-//				m_intake.intake();
-//				break;
-//			case OUTTAKE:
-//				m_intake.outtake();
-//				break;
-//			case IDLE:
-//				m_intake.idle();
-//				break;
-//			}
-//		}
-		
-//		m_shooter.compress(c.compress);
 	}
 }

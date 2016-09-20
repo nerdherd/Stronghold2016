@@ -40,8 +40,7 @@ public class Commands {
 	public RollerCommands rollerCommand = RollerCommands.IDLE;
 	
 	public boolean compress = false;
-	
-	public boolean shooting = false;
+	public boolean shooterFire = false;
 	
 	public boolean reset = false;
 }

@@ -2,7 +2,7 @@ package org.camsrobotics.frc2016;
 
 import org.camsrobotics.frc2016.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

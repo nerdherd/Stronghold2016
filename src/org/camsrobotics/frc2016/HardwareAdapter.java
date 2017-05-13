@@ -6,11 +6,11 @@ import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.lib.Gearbox;
 import org.camsrobotics.lib.NerdyJoystick;
 
+import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;

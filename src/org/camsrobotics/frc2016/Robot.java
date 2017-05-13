@@ -10,12 +10,12 @@ import org.camsrobotics.frc2016.subsystems.Shooter;
 import org.camsrobotics.frc2016.teleop.Commands;
 import org.camsrobotics.frc2016.teleop.TeleopManager;
 import org.camsrobotics.lib.MultiLooper;
-import org.camsrobotics.lib.NerdyIterativeRobot;
 import org.camsrobotics.lib.NerdyMath;
 
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -28,7 +28,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Wesley
  * 
  */
-public class Robot extends NerdyIterativeRobot {
+public class Robot	extends IterativeRobot	{
 	
 	MultiLooper controllers = new MultiLooper("Controllers", 1/200.0);
 	MultiLooper slowControllers = new MultiLooper("SlowControllers", 1/100.0);
